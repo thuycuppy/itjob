@@ -105,7 +105,7 @@ public class Candidate implements java.io.Serializable {
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "expected_jobtype_id", nullable = false)
+	@JoinColumn(name = "expected_job_type_id", nullable = false)
 	public JobType getJobType() {
 		return this.jobType;
 	}

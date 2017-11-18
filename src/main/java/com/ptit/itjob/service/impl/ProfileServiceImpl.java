@@ -10,7 +10,7 @@ import com.ptit.itjob.dto.RegisterDto;
 import com.ptit.itjob.model.Account;
 import com.ptit.itjob.repository.AccountRepository;
 import com.ptit.itjob.service.ProfileService;
-import com.ptit.itjob.util.Constant;
+import com.ptit.itjob.common.constant.Constant;
 
 @Service
 public class ProfileServiceImpl implements ProfileService {
