@@ -12,8 +12,8 @@
             </ul>
             <ul class="menu-links pull-right">
                 <li><a href="/">Home</a></li>
-                <li><a href="#">All Jobs</a></li>
-                <li><a href="#">All Companies</a></li>
+                <li><a href="/job">All Jobs</a></li>
+                <li><a href="/company">All Companies</a></li>
                 <sec:authorize access="isAnonymous()">
                  <li class="no-bg">
                  	<a href="login" class="p-job">

@@ -17,9 +17,12 @@ import com.ptit.itjob.security.CustomUserDetails;
 
 @Service
 public class UserDetailsServiceImpl implements UserDetailsService {
+    private AccountRepository accountRepository;
 
     @Autowired
-    private AccountRepository accountRepository;
+    public UserDetailsServiceImpl(AccountRepository accountRepository) {
+        this.accountRepository = accountRepository;
+    }
 
     @Override
     @Transactional(readOnly = true)
@@ -37,5 +40,4 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         customUserDetails.setAuthorities(grantedAuthorities);
         return customUserDetails;
     }
-
 }

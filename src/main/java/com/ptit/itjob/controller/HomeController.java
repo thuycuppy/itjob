@@ -12,19 +12,23 @@ import com.ptit.itjob.service.LocationService;
 @Controller
 public class HomeController {
 
-	@Autowired
 	private LocationService locationService;
-	@Autowired
 	private JobService jobService;
-	@Autowired
 	private CompanyService companyService;
-	
+
+	@Autowired
+	public HomeController(LocationService locationService, JobService jobService, CompanyService companyService) {
+		this.locationService = locationService;
+		this.jobService = jobService;
+		this.companyService = companyService;
+	}
+
 	@GetMapping("/")
-	public String home(Model model) {
+	public String index(Model model) {
 		model.addAttribute("locations", locationService.findAll());
-		model.addAttribute("latestJobs", jobService.findLatestJobs());
-		model.addAttribute("topCompanies", companyService.findTopCompanies());
-		return "index";
+		model.addAttribute("latestJobs", jobService.findLatest());
+		model.addAttribute("topCompanies", companyService.findTop());
+		return "home";
 	}
 	
 }

@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
 <section class="slidershow-bg parallex">
     <div class="container">
@@ -53,27 +52,27 @@
             </div>
             <div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="all-jobs-list-box2">
-                	<c:forEach var="latestJob" items="${latestJobs}">
+                    <c:forEach var="latestJob" items="${latestJobs.content}">
                     <div class="job-box job-box-2">
                         <div class="col-md-2 col-sm-2 col-xs-12 hidden-sm">
                             <div class="comp-logo">
-                                <a href="#"><img src="${latestJob.company.logo}" class="img-responsive" alt="scriptsbundle"> </a>
+                                <a href="#"><img src="${latestJob.companyLogo}" class="img-responsive" alt="${latestJob.companyName}"> </a>
                             </div>
                         </div>
                         <div class="col-md-10 col-sm-10 col-xs-12">
                             <div class="job-title-box">
-                                <a href="#"><span class="job-title">${latestJob.title}</span></a> 
-                                <a href="#"><span class="comp-name">${latestJob.company.name}</span></a>
-                                <a href="#" class="job-type jt-full-time-color"> <i class="fa fa-clock-o"></i> ${latestJob.jobType.name}</a>
+                                <a href="#" class="job-title">${latestJob.title}</a><br />
+                                <a href="#"><span class="comp-name">${latestJob.companyName}</span></a>
+                                <a href="#" class="job-type jt-remote-color"><i class="fa fa-clock-o"></i> ${latestJob.jobTypeName}</a>
                             </div>
-                            <p>${latestJob.description} <a href="#">Read More</a> </p>
+                            <p>${latestJob.description}<a href="#">Read More</a> </p>
                         </div>
                         <div class="job-salary"> <i class="fa fa-money"></i> $${latestJob.salary}</div>
                     </div>
                     </c:forEach>
                     <div class="col-md-12 col-sm-12 col-xs-12">
                         <div class="load-more-btn">
-                            <button class="btn-default"> View All <i class="fa fa-angle-right"></i> </button>
+                            <button class="btn-default">View All <i class="fa fa-angle-right"></i></button>
                         </div>
                     </div>
                 </div>
@@ -92,7 +91,7 @@
                         <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor.At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium</p>
                     </div>
                 </div>
-                <c:forEach var="topCompany" items="${topCompanies}">
+                <c:forEach var="topCompany" items="${topCompanies.content}">
                 <div class="col-md-4 col-sm-6 col-xs-12">
                		<div class="company-list-box">
 	                   	<span class="company-list-img">
@@ -101,14 +100,14 @@
               	        <div class="company-list-box-detail">
                        		<h5>${topCompany.name}</h5>
                            	<p>${topCompany.address}</p>
-                          	<div class="ratings"><span class="badge"> ${fn:length(topCompany.jobs)}</span></div>
+                          	<div class="ratings"><span class="badge"> ${topCompany.totalJobs} jobs</span></div>
                         </div>
                     </div>
                 </div>
                 </c:forEach>
                 <div class="col-md-12 col-sm-12 col-xs-12">
                     <div class="load-more-btn">
-                        <button class="btn-default"> View All <i class="fa fa-angle-right"></i> </button>
+                        <button class="btn-default">View All <i class="fa fa-angle-right"></i></button>
                     </div>
                 </div>
             </div>

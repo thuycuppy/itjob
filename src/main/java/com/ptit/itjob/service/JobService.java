@@ -1,9 +1,10 @@
 package com.ptit.itjob.service;
 
-import java.util.List;
-
-import com.ptit.itjob.model.Job;
+import com.ptit.itjob.dto.response.JobListDto;
+import org.springframework.data.domain.Page;
 
 public interface JobService {
-	List<Job> findLatestJobs();
+	Page<JobListDto> findLatest();
+
+	Page<JobListDto> findByCompany(Integer companyId, int page);
 }

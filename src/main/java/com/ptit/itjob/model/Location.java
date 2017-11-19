@@ -57,7 +57,7 @@ public class Location implements java.io.Serializable {
 		this.name = name;
 	}
 
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "location")
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "expectedLocation")
 	public Set<Candidate> getCandidates() {
 		return this.candidates;
 	}

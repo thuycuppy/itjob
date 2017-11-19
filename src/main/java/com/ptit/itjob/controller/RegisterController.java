@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.ptit.itjob.dto.RegisterDto;
+import com.ptit.itjob.dto.request.RegisterDto;
 import com.ptit.itjob.service.ProfileService;
 import com.ptit.itjob.validator.RegisterValidator;
 

@@ -5,7 +5,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
 
-import com.ptit.itjob.dto.RegisterDto;
+import com.ptit.itjob.dto.request.RegisterDto;
 import com.ptit.itjob.model.Account;
 import com.ptit.itjob.repository.AccountRepository;
 

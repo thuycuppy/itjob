@@ -55,7 +55,7 @@ public class Experience implements java.io.Serializable {
 		this.name = name;
 	}
 
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "experience")
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "expectedExperience")
 	public Set<Candidate> getCandidates() {
 		return this.candidates;
 	}

@@ -1,4 +1,4 @@
-package com.ptit.itjob.dto;
+package com.ptit.itjob.dto.request;
 
 import javax.persistence.Transient;
 

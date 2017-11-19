@@ -7,8 +7,8 @@
         </ul>
         <ul class="menu-links pull-right">
             <li><a href="/">Home</a></li>
-            <li><a href="#">All Jobs</a></li>
-            <li><a href="#">All Companies</a></li>
+            <li><a href="/job">All Jobs</a></li>
+            <li><a href="/company/list">All Companies</a></li>
             <li><a href="javascript:void(0)"> Candidate <i class="fa fa-angle-down fa-indicator"></i></a>
                 <ul class="drop-down-multilevel">
                     <li><a href="users.html">Test</a></li>

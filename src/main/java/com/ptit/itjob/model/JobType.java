@@ -51,7 +51,7 @@ public class JobType implements java.io.Serializable {
 		this.name = name;
 	}
 
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "jobType")
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "expectedJobType")
 	public Set<Candidate> getCandidates() {
 		return this.candidates;
 	}

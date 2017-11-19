@@ -14,18 +14,28 @@
     
     <!-- Pages -->
     <definition name="home" extends="basic">
-    	<put-attribute name="title" value="Home page" />
+    	<put-attribute name="title" value="ITJob | Home" />
         <put-attribute name="header" value="/WEB-INF/view/fragment/header2.jsp" />
         <put-attribute name="body" value="/WEB-INF/view/page/home.jsp" />
     </definition>
     
     <definition name="login" extends="basic">
-    	<put-attribute name="title" value="Login page" /> 
+    	<put-attribute name="title" value="ITJob | Login" />
         <put-attribute name="body" value="/WEB-INF/view/page/login.jsp" />
     </definition>
     
     <definition name="register" extends="basic">
-    	<put-attribute name="title" value="Register page" /> 
+    	<put-attribute name="title" value="ITJob | Register" />
         <put-attribute name="body" value="/WEB-INF/view/page/register.jsp" />
+    </definition>
+
+    <definition name="company.list" extends="basic">
+        <put-attribute name="title" value="ITJob | List Companies" />
+        <put-attribute name="body" value="/WEB-INF/view/page/company_list.jsp" />
+    </definition>
+
+    <definition name="company.detail" extends="basic">
+        <put-attribute name="title" value="ITJob | Company Detail" />
+        <put-attribute name="body" value="/WEB-INF/view/page/company_detail.jsp" />
     </definition>
 </tiles-definitions>

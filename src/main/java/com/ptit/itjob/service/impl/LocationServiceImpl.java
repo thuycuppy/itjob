@@ -10,14 +10,16 @@ import com.ptit.itjob.service.LocationService;
 
 @Service
 public class LocationServiceImpl implements LocationService {
+	private LocationRepository locationRepository;
 
 	@Autowired
-	private LocationRepository locationRepository;
-	
+	public LocationServiceImpl(LocationRepository locationRepository) {
+		this.locationRepository = locationRepository;
+	}
+
 	@Override
 	@Transactional(readOnly = true)
 	public Iterable<Location> findAll() {
 		return locationRepository.findAll();
 	}
-
 }
