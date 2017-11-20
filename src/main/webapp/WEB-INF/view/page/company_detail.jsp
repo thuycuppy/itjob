@@ -22,133 +22,139 @@
 <section class="single-job-section single-job-section-2">
     <div class="container">
         <div class="row">
-            <div class="single-job-detail-box">
-                <div class="col-md-4 col-sm-4 col-xs-12">
-                    <aside>
-                        <div class="apply-job">
-                            <a class="btn btn-default" data-toggle="modal" data-target="#myModal"><i class="fa fa-upload"></i>Apply For Position</a>
-                            <a class="btn btn-default bookmark"><i class="fa fa-star"></i> Bookmark This Job</a>
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="single-job-detail-box">
+                    <div class="col-md-9 col-sm-12 col-xs-12">
+                        <div class="company-img">
+                            <img src="/${company.logo}" alt="${company.name}">
                         </div>
-                        <div class="company-detail">
-                            <div class="company-img">
-                                <img src="images/company/logo2.png" class="img-responsive" alt="">
+                        <div class="job-detail-2">
+                            <h2>${company.name}</h2>
+                            <div class="job-detail-meta">
+                                <ul>
+                                    <li><i class="fa fa-map-marker"></i> ${company.location}</li>
+                                    <li><i class="fa fa-dollar"></i> ${company.companyType}</li>
+                                </ul>
                             </div>
+                            <div class="b-socials full-socials">
+                                <ul class="list-unstyled">
+                                    <li><a href="https://twitter.com/"><i class="fa fa-twitter fa-fw"></i>Tweet</a></li>
+                                    <li><a href="https://www.facebook.com/"><i class="fa fa-facebook fa-fw"></i>Share</a></li>
+                                    <li><a href="https://plus.google.com/"><i class="fa fa-google-plus fa-fw"></i>Google+</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="col-md-8 col-sm-12 col-xs-12">
+                    <div class="single-job-page-2 job-short-detail">
+                        <div class="heading-inner">
+                            <p class="title">Company Introduction</p>
+                        </div>
+                        <div class="job-desc job-detail-boxes">
+                            <p>${company.description}</p>
+                        </div>
+                        <div class="heading-inner">
+                            <p class="title">Jobs Posted</p>
+                        </div>
+                        <div id="jobs" class="all-jobs-list-box2"></div>
+                        <div class="load-more-btn">
+                            <button id="btnLoadMoreJob" class="btn-default" onclick="loadPage();">
+                                Load More <i class="fa fa-refresh"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 col-sm-12 col-xs-12">
+                    <aside>
+                        <div class="company-detail widget">
+                            <div class="widget-heading"><span class="title">Company Detail</span></div>
                             <div class="company-contact-detail">
                                 <table>
                                     <tr>
                                         <th>Name:</th>
-                                        <td> Fakry Agency Pvt. Ltd., Vatnaam</td>
+                                        <td>${company.name}</td>
                                     </tr>
                                     <tr>
-                                        <th>Email:</th>
-                                        <td> admin@confidential.com</td>
-                                    </tr>
-                                    <tr>
-                                        <th>Phone:</th>
-                                        <td> +99 333 1234567</td>
+                                        <th>Quantity:</th>
+                                        <td>${company.quantity}</td>
                                     </tr>
                                     <tr>
                                         <th>Website:</th>
-                                        <td> www.caplvwebsite.com</td>
+                                        <td><a href="${company.website}">${company.website}</a></td>
+                                    </tr>
+                                    <tr>
+                                        <th>Phone:</th>
+                                        <td>${company.phone}</td>
                                     </tr>
                                     <tr>
                                         <th>Address:</th>
-                                        <td> 2nd Downtown street, hellon city, vatnaam</td>
+                                        <td>${company.address}</td>
                                     </tr>
                                 </table>
                             </div>
                         </div>
                     </aside>
                 </div>
-
-                <div class="col-md-8 col-sm-8 col-xs-12">
-                    <div class="heading-inner">
-                        <p class="title">Company Description</p>
-                    </div>
-                    <div class="job-desc job-detail-boxes">
-                        <p>
-                            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-                        </p>
-                    </div>
-                    <div class="heading-inner">
-                        <p class="title">Jobs Posted</p>
-                    </div>
-                    <div class="job-desc job-detail-boxes">
-                        <div class="all-jobs-list-box2">
-                            <div class="job-box job-box-2">
-                                <div class="col-md-2 col-sm-2 col-xs-12 hidden-sm hidden-xs">
-                                    <div class="comp-logo">
-                                        <a href="#"><img src="images/company/5.png" class="img-responsive" alt="scriptsbundle"> </a>
-                                    </div>
-
-                                </div>
-                                <div class="col-md-10 col-sm-10 col-xs-12">
-                                    <div class="job-title-box">
-                                        <a href="#">
-                                            <div class="job-title"> Technical Documentation Specialist</div>
-                                        </a>
-                                        <a href="#"><span class="comp-name">conversi Pvt. Ltd. United States </span></a>
-                                        <a href="#" class="job-type jt-full-time-color">
-                                            <i class="fa fa-clock-o"></i> Full time
-                                        </a>
-                                    </div>
-                                    <p>Prompta numquam mel ad, tempor definiebas id usu, cum cu feugiat bonorum. Eu pri labores maiorum patrioque, sea an tation utinam. Idque albucius prodesset ei est, sea te vide contentiones consectetuer.......<a href="#">Read More</a> </p>
-                                </div>
-                                <div class="job-salary">
-                                    <i class="fa fa-money"></i> $400 - $500
-                                </div>
-                            </div>
-
-                            <div class="job-box job-box-2">
-                                <div class="col-md-2 col-sm-2 col-xs-12  hidden-xs hidden-sm">
-                                    <div class="comp-logo">
-                                        <a href="#"><img src="images/company/1.png" class="img-responsive" alt="scriptsbundle"> </a>
-                                    </div>
-                                </div>
-                                <div class="col-md-10 col-sm-10 col-xs-12">
-                                    <div class="job-title-box">
-                                        <a href="#">
-                                            <div class="job-title"> Assistant Engineer (IT/Networks)</div>
-                                        </a>
-                                        <a href="#"><span class="comp-name">conversi Pvt. Ltd. Malaysia</span></a>
-                                        <a href="#" class="job-type jt-part-time-color">
-                                            <i class="fa fa-clock-o"></i> Part Time
-                                        </a>
-                                    </div>
-                                    <p>Prompta numquam mel ad, tempor definiebas id usu, cum cu feugiat bonorum. Eu pri labores maiorum patrioque, sea an tation utinam. Idque albucius prodesset ei est, sea te vide contentiones consectetuer.......<a href="#">Read More</a> </p>
-                                </div>
-                                <div class="job-salary">
-                                    <i class="fa fa-money"></i> $200 - $300
-                                </div>
-                            </div>
-                            <div class="job-box job-box-2">
-                                <div class="col-md-2 col-sm-2 col-xs-12  hidden-xs hidden-sm">
-                                    <div class="comp-logo">
-                                        <a href="#"><img src="images/company/5.png" class="img-responsive" alt="scriptsbundle"> </a>
-                                    </div>
-                                </div>
-                                <div class="col-md-10 col-sm-10 col-xs-12">
-                                    <div class="job-title-box">
-                                        <a href="#">
-                                            <div class="job-title"> Technical Network Director (IT/Networks)</div>
-                                        </a>
-                                        <a href="#"><span class="comp-name">conversi Pvt. Ltd. United States</span></a>
-                                        <a href="#" class="job-type jt-remote-color">
-                                            <i class="fa fa-clock-o"></i> Remote
-                                        </a>
-                                    </div>
-                                    <p>Prompta numquam mel ad, tempor definiebas id usu, cum cu feugiat bonorum. Eu pri labores maiorum patrioque, sea an tation utinam. Idque albucius prodesset ei est, sea te vide contentiones consectetuer.......<a href="#">Read More</a> </p>
-                                </div>
-                                <div class="job-salary">
-                                    <i class="fa fa-money"></i> $200 - $250
-                                </div>
-                            </div>
-                        </ul>
-                    </div>
-
-                </div>
-                </div>
             </div>
         </div>
     </div>
 </section>
+
+<script>
+    var currentUrl = window.location.href;
+    var companyId = currentUrl.substr(currentUrl.lastIndexOf("/") + 1);
+    var currentPage = 0;
+
+    $(document).ready(function() {
+        loadPage();
+    });
+
+    function loadPage(page) {
+        $.ajax({
+            type: 'GET',
+            url: '/ajax/company/' + companyId + '/job',
+            data: {page: currentPage},
+            success: function(res) {
+                console.log(res);
+                if (res.content.length > 0) {
+                    $("#jobs").append(tmpl('tmpl-jobs', res.content));
+                    currentPage++;
+                }
+                if (res.last) {
+                    $("#btnLoadMoreJob").remove();
+                }
+            },
+            error: function(res) {
+                console.log('ERR:' + res);
+            }
+        });
+    }
+</script>
+
+<script type="text/x-tmpl" id="tmpl-jobs">
+{% for (var i = 0; i < o.length; i++) { %}
+<div class="job-box job-box-2">
+    <div class="col-md-2 col-sm-2 col-xs-12 hidden-sm">
+        <div class="comp-logo">
+            <a href="/company/{%=o[i].companyId%}"><img src="/{%=o[i].companyLogo%}" class="img-responsive" alt="{%=o[i].companyName%}"> </a>
+        </div>
+    </div>
+    <div class="col-md-10 col-sm-10 col-xs-12">
+        <div class="job-title-box">
+            <a href="/job/{%=o[i].id%}">
+                <div class="job-title">{%=o[i].title%}</div>
+            </a>
+            <a href="/job/{%=o[i].id%}">
+                <span class="comp-name">{%=o[i].companyName%}</span>
+            </a>
+            <a href="/job/{%=o[i].id%}" class="job-type jt-remote-color"><i class="fa fa-clock-o"></i> {%=o[i].jobType%}</a>
+        </div>
+        <p>{%=o[i].description%}<a href="/job/{%=o[i].id%}">Read More</a> </p>
+    </div>
+    <div class="job-salary"><i class="fa fa-money"></i> {%=o[i].salary%}</div>
+</div>
+{% } %}
+</script>

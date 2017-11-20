@@ -6,7 +6,7 @@
             <div class="row">
                 <div class="col-sm-6 col-md-4 col-xs-12">
                     <div class="footer_block">
-                        <a href="index-2.html" class="f_logo"><img src="img/logo.png" class="img-responsive" alt="logo"></a>
+                        <a href="/" class="f_logo"><img src="/img/logo.png" class="img-responsive" alt="logo"></a>
                         <p>Aoluptas sit aspernatur aut odit aut fugit, sed elits quias horisa hinoe magni  magni dolores eos qui ratione volust luptatem sequised .</p>
                         <div class="social-bar">
                             <ul>

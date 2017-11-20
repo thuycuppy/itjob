@@ -45,7 +45,7 @@ public class JobServiceImpl implements JobService {
 		dto.setCompanyId(job.getCompany().getId());
 		dto.setCompanyName(job.getCompany().getName());
 		dto.setCompanyLogo(job.getCompany().getLogo());
-		dto.setJobTypeName(job.getJobType().getName());
+		dto.setJobType(job.getJobType().getName());
 		return dto;
 	}
 }

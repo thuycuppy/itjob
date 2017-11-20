@@ -40,62 +40,65 @@
                     </div>
                 </div>
 
-                <div class="col-md-12 col-sm-12 col-xs-12 nopadding">
-                    <div id="cats-masonry">
-                        <c:forEach var="company" items="${companies.content}">
-                        <div class="col-md-4 col-sm-6 col-xs-12">
-                            <a href="#">
-                                <div class="company-list-box">
-                                    <span class="company-list-img">
-                                	    <img src="${company.logo}" class="img-responsive" alt="${company.name}">
-                                    </span>
-                                    <div class="company-list-box-detail">
-                                        <h5>${company.name}</h5>
-                                        <p>${company.address}</p>
-                                        <div class="ratings">
-                                            <span class="badge">${company.totalJobs} jobs</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </a>
-                        </div>
-                        </c:forEach>
-                    </div>
-                </div>
+                <div id="companies" class="col-md-12 col-sm-12 col-xs-12 nopadding"></div>
 
-                <div class="col-md-12 col-sm-12 col-xs-12 nopadding">
-                    <div class="pagination-box clearfix">
-                        <ul class="pagination">
-                            <c:choose>
-                                <c:when test="${pagination.currentIndex == 1}">
-                                    <li class="disabled"><a href="#"><span aria-hidden="true">«</span></a></li>
-                                </c:when>
-                                <c:otherwise>
-                                    <li><a href="/company?page=1"><span aria-hidden="true">«</span></a></li>
-                                </c:otherwise>
-                            </c:choose>
-                            <c:forEach var="page" begin="${pagination.beginIndex}" end="${pagination.endIndex}">
-                                <c:choose>
-                                    <c:when test="${page == pagination.currentIndex}">
-                                        <li class="active"><a href="/company?page=${page}">${page}</a></li>
-                                    </c:when>
-                                    <c:otherwise>
-                                        <li><a href="/company?page=${page}">${page}</a></li>
-                                    </c:otherwise>
-                                </c:choose>
-                            </c:forEach>
-                            <c:choose>
-                                <c:when test="${pagination.currentIndex == companies.totalPages}">
-                                    <li class="disabled"><a href="#"><span aria-hidden="true">»</span></a></li>
-                                </c:when>
-                                <c:otherwise>
-                                    <li><a href="/company?page=${companies.totalPages}"><span aria-hidden="true">»</span></a></li>
-                                </c:otherwise>
-                            </c:choose>
-                        </ul>
+                <div class="col-md-12 col-sm-12 col-xs-12">
+                    <div class="load-more-btn">
+                        <button id="btnLoadMoreCompany" class="btn-default" onclick="loadPage();">
+                            Load More <i class="fa fa-refresh"></i>
+                        </button>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </section>
+
+<script>
+    var currentPage = 0;
+
+    $(document).ready(function() {
+        loadPage();
+    });
+
+    function loadPage() {
+        $.ajax({
+            type: 'GET',
+            url: '/ajax/company',
+            data: {page: currentPage},
+            success: function(res) {
+                if (res.content.length > 0) {
+                    $("#companies").append(tmpl('tmpl-companies', res.content));
+                    currentPage++;
+                }
+                if (res.last) {
+                    $("#btnLoadMoreCompany").remove();
+                }
+            },
+            error: function(res) {
+                console.log('ERR:' + res);
+            }
+        });
+    }
+</script>
+
+<script type="text/x-tmpl" id="tmpl-companies">
+{% for (var i = 0; i < o.length; i++) { %}
+    <div class="col-md-4 col-sm-6 col-xs-12">
+        <a href="/company/detail/{%=o[i].id%}">
+            <div class="company-list-box">
+                <span class="company-list-img">
+                    <img src="/{%=o[i].logo%}" class="img-responsive" alt="{%=o[i].name%}">
+                </span>
+                <div class="company-list-box-detail">
+                    <h5>{%=o[i].name%}</h5>
+                    <p>{%=o[i].address%}</p>
+                    <div class="ratings">
+                        <span class="badge">{%=o[i].totalJobs%} jobs</span>
+                    </div>
+                </div>
+            </div>
+        </a>
+    </div>
+{% } %}
+</script>

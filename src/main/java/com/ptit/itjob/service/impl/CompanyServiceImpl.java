@@ -35,11 +35,6 @@ public class CompanyServiceImpl implements CompanyService {
 	}
 
 	@Override
-	public CompanyDetailDto findOne(Integer id) {
-		return companyRepository.findOneById(id);
-	}
-
-	@Override
 	@Transactional(readOnly = true)
 	public Page<CompanyListDto> findTop() {
 		PageRequest pageRequest = new PageRequest(0, 6, new Sort(Sort.Direction.DESC, "jobs"));
@@ -47,9 +42,21 @@ public class CompanyServiceImpl implements CompanyService {
 		return companies.map(this::convertToCompanyListDto);
 	}
 
+	@Override
+	public CompanyDetailDto findOne(Integer id) {
+		return convertToCompanyDetailDto(companyRepository.findOneById(id));
+	}
+
 	private CompanyListDto convertToCompanyListDto(Company company) {
 		CompanyListDto dto = modelMapper.map(company, CompanyListDto.class);
 		dto.setTotalJobs(company.getJobs().size());
+		return dto;
+	}
+
+	private CompanyDetailDto convertToCompanyDetailDto(Company company) {
+		CompanyDetailDto dto = modelMapper.map(company, CompanyDetailDto.class);
+		dto.setCompanyType(company.getCompanyType().getName());
+		dto.setLocation(company.getLocation().getName());
 		return dto;
 	}
 }

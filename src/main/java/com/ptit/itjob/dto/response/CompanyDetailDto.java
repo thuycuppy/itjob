@@ -9,6 +9,7 @@ public class CompanyDetailDto implements Serializable {
     private String name;
     private String quantity;
     private String website;
+    private String location;
     private String address;
     private String logo;
     private String description;
@@ -17,12 +18,13 @@ public class CompanyDetailDto implements Serializable {
     public CompanyDetailDto() {
     }
 
-    public CompanyDetailDto(Integer id, String companyType, String name, String quantity, String website, String address, String logo, String description, String phone) {
+    public CompanyDetailDto(Integer id, String companyType, String name, String quantity, String website, String location, String address, String logo, String description, String phone) {
         this.id = id;
         this.companyType = companyType;
         this.name = name;
         this.quantity = quantity;
         this.website = website;
+        this.location = location;
         this.address = address;
         this.logo = logo;
         this.description = description;
@@ -67,6 +69,14 @@ public class CompanyDetailDto implements Serializable {
 
     public void setWebsite(String website) {
         this.website = website;
+    }
+
+    public String getLocation() {
+        return location;
+    }
+
+    public void setLocation(String location) {
+        this.location = location;
     }
 
     public String getAddress() {

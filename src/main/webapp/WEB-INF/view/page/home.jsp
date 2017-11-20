@@ -63,7 +63,7 @@
                             <div class="job-title-box">
                                 <a href="#" class="job-title">${latestJob.title}</a><br />
                                 <a href="#"><span class="comp-name">${latestJob.companyName}</span></a>
-                                <a href="#" class="job-type jt-remote-color"><i class="fa fa-clock-o"></i> ${latestJob.jobTypeName}</a>
+                                <a href="#" class="job-type jt-remote-color"><i class="fa fa-clock-o"></i> ${latestJob.jobType}</a>
                             </div>
                             <p>${latestJob.description}<a href="#">Read More</a> </p>
                         </div>

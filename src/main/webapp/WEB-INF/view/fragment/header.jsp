@@ -2,7 +2,7 @@
     <section class="menu-list-items container"> 
         <ul class="menu-logo">
             <li>
-                <a href="/"> <img src="img/logo.png" alt="logo" class="img-responsive"> </a>
+                <a href="/"> <img src="/img/logo.png" alt="logo" class="img-responsive"> </a>
             </li>
         </ul>
         <ul class="menu-links pull-right">

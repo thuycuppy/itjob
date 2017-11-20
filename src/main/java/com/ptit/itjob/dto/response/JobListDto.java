@@ -11,12 +11,12 @@ public class JobListDto implements Serializable {
     private Integer companyId;
     private String companyLogo;
     private String companyName;
-    private String jobTypeName;
+    private String jobType;
 
     public JobListDto() {
     }
 
-    public JobListDto(Integer jobId, String title, int salary, String description, Integer companyId, String companyLogo, String companyName, String jobTypeName) {
+    public JobListDto(Integer jobId, String title, int salary, String description, Integer companyId, String companyLogo, String companyName, String jobType) {
         this.jobId = jobId;
         this.title = title;
         this.salary = salary;
@@ -24,7 +24,7 @@ public class JobListDto implements Serializable {
         this.companyId = companyId;
         this.companyLogo = companyLogo;
         this.companyName = companyName;
-        this.jobTypeName = jobTypeName;
+        this.jobType = jobType;
     }
 
     public Integer getJobId() {
@@ -83,11 +83,11 @@ public class JobListDto implements Serializable {
         this.companyName = companyName;
     }
 
-    public String getJobTypeName() {
-        return jobTypeName;
+    public String getJobType() {
+        return jobType;
     }
 
-    public void setJobTypeName(String jobTypeName) {
-        this.jobTypeName = jobTypeName;
+    public void setJobType(String jobType) {
+        this.jobType = jobType;
     }
 }
