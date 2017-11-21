@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class CompanyController {
@@ -18,13 +19,13 @@ public class CompanyController {
     }
 
     @GetMapping("/company")
-    public String list() {
+    public String listCompany() {
         return "company_list";
     }
 
     @GetMapping("/company/{id}")
-    public String detail(@PathVariable("id") Integer id, Model model) {
-        model.addAttribute("company", companyService.findOne(id));
+    public String showCompany(@PathVariable("id") Integer id, Model model) {
+        model.addAttribute("company", companyService.findById(id));
         return "company_detail";
     }
 }

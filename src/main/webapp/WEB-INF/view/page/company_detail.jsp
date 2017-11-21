@@ -36,13 +36,6 @@
                                     <li><i class="fa fa-dollar"></i> ${company.companyType}</li>
                                 </ul>
                             </div>
-                            <div class="b-socials full-socials">
-                                <ul class="list-unstyled">
-                                    <li><a href="https://twitter.com/"><i class="fa fa-twitter fa-fw"></i>Tweet</a></li>
-                                    <li><a href="https://www.facebook.com/"><i class="fa fa-facebook fa-fw"></i>Share</a></li>
-                                    <li><a href="https://plus.google.com/"><i class="fa fa-google-plus fa-fw"></i>Google+</a></li>
-                                </ul>
-                            </div>
                         </div>
                     </div>
                 </div>

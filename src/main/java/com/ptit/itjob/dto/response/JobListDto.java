@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 public class JobListDto implements Serializable {
     private static final long serialVersionUID = 4595634959863992395L;
-    private Integer jobId;
+    private Integer id;
     private String title;
     private int salary;
     private String description;
@@ -16,8 +16,8 @@ public class JobListDto implements Serializable {
     public JobListDto() {
     }
 
-    public JobListDto(Integer jobId, String title, int salary, String description, Integer companyId, String companyLogo, String companyName, String jobType) {
-        this.jobId = jobId;
+    public JobListDto(Integer id, String title, int salary, String description, Integer companyId, String companyLogo, String companyName, String jobType) {
+        this.id = id;
         this.title = title;
         this.salary = salary;
         this.description = description;
@@ -27,12 +27,12 @@ public class JobListDto implements Serializable {
         this.jobType = jobType;
     }
 
-    public Integer getJobId() {
-        return jobId;
+    public Integer getId() {
+        return id;
     }
 
-    public void setJobId(Integer jobId) {
-        this.jobId = jobId;
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public String getTitle() {

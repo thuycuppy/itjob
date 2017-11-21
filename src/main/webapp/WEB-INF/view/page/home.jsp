@@ -23,9 +23,9 @@
                         <div class="col-md-3 col-sm-3 col-xs-12 nopadding">
                             <div class="form-group">
                                 <select class="select-location form-control">
-                                	<c:forEach var="location" items="${locations}">
-                                		<option value="${location.id}">${location.name}</option>
-                                	</c:forEach>
+                                <c:forEach var="location" items="${locations}">
+                                    <option value="${location.id}">${location.name}</option>
+                                </c:forEach>
                                 </select>
                             </div>
                         </div>
@@ -56,14 +56,16 @@
                     <div class="job-box job-box-2">
                         <div class="col-md-2 col-sm-2 col-xs-12 hidden-sm">
                             <div class="comp-logo">
-                                <a href="#"><img src="${latestJob.companyLogo}" class="img-responsive" alt="${latestJob.companyName}"> </a>
+                                <a href="/company/${latestJob.companyId}">
+                                    <img src="${latestJob.companyLogo}" class="img-responsive" alt="${latestJob.companyName}">
+                                </a>
                             </div>
                         </div>
                         <div class="col-md-10 col-sm-10 col-xs-12">
                             <div class="job-title-box">
-                                <a href="#" class="job-title">${latestJob.title}</a><br />
-                                <a href="#"><span class="comp-name">${latestJob.companyName}</span></a>
-                                <a href="#" class="job-type jt-remote-color"><i class="fa fa-clock-o"></i> ${latestJob.jobType}</a>
+                                <a href="/job/${latestJob.id}" class="job-title">${latestJob.title}</a><br />
+                                <a href="/company/${latestJob.companyId}"><span class="comp-name">${latestJob.companyName}</span></a>
+                                <span class="job-type jt-remote-color"><i class="fa fa-clock-o"></i> ${latestJob.jobType}</span>
                             </div>
                             <p>${latestJob.description}<a href="#">Read More</a> </p>
                         </div>

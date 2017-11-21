@@ -28,7 +28,15 @@ public class JobServiceImpl implements JobService {
 	@Override
 	@Transactional(readOnly = true)
 	public Page<JobListDto> findLatest() {
-		PageRequest pageRequest = new PageRequest(0, 4, new Sort(Sort.Direction.DESC, "createdAt"));
+		PageRequest pageRequest = new PageRequest(0, Constant.JOB_HOME, new Sort(Sort.Direction.DESC, "createdAt"));
+		Page<Job> jobs = jobRepository.findAll(pageRequest);
+		return jobs.map(this::convertToJobListDto);
+	}
+
+	@Override
+	@Transactional(readOnly = true)
+	public Page<JobListDto> findAll(int page) {
+		PageRequest pageRequest = new PageRequest(page, Constant.JOB_PER_PAGE, new Sort(Sort.Direction.DESC, "createdAt"));
 		Page<Job> jobs = jobRepository.findAll(pageRequest);
 		return jobs.map(this::convertToJobListDto);
 	}
@@ -38,6 +46,11 @@ public class JobServiceImpl implements JobService {
 		PageRequest pageRequest = new PageRequest(page, Constant.COMPANY_JOB_PER_PAGE, new Sort(Sort.Direction.DESC, "createdAt"));
 		Page<Job> jobs = jobRepository.findByCompanyId(companyId, pageRequest);
 		return jobs.map(this::convertToJobListDto);
+	}
+
+	@Override
+	public Job findById(Integer id) {
+		return jobRepository.findOne(id);
 	}
 
 	private JobListDto convertToJobListDto(Job job) {

@@ -50,10 +50,30 @@
         <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 	<![endif]-->
 
-    <!-- JAVASCRIPT JS  -->
+    <!-- JQUERY  -->
+    <script type="text/javascript" src="/js/jquery-3.1.1.min.js"></script>
+</head>
+
+<body>
+<div class="page">
+    <div id="spinner">
+        <div class="spinner-img"> <img alt="Opportunities Preloader" src="/img/loader.gif" />
+            <h2>Please Wait.....</h2>
+        </div>
+    </div>
+    
+	<tiles:insertAttribute name="header" />
+
+    <tiles:insertAttribute name="body" />
+    
+    <tiles:insertAttribute name="footer" />
+
+    <a href="#" class="scrollup"><i class="fa fa-chevron-up"></i></a>
+
+    <!-- JQUERY  -->
     <script type="text/javascript" src="/js/jquery-3.1.1.min.js"></script>
 
-    <!-- JAVASCRIPT JS  -->
+    <!-- JQUERY  -->
     <script type="text/javascript" src="/js/jquery-migrate-1.2.1.min.js"></script>
 
     <!-- BOOTSTRAP CORE JS -->
@@ -89,23 +109,6 @@
 
     <!-- CORE JS -->
     <script type="text/javascript" src="/js/custom.js"></script>
-</head>
-
-<body>
-<div class="page">
-    <div id="spinner">
-        <div class="spinner-img"> <img alt="Opportunities Preloader" src="/img/loader.gif" />
-            <h2>Please Wait.....</h2>
-        </div>
-    </div>
-    
-	<tiles:insertAttribute name="header" />
-
-    <tiles:insertAttribute name="body" />
-    
-    <tiles:insertAttribute name="footer" />
-
-    <a href="#" class="scrollup"><i class="fa fa-chevron-up"></i></a>
 </div>
 </body>
 

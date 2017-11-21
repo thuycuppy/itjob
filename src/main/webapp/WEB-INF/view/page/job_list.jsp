@@ -32,19 +32,18 @@
 <section class="categories-list-page light-grey">
     <div class="container">
         <div class="row">
-            <div class="col-md-12 col-sm-12 col-xs-12">
+            <div class="col-md-12 col-sm-12 col-xs-12 nopadding">
                 <div class="col-md-12 col-sm-12 col-xs-12">
                     <div class="Heading-title black">
-                        <h1>List Companies</h1>
+                        <h1>List Jobs</h1>
                         <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor.At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium</p>
                     </div>
                 </div>
 
-                <div id="companies" class="col-md-12 col-sm-12 col-xs-12 nopadding"></div>
-
                 <div class="col-md-12 col-sm-12 col-xs-12">
+                    <div id="jobs" class="all-jobs-list-box2"></div>
                     <div class="load-more-btn">
-                        <button id="btnLoadMoreCompany" class="btn-default" onclick="loadPage();">
+                        <button id="btnLoadMoreJob" class="btn-default" onclick="loadPage();">
                             Load More <i class="fa fa-refresh"></i>
                         </button>
                     </div>
@@ -64,15 +63,15 @@
     function loadPage() {
         $.ajax({
             type: 'GET',
-            url: '/ajax/company',
+            url: '/ajax/job',
             data: {page: currentPage},
             success: function(res) {
                 if (res.content.length > 0) {
-                    $("#companies").append(tmpl('tmpl-companies', res.content));
+                    $("#jobs").append(tmpl('tmpl-jobs', res.content));
                     currentPage++;
                 }
                 if (res.last) {
-                    $("#btnLoadMoreCompany").remove();
+                    $("#btnLoadMoreJob").remove();
                 }
             },
             error: function(res) {
@@ -82,23 +81,31 @@
     }
 </script>
 
-<script type="text/x-tmpl" id="tmpl-companies">
+<script type="text/x-tmpl" id="tmpl-jobs">
 {% for (var i = 0; i < o.length; i++) { %}
-    <div class="col-md-4 col-sm-6 col-xs-12">
-        <a href="/company/{%=o[i].id%}">
-            <div class="company-list-box">
-                <span class="company-list-img">
-                    <img src="/{%=o[i].logo%}" class="img-responsive" alt="{%=o[i].name%}">
-                </span>
-                <div class="company-list-box-detail">
-                    <h5>{%=o[i].name%}</h5>
-                    <p>{%=o[i].address%}</p>
-                    <div class="ratings">
-                        <span class="badge">{%=o[i].totalJobs%} jobs</span>
-                    </div>
-                </div>
+    <div class="job-box job-box-2">
+        <div class="col-md-2 col-sm-2 col-xs-12 hidden-sm hidden-xs">
+            <div class="comp-logo">
+                <a href="/company/{%=o[i].companyId%}">
+                    <img src="/{%=o[i].companyLogo%}" class="img-responsive" alt="{%=o[i].companyName%}">
+                </a>
             </div>
-        </a>
+        </div>
+        <div class="col-md-10 col-sm-10 col-xs-12">
+            <div class="job-title-box">
+                <a href="/job/{%=o[i].id%}">
+                    <div class="job-title">{%=o[i].title%}</div>
+                </a>
+                <a href="/company/{%=o[i].companyId%}"><span class="comp-name">{%=o[i].companyName%}</span></a>
+                <span class="job-type jt-remote-color">
+                    <i class="fa fa-clock-o"></i> {%=o[i].jobType%}
+                </span>
+            </div>
+            <p>{%=o[i].description%}<a href="#">Read More</a> </p>
+        </div>
+        <div class="job-salary">
+            <i class="fa fa-money"></i> {%=o[i].salary%}
+        </div>
     </div>
 {% } %}
 </script>

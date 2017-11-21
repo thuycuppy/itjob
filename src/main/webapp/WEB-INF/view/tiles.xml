@@ -30,12 +30,22 @@
     </definition>
 
     <definition name="company_list" extends="basic">
-        <put-attribute name="title" value="ITJob | List Companies" />
+        <put-attribute name="title" value="ITJob | All Companies" />
         <put-attribute name="body" value="/WEB-INF/view/page/company_list.jsp" />
     </definition>
 
     <definition name="company_detail" extends="basic">
         <put-attribute name="title" value="ITJob | Company Detail" />
         <put-attribute name="body" value="/WEB-INF/view/page/company_detail.jsp" />
+    </definition>
+
+    <definition name="job_list" extends="basic">
+        <put-attribute name="title" value="ITJob | All Jobs" />
+        <put-attribute name="body" value="/WEB-INF/view/page/job_list.jsp" />
+    </definition>
+
+    <definition name="job_detail" extends="basic">
+        <put-attribute name="title" value="ITJob | Job Detail" />
+        <put-attribute name="body" value="/WEB-INF/view/page/job_detail.jsp" />
     </definition>
 </tiles-definitions>

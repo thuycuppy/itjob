@@ -28,6 +28,14 @@ public class CompanyServiceImpl implements CompanyService {
 
 	@Override
 	@Transactional(readOnly = true)
+	public Page<CompanyListDto> findTop() {
+		PageRequest pageRequest = new PageRequest(0, Constant.COMPANY_HOME, new Sort(Sort.Direction.DESC, "jobs.size"));
+		Page<Company> companies = companyRepository.findAll(pageRequest);
+		return companies.map(this::convertToCompanyListDto);
+	}
+
+	@Override
+	@Transactional(readOnly = true)
 	public Page<CompanyListDto> findAll(int page) {
 		PageRequest pageRequest = new PageRequest(page, Constant.COMPANY_PER_PAGE);
 		Page<Company> companies = companyRepository.findAll(pageRequest);
@@ -36,14 +44,14 @@ public class CompanyServiceImpl implements CompanyService {
 
 	@Override
 	@Transactional(readOnly = true)
-	public Page<CompanyListDto> findTop() {
-		PageRequest pageRequest = new PageRequest(0, 6, new Sort(Sort.Direction.DESC, "jobs"));
-		Page<Company> companies = companyRepository.findAll(pageRequest);
+	public Page<CompanyListDto> findByName(String name, int page) {
+		PageRequest pageRequest = new PageRequest(page, Constant.COMPANY_PER_PAGE, new Sort(Sort.Direction.DESC, "jobs.size"));
+		Page<Company> companies = companyRepository.findByName("%" + name + "%", pageRequest);
 		return companies.map(this::convertToCompanyListDto);
 	}
 
 	@Override
-	public CompanyDetailDto findOne(Integer id) {
+	public CompanyDetailDto findById(Integer id) {
 		return convertToCompanyDetailDto(companyRepository.findOneById(id));
 	}
 

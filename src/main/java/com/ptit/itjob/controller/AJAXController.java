@@ -28,7 +28,12 @@ public class AJAXController {
     }
 
     @GetMapping("/ajax/company/{id}/job")
-    public Page<JobListDto> loadMoreJobs(@PathVariable("id") Integer companyId, @RequestParam("page") Integer page) {
+    public Page<JobListDto> loadMoreCompanyJobs(@PathVariable("id") Integer companyId, @RequestParam("page") Integer page) {
         return jobService.findByCompany(companyId, page);
+    }
+
+    @GetMapping("/ajax/job")
+    public Page<JobListDto> loadMoreJobs(@RequestParam("page") Integer page) {
+        return jobService.findAll(page);
     }
 }

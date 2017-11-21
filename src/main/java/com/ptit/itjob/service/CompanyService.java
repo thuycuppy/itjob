@@ -10,5 +10,7 @@ public interface CompanyService {
 
 	Page<CompanyListDto> findAll(int page);
 
-	CompanyDetailDto findOne(Integer id);
+	Page<CompanyListDto> findByName(String name, int page);
+
+	CompanyDetailDto findById(Integer id);
 }
