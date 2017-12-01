@@ -104,7 +104,7 @@ public class Company implements java.io.Serializable {
 		this.location = location;
 	}
 
-	@Column(name = "name", nullable = false)
+	@Column(name = "name", nullable = false, length = 50)
 	public String getName() {
 		return this.name;
 	}

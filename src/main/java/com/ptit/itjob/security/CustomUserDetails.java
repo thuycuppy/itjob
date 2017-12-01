@@ -10,15 +10,15 @@ import com.ptit.itjob.model.Account;
 
 public class CustomUserDetails implements UserDetails {
 	private static final long serialVersionUID = 1L;
-	private Account user;
+	private Account account;
 	private Set<GrantedAuthority> authorities = new HashSet<>();
-	
-	public Account getUser() {
-		return user;
+
+	public Account getAccount() {
+		return account;
 	}
 
-	public void setUser(Account user) {
-		this.user = user;
+	public void setAccount(Account account) {
+		this.account = account;
 	}
 
 	@Override
@@ -32,12 +32,12 @@ public class CustomUserDetails implements UserDetails {
 
 	@Override
 	public String getPassword() {
-		return user.getPassword();
+		return account.getPassword();
 	}
 
 	@Override
 	public String getUsername() {
-		return user.getEmail();
+		return account.getEmail();
 	}
 
 	@Override

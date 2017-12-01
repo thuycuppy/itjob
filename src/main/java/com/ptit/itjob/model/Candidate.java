@@ -40,8 +40,17 @@ public class Candidate implements java.io.Serializable {
 	public Candidate() {
 	}
 
+	public Candidate(Account account, String name, Date dob, String phone, boolean sex, String address) {
+		this.account = account;
+		this.name = name;
+		this.dob = dob;
+		this.phone = phone;
+		this.sex = sex;
+		this.address = address;
+	}
+
 	public Candidate(Account account, Experience expectedExperience, JobType expectedJobType, Location expectedLocation, String name, Date dob,
-			String phone, boolean sex, String address, int expectedSalary) {
+					 String phone, boolean sex, String address, int expectedSalary) {
 		this.account = account;
 		this.expectedExperience = expectedExperience;
 		this.expectedJobType = expectedJobType;
@@ -124,7 +133,7 @@ public class Candidate implements java.io.Serializable {
 		this.expectedLocation = expectedLocation;
 	}
 
-	@Column(name = "name", nullable = false)
+	@Column(name = "name", nullable = false, length = 50)
 	public String getName() {
 		return this.name;
 	}
@@ -143,7 +152,7 @@ public class Candidate implements java.io.Serializable {
 		this.dob = dob;
 	}
 
-	@Column(name = "phone", nullable = false)
+	@Column(name = "phone", nullable = false, length = 20)
 	public String getPhone() {
 		return this.phone;
 	}

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 19, 2017 at 02:54 AM
+-- Generation Time: Dec 01, 2017 at 10:26 PM
 -- Server version: 5.7.14
 -- PHP Version: 5.6.25
 
@@ -28,6 +28,7 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `account` (
   `id` int(11) UNSIGNED NOT NULL,
+  `name` varchar(50) NOT NULL,
   `password` varchar(60) NOT NULL,
   `email` varchar(255) NOT NULL,
   `role` varchar(50) NOT NULL,
@@ -38,18 +39,23 @@ CREATE TABLE `account` (
 -- Dumping data for table `account`
 --
 
-INSERT INTO `account` (`id`, `password`, `email`, `role`, `avatar`) VALUES
-(1, '$2a$10$LOqePml/koRGsk2YAIOFI.1YNKZg7EsQ5BAIuYP1nWOyYRl21dlne', 'thuy@gmail.com', 'ROLE_CANDIDATE', 'img/avatar/default.jpg'),
-(2, '$2y$10$FxstkW3S70UptzjSTZCMfOVBQbmp/z0..Fw0CX0df48nU2.noy4cC', 'anh@gmail.com', 'ROLE_CANDIDATE', 'img/avatar/default.jpg'),
-(3, '$2y$10$FxstkW3S70UptzjSTZCMfOVBQbmp/z0..Fw0CX0df48nU2.noy4cC', 'abc@gmail.com', 'ROLE_COMPANY', 'img/avatar/default.jpg'),
-(4, '$2y$10$FxstkW3S70UptzjSTZCMfOVBQbmp/z0..Fw0CX0df48nU2.noy4cC', 'tuan@gmail.com', 'ROLE_CANDIDATE', 'img/avatar/default.jpg'),
-(5, '$2y$10$FxstkW3S70UptzjSTZCMfOVBQbmp/z0..Fw0CX0df48nU2.noy4cC', 'fpt@fsoft.com.vn', 'ROLE_COMPANY', 'img/avatar/default.jpg'),
-(6, '$2y$10$FxstkW3S70UptzjSTZCMfOVBQbmp/z0..Fw0CX0df48nU2.noy4cC', 'cmc@gmail.com', 'ROLE_COMPANY', 'img/avatar/default.jpg'),
-(7, '$2y$10$FxstkW3S70UptzjSTZCMfOVBQbmp/z0..Fw0CX0df48nU2.noy4cC', 'ominext@gmail.com', 'ROLE_COMPANY', 'img/avatar/default.jpg'),
-(8, '$2y$10$FxstkW3S70UptzjSTZCMfOVBQbmp/z0..Fw0CX0df48nU2.noy4cC', 'lethuy@gmail.com', 'ROLE_CANDIDATE', 'img/avatar/default.jpg'),
-(9, '$2y$10$FxstkW3S70UptzjSTZCMfOVBQbmp/z0..Fw0CX0df48nU2.noy4cC', 'tuananh@gmail.com', 'ROLE_CANDIDATE', 'img/avatar/default.jpg'),
-(10, '$2y$10$FxstkW3S70UptzjSTZCMfOVBQbmp/z0..Fw0CX0df48nU2.noy4cC', 'cowell@gmail.com', 'ROLE_COMPANY', 'img/avatar/default.jpg'),
-(12, '$2a$10$obGxAbxMMeUTUu51gZ.jlue5bL67j1AapTNBsOlf7FjAX40RF8B7q', 'thuy@gmail.com2', 'ROLE_CANDIDATE', 'img/avatar/default.jpg');
+INSERT INTO `account` (`id`, `name`, `password`, `email`, `role`, `avatar`) VALUES
+(1, 'Lê Thị Thủy', '$2a$10$LOqePml/koRGsk2YAIOFI.1YNKZg7EsQ5BAIuYP1nWOyYRl21dlne', 'thuy@gmail.com', 'ROLE_CANDIDATE', '/upload/avatar/default.jpg'),
+(2, 'Lê Thị Thủy', '$2y$10$FxstkW3S70UptzjSTZCMfOVBQbmp/z0..Fw0CX0df48nU2.noy4cC', 'anh@gmail.com', 'ROLE_CANDIDATE', '/upload/avatar/default.jpg'),
+(3, 'Lê Thị Thủy', '$2y$10$FxstkW3S70UptzjSTZCMfOVBQbmp/z0..Fw0CX0df48nU2.noy4cC', 'abc@gmail.com', 'ROLE_COMPANY', '/upload/avatar/default.jpg'),
+(4, 'Lê Thị Thủy', '$2y$10$FxstkW3S70UptzjSTZCMfOVBQbmp/z0..Fw0CX0df48nU2.noy4cC', 'tuan@gmail.com', 'ROLE_CANDIDATE', '/upload/avatar/default.jpg'),
+(5, 'Lê Thị Thủy', '$2y$10$FxstkW3S70UptzjSTZCMfOVBQbmp/z0..Fw0CX0df48nU2.noy4cC', 'fpt@fsoft.com.vn', 'ROLE_COMPANY', '/upload/avatar/default.jpg'),
+(6, 'Lê Thị Thủy', '$2y$10$FxstkW3S70UptzjSTZCMfOVBQbmp/z0..Fw0CX0df48nU2.noy4cC', 'cmc@gmail.com', 'ROLE_COMPANY', '/upload/avatar/default.jpg'),
+(7, 'Lê Thị Thủy', '$2y$10$FxstkW3S70UptzjSTZCMfOVBQbmp/z0..Fw0CX0df48nU2.noy4cC', 'ominext@gmail.com', 'ROLE_COMPANY', '/upload/avatar/default.jpg'),
+(8, 'Lê Thị Thủy', '$2y$10$FxstkW3S70UptzjSTZCMfOVBQbmp/z0..Fw0CX0df48nU2.noy4cC', 'lethuy@gmail.com', 'ROLE_CANDIDATE', '/upload/avatar/default.jpg'),
+(9, 'Lê Thị Thủy', '$2y$10$FxstkW3S70UptzjSTZCMfOVBQbmp/z0..Fw0CX0df48nU2.noy4cC', 'tuananh@gmail.com', 'ROLE_CANDIDATE', '/upload/avatar/default.jpg'),
+(10, 'Lê Thị Thủy', '$2y$10$FxstkW3S70UptzjSTZCMfOVBQbmp/z0..Fw0CX0df48nU2.noy4cC', 'cowell@gmail.com', 'ROLE_COMPANY', '/upload/avatar/default.jpg'),
+(12, 'Lê Thị Thủy', '$2a$10$obGxAbxMMeUTUu51gZ.jlue5bL67j1AapTNBsOlf7FjAX40RF8B7q', 'thuy@gmail.com2', 'ROLE_CANDIDATE', '/upload/avatar/default.jpg'),
+(13, '123', '$2a$10$CihNhkRdAgYVvFiWHeyeBeM0ArrDln6mMlHkZ2P./AEU11vx3JEaG', '123@gmail.com', 'ROLE_CANDIDATE', '/upload/avatar/default.jpg'),
+(14, '456', '$2a$10$uYjrSbW0DZ/lBwRXb4Mp.O/FcOqaj.KFdu3jcqq8ioTeErul.ozXO', '456@gmail.com', 'ROLE_CANDIDATE', '/upload/avatar/default.jpg'),
+(15, '789', '$2a$10$BI.FPPiWxYsPMJ5SzfzkEuL4Xp/GRU1kjzb8vvwc9tsXF5X9VHzN2', '789@gmail.com', 'ROLE_CANDIDATE', '/upload/avatar/default.jpg'),
+(16, '456', '$2a$10$Ax7XeUBNe5g0fwHLOPFDpee2xV1HlR3Q0TU2N3gjE8zwwnm1dKSiK', '123@gmail.com2', 'ROLE_CANDIDATE', '/upload/avatar/default.jpg'),
+(17, 'khihieu', '$2a$10$xkxHHCkt9UK2.JQANrwp4OWuzjLPOajaiDcRQANiUf8LuC65ZZCfW', 'khihieu@gmail.com', 'ROLE_CANDIDATE', '/upload/avatar/default.jpg');
 
 -- --------------------------------------------------------
 
@@ -59,9 +65,9 @@ INSERT INTO `account` (`id`, `password`, `email`, `role`, `avatar`) VALUES
 
 CREATE TABLE `candidate` (
   `id` int(11) UNSIGNED NOT NULL,
-  `name` varchar(255) NOT NULL,
+  `name` varchar(50) NOT NULL,
   `dob` date NOT NULL,
-  `phone` varchar(255) NOT NULL,
+  `phone` varchar(20) NOT NULL,
   `sex` bit(1) NOT NULL,
   `address` varchar(255) NOT NULL,
   `description` varchar(255) DEFAULT NULL,
@@ -78,7 +84,12 @@ CREATE TABLE `candidate` (
 --
 
 INSERT INTO `candidate` (`id`, `name`, `dob`, `phone`, `sex`, `address`, `description`, `resume`, `account_id`, `expected_location_id`, `expected_job_type_id`, `experience_id`, `expected_salary`) VALUES
-(1, 'Nguyễn Tuấn Anh', '1995-06-21', '0973075726', b'1', 'Hà Đông, Hà Nội', NULL, NULL, 2, 1, 2, 2, 500);
+(1, 'Nguyễn Tuấn Anh', '1995-06-21', '0973075726', b'1', 'Hà Đông, Hà Nội', NULL, NULL, 2, 1, 2, 2, 500),
+(2, '123', '2017-02-02', '123', b'0', '123', NULL, NULL, 13, NULL, NULL, NULL, 0),
+(3, '456', '2017-09-08', '123', b'1', '123', NULL, NULL, 14, NULL, NULL, NULL, 0),
+(4, '789', '2017-02-02', '123', b'1', '123', NULL, NULL, 15, NULL, NULL, NULL, 0),
+(5, '456', '2017-02-02', '123', b'0', '123', NULL, NULL, 16, NULL, NULL, NULL, 0),
+(6, 'khihieu', '2017-02-02', '123', b'0', '123', NULL, '/upload/resume/40511_161201410922BuiThiHue.pdf', 17, NULL, NULL, NULL, 0);
 
 -- --------------------------------------------------------
 
@@ -107,7 +118,7 @@ INSERT INTO `candidate_skill` (`candidate_id`, `skill_id`) VALUES
 
 CREATE TABLE `company` (
   `id` int(11) UNSIGNED NOT NULL,
-  `name` varchar(255) NOT NULL,
+  `name` varchar(50) NOT NULL,
   `company_type_id` int(11) UNSIGNED NOT NULL,
   `quantity` varchar(45) NOT NULL,
   `website` varchar(255) NOT NULL,
@@ -124,16 +135,16 @@ CREATE TABLE `company` (
 --
 
 INSERT INTO `company` (`id`, `name`, `company_type_id`, `quantity`, `website`, `location_id`, `address`, `logo`, `description`, `phone`, `account_id`) VALUES
-(1, 'FPT Software', 1, '300+', 'www.fpt.com', 1, 'Cầu Giấy, Hà Nội', 'img/company/1.png', NULL, '0123456789', 1),
-(2, 'Episerver', 1, '51-150', 'www.abc.com', 1, 'Đống Đa, Hà Nội', 'img/company/2.png', NULL, '0123456789', 1),
-(3, 'Episerver', 1, '51-150', 'www.abc.com', 1, 'Đống Đa, Hà Nội', 'img/company/2.png', NULL, '0123456789', 1),
-(4, 'Episerver', 1, '51-150', 'www.abc.com', 1, 'Đống Đa, Hà Nội', 'img/company/2.png', NULL, '0123456789', 1),
-(5, 'Episerver', 1, '51-150', 'www.abc.com', 1, 'Đống Đa, Hà Nội', 'img/company/2.png', NULL, '0123456789', 1),
-(6, 'Episerver', 1, '51-150', 'www.abc.com', 1, 'Đống Đa, Hà Nội', 'img/company/2.png', NULL, '0123456789', 1),
-(7, 'Episerver', 1, '51-150', 'www.abc.com', 1, 'Đống Đa, Hà Nội', 'img/company/2.png', NULL, '0123456789', 1),
-(8, 'Episerver', 1, '51-150', 'www.abc.com', 1, 'Đống Đa, Hà Nội', 'img/company/2.png', NULL, '0123456789', 1),
-(9, 'Episerver', 1, '51-150', 'www.abc.com', 1, 'Đống Đa, Hà Nội', 'img/company/2.png', NULL, '0123456789', 1),
-(10, 'Episerver', 1, '51-150', 'www.abc.com', 1, 'Đống Đa, Hà Nội', 'img/company/2.png', NULL, '0123456789', 1);
+(1, 'FPT Software', 1, '300+', 'www.fpt.com', 1, 'Cầu Giấy, Hà Nội', '/upload/logo/1.png', NULL, '0123456789', 1),
+(2, 'Episerver', 1, '51-150', 'www.abc.com', 1, 'Đống Đa, Hà Nội', '/upload/logo/2.png', NULL, '0123456789', 1),
+(3, 'Episerver', 1, '51-150', 'www.abc.com', 1, 'Đống Đa, Hà Nội', '/upload/logo/2.png', NULL, '0123456789', 1),
+(4, 'Episerver', 1, '51-150', 'www.abc.com', 1, 'Đống Đa, Hà Nội', '/upload/logo/2.png', NULL, '0123456789', 1),
+(5, 'Episerver', 1, '51-150', 'www.abc.com', 1, 'Đống Đa, Hà Nội', '/upload/logo/2.png', NULL, '0123456789', 1),
+(6, 'Episerver', 1, '51-150', 'www.abc.com', 1, 'Đống Đa, Hà Nội', '/upload/logo/2.png', NULL, '0123456789', 1),
+(7, 'Episerver', 1, '51-150', 'www.abc.com', 1, 'Đống Đa, Hà Nội', '/upload/logo/2.png', NULL, '0123456789', 1),
+(8, 'Episerver', 1, '51-150', 'www.abc.com', 1, 'Đống Đa, Hà Nội', '/upload/logo/2.png', NULL, '0123456789', 1),
+(9, 'Episerver', 1, '51-150', 'www.abc.com', 1, 'Đống Đa, Hà Nội', '/upload/logo/2.png', NULL, '0123456789', 1),
+(10, 'Episerver', 1, '51-150', 'www.abc.com', 1, 'Đống Đa, Hà Nội', '/upload/logo/2.png', NULL, '0123456789', 1);
 
 -- --------------------------------------------------------
 
@@ -279,10 +290,10 @@ CREATE TABLE `job_type` (
 --
 
 INSERT INTO `job_type` (`id`, `name`) VALUES
-(1, 'parttime'),
-(2, 'fulltime'),
-(3, 'internship'),
-(4, 'remote');
+(1, 'Parttime'),
+(2, 'Fulltime'),
+(3, 'Internship'),
+(4, 'Remote');
 
 -- --------------------------------------------------------
 
@@ -433,12 +444,12 @@ ALTER TABLE `skill`
 -- AUTO_INCREMENT for table `account`
 --
 ALTER TABLE `account`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 --
 -- AUTO_INCREMENT for table `candidate`
 --
 ALTER TABLE `candidate`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 --
 -- AUTO_INCREMENT for table `company`
 --

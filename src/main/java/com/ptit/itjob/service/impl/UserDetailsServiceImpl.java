@@ -36,7 +36,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         grantedAuthorities.add(new SimpleGrantedAuthority(account.getRole()));
 
         CustomUserDetails customUserDetails = new CustomUserDetails();
-        customUserDetails.setUser(account);
+        customUserDetails.setAccount(account);
         customUserDetails.setAuthorities(grantedAuthorities);
         return customUserDetails;
     }

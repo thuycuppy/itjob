@@ -9,36 +9,44 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.ptit.itjob.dto.request.RegisterReq;
-import com.ptit.itjob.service.ProfileService;
+import com.ptit.itjob.dto.request.CandidateRegisterReq;
+import com.ptit.itjob.service.CandidateService;
 import com.ptit.itjob.validator.RegisterValidator;
 
 @Controller
 public class RegisterController {
-	@Autowired
 	private RegisterValidator registerValidator;
+	private CandidateService candidateService;
+
 	@Autowired
-	private ProfileService profileService;
-	
-	@GetMapping("/register")
-	public String register(Model model) {
-		model.addAttribute("registerDto", new RegisterReq());
+	public RegisterController(RegisterValidator registerValidator, CandidateService candidateService) {
+		this.registerValidator = registerValidator;
+		this.candidateService = candidateService;
+	}
+
+	@GetMapping("/register/candidate")
+	public String registerCandidate(Model model) {
+		model.addAttribute("registerDto", new CandidateRegisterReq());
 		return "register";
 	}
 	
-	@PostMapping("/register")
-	public String handleRegister(@ModelAttribute("registerDto") @Valid RegisterReq req,
-			BindingResult result, RedirectAttributes redirect) {
+	@PostMapping("/register/candidate")
+	public String handleRegisterCandidate(
+			@ModelAttribute("registerDto") @Valid CandidateRegisterReq req,
+			BindingResult result, RedirectAttributes redirect,
+			@RequestParam(value = "resume", required = false) MultipartFile resume) {
 		registerValidator.validate(req, result);
         if (result.hasErrors()) {
             return "register";
         }
 
-        profileService.register(req);
+        candidateService.register(req, resume);
         redirect.addFlashAttribute("success", "You registered successfully!");
         return "redirect:/login";
 	}
-	
+
 }

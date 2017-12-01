@@ -23,11 +23,11 @@
                 </sec:authorize>
                 <sec:authorize access="isAuthenticated()">
                 	<sec:authentication var="principal" property="principal" />
-                	<c:set var="user" value="${principal.getUser()}" />
+                	<c:set var="account" value="${principal.getAccount()}" />
                 	<li class="profile-pic">
 	                   <a href="javascript:void(0)"> 
-	                   	<img src="${user.avatar}" alt="user-img" class="img-circle" width="36">
-	                   	<span class="hidden-xs hidden-sm">${user.name} </span>
+	                   	<img src="${account.avatar}" alt="user-img" class="img-circle" width="36">
+	                   	<span class="hidden-xs hidden-sm">${account.name} </span>
 	                   	<i class="fa fa-angle-down fa-indicator"></i> 
 	                   </a>
 	                   <ul class="drop-down-multilevel left-side">

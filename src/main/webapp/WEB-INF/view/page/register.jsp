@@ -24,7 +24,7 @@
     <div class="container">
         <div class="row">
             <div class="col-md-12 col-sm-12 col-xs-12">
-                <div class="login-container">
+                <div class="login-container" style="width: 700px">
                     <div class="loginbox">
                         <div class="loginbox-title">Sign Up using social accounts</div>
                         <ul class="social-network social-circle onwhite">
@@ -37,65 +37,98 @@
                             <div class="or-line"></div>
                             <div class="or">OR</div>
                         </div>
-                        <c:url value="/register" var="action" />
-        	 			<form:form action="${action}" method="POST" modelAttribute="registerDto">
-                        <div class="form-group">
-                            <label>Your name: <span class="required">*</span></label>
-                            <form:input path="name" cssClass="form-control" />
-							<c:set var="nameErrors"><form:errors path="name"/></c:set>
-							<c:if test="${not empty nameErrors}">
-							  <div class="field-error">
-							    <i class="fa fa-exclamation-circle"></i> 
-							    <form:errors path="name" delimiter="<br><i class='fa fa-exclamation-circle'></i> " />
-							  </div>
-							</c:if>
-                        </div>
-                        <div class="form-group">
-                            <label>Email: <span class="required">*</span></label>
-                            <form:input path="email" cssClass="form-control" />
-							<c:set var="emailErrors"><form:errors path="email"/></c:set>
-							<c:if test="${not empty emailErrors}">
-							  <div class="field-error">
-							    <i class="fa fa-exclamation-circle"></i> 
-							    <form:errors path="email" delimiter="<br><i class='fa fa-exclamation-circle'></i> " />
-							  </div>
-							</c:if>
-                        </div>
-                        <div class="form-group">
-                            <label>Password: <span class="required">*</span></label>
-                            <form:password path="password" cssClass="form-control" />
-						    <c:set var="passwordErrors"><form:errors path="password"/></c:set>
-				        	<c:if test="${not empty passwordErrors}">
-					      		<div class="field-error">
-					           		<i class="fa fa-exclamation-circle"></i> 
-					             	<form:errors path="password" delimiter="<br><i class='fa fa-exclamation-circle'></i> " />
-					           </div>
-				        	</c:if>
-                        </div>
-                        <div class="form-group">
-                            <label>Confirm Password: <span class="required">*</span></label>
-                            <form:password path="confirmPassword" cssClass="form-control" />
-							<c:set var="confirmPasswordErrors"><form:errors path="confirmPassword"/></c:set>
-							<c:if test="${not empty confirmPasswordErrors}">
-							  <div class="field-error">
-							    <i class="fa fa-exclamation-circle"></i> 
-							    <form:errors path="confirmPassword" delimiter="<br><i class='fa fa-exclamation-circle'></i> " />
-							  </div>
-							</c:if>
-                        </div>
-                        <div class="form-group">
-                            <label>Role: <span class="required">*</span></label>
-                           	<div class="radio">
-                              	<label>
-                              		<form:radiobutton path="role" value="ROLE_COMPANY" checked="checked" />Company
-                              </label>
+                        <c:url value="/register/candidate" var="action" />
+        	 			<form:form action="${action}" method="POST" modelAttribute="registerDto" enctype="multipart/form-data">
+                            <div class="col-md-6 form-group">
+                                <label>Your name: <span class="required">*</span></label>
+                                <form:input path="name" cssClass="form-control" />
+                                <c:set var="nameErrors"><form:errors path="name"/></c:set>
+                                <c:if test="${not empty nameErrors}">
+                                  <div class="field-error">
+                                    <i class="fa fa-exclamation-circle"></i>
+                                    <form:errors path="name" delimiter="<br><i class='fa fa-exclamation-circle'></i> " />
+                                  </div>
+                                </c:if>
                             </div>
-                            <div class="radio">
-                              	<label>
-                                  <form:radiobutton path="role" value="ROLE_CANDIDATE" />Candidate
-                            	</label>
+                            <div class="col-md-6  form-group">
+                                <label>Email: <span class="required">*</span></label>
+                                <form:input path="email" cssClass="form-control" />
+                                <c:set var="emailErrors"><form:errors path="email"/></c:set>
+                                <c:if test="${not empty emailErrors}">
+                                  <div class="field-error">
+                                    <i class="fa fa-exclamation-circle"></i>
+                                    <form:errors path="email" delimiter="<br><i class='fa fa-exclamation-circle'></i> " />
+                                  </div>
+                                </c:if>
                             </div>
-                        </div>
+                            <div class="col-md-6 form-group">
+                                <label>Password: <span class="required">*</span></label>
+                                <form:password path="password" cssClass="form-control" />
+                                <c:set var="passwordErrors"><form:errors path="password"/></c:set>
+                                <c:if test="${not empty passwordErrors}">
+                                    <div class="field-error">
+                                        <i class="fa fa-exclamation-circle"></i>
+                                        <form:errors path="password" delimiter="<br><i class='fa fa-exclamation-circle'></i> " />
+                                   </div>
+                                </c:if>
+                            </div>
+                            <div class="col-md-6 form-group">
+                                <label>Confirm Password: <span class="required">*</span></label>
+                                <form:password path="confirmPassword" cssClass="form-control" />
+                                <c:set var="confirmPasswordErrors"><form:errors path="confirmPassword"/></c:set>
+                                <c:if test="${not empty confirmPasswordErrors}">
+                                  <div class="field-error">
+                                    <i class="fa fa-exclamation-circle"></i>
+                                    <form:errors path="confirmPassword" delimiter="<br><i class='fa fa-exclamation-circle'></i> " />
+                                  </div>
+                                </c:if>
+                            </div>
+                            <div class="col-md-12 form-group">
+                                <label>Resume:</label>
+                                <input type="file" name="resume">
+                            </div>
+                            <div class="col-md-6 form-group">
+                                <label>Your birthday: <span class="required">*</span></label>
+                                <form:input path="dob" cssClass="form-control" />
+                                <c:set var="dobErrors"><form:errors path="dob"/></c:set>
+                                <c:if test="${not empty dobErrors}">
+                                    <div class="field-error">
+                                        <i class="fa fa-exclamation-circle"></i>
+                                        <form:errors path="dob" delimiter="<br><i class='fa fa-exclamation-circle'></i> " />
+                                    </div>
+                                </c:if>
+                            </div>
+                            <div class="col-md-6 form-group">
+                                <label>Your phone: <span class="required">*</span></label>
+                                <form:input path="phone" cssClass="form-control" />
+                                <c:set var="phoneErrors"><form:errors path="phone"/></c:set>
+                                <c:if test="${not empty phoneErrors}">
+                                    <div class="field-error">
+                                        <i class="fa fa-exclamation-circle"></i>
+                                        <form:errors path="phone" delimiter="<br><i class='fa fa-exclamation-circle'></i> " />
+                                    </div>
+                                </c:if>
+                            </div>
+                            <div class="col-md-6 form-group">
+                                <label>Your sex:</label><br/>
+                                <label class="radio-inline">
+                                    <form:radiobutton path="sex" value="false" />Female
+                                </label>
+                                <label class="radio-inline">
+                                    <form:radiobutton path="sex" value="true" />Male
+                                </label>
+                            </div>
+                            <div class="col-md-6 form-group">
+                                <label>Your address: <span class="required">*</span></label>
+                                <form:input path="address" cssClass="form-control" />
+                                <c:set var="addressErrors"><form:errors path="address"/></c:set>
+                                <c:if test="${not empty addressErrors}">
+                                    <div class="field-error">
+                                        <i class="fa fa-exclamation-circle"></i>
+                                        <form:errors path="address" delimiter="<br><i class='fa fa-exclamation-circle'></i> " />
+                                    </div>
+                                </c:if>
+                            </div>
                         <div class="loginbox-submit">
                             <input type="submit" class="btn btn-default btn-block" value="Register">
                         </div>
