@@ -1,7 +1,7 @@
 package com.ptit.itjob.service;
 
-import com.ptit.itjob.dto.request.RegisterDto;
+import com.ptit.itjob.dto.request.RegisterReq;
 
 public interface ProfileService {
-	void register(RegisterDto registerDto);
+	void register(RegisterReq registerDto);
 }

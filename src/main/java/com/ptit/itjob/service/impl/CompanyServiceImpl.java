@@ -1,8 +1,9 @@
 package com.ptit.itjob.service.impl;
 
 import com.ptit.itjob.common.Constant;
-import com.ptit.itjob.dto.response.CompanyDetailDto;
-import com.ptit.itjob.dto.response.CompanyListDto;
+import com.ptit.itjob.dto.response.CompanyDetailRes;
+import com.ptit.itjob.dto.response.CompanyListRes;
+import com.ptit.itjob.dto.response.CompanySearchRes;
 import com.ptit.itjob.model.Company;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +15,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.ptit.itjob.repository.CompanyRepository;
 import com.ptit.itjob.service.CompanyService;
+
+import java.util.List;
 
 @Service
 public class CompanyServiceImpl implements CompanyService {
@@ -28,7 +31,7 @@ public class CompanyServiceImpl implements CompanyService {
 
 	@Override
 	@Transactional(readOnly = true)
-	public Page<CompanyListDto> findTop() {
+	public Page<CompanyListRes> findTop() {
 		PageRequest pageRequest = new PageRequest(0, Constant.COMPANY_HOME, new Sort(Sort.Direction.DESC, "jobs.size"));
 		Page<Company> companies = companyRepository.findAll(pageRequest);
 		return companies.map(this::convertToCompanyListDto);
@@ -36,7 +39,7 @@ public class CompanyServiceImpl implements CompanyService {
 
 	@Override
 	@Transactional(readOnly = true)
-	public Page<CompanyListDto> findAll(int page) {
+	public Page<CompanyListRes> findAll(int page) {
 		PageRequest pageRequest = new PageRequest(page, Constant.COMPANY_PER_PAGE);
 		Page<Company> companies = companyRepository.findAll(pageRequest);
 		return companies.map(this::convertToCompanyListDto);
@@ -44,25 +47,23 @@ public class CompanyServiceImpl implements CompanyService {
 
 	@Override
 	@Transactional(readOnly = true)
-	public Page<CompanyListDto> findByName(String name, int page) {
-		PageRequest pageRequest = new PageRequest(page, Constant.COMPANY_PER_PAGE, new Sort(Sort.Direction.DESC, "jobs.size"));
-		Page<Company> companies = companyRepository.findByName("%" + name + "%", pageRequest);
-		return companies.map(this::convertToCompanyListDto);
+	public List<CompanySearchRes> findByName(String name) {
+		return companyRepository.findFirst5ByNameContaining(name);
 	}
 
 	@Override
-	public CompanyDetailDto findById(Integer id) {
+	public CompanyDetailRes findById(Integer id) {
 		return convertToCompanyDetailDto(companyRepository.findOneById(id));
 	}
 
-	private CompanyListDto convertToCompanyListDto(Company company) {
-		CompanyListDto dto = modelMapper.map(company, CompanyListDto.class);
+	private CompanyListRes convertToCompanyListDto(Company company) {
+		CompanyListRes dto = modelMapper.map(company, CompanyListRes.class);
 		dto.setTotalJobs(company.getJobs().size());
 		return dto;
 	}
 
-	private CompanyDetailDto convertToCompanyDetailDto(Company company) {
-		CompanyDetailDto dto = modelMapper.map(company, CompanyDetailDto.class);
+	private CompanyDetailRes convertToCompanyDetailDto(Company company) {
+		CompanyDetailRes dto = modelMapper.map(company, CompanyDetailRes.class);
 		dto.setCompanyType(company.getCompanyType().getName());
 		dto.setLocation(company.getLocation().getName());
 		return dto;

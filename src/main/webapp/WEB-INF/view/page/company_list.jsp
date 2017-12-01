@@ -10,13 +10,12 @@
                         <form class="form-inline">
                             <div class="col-md-10 col-sm-10 col-xs-12 nopadding">
                                 <div class="form-group">
-                                    <input type="text" class="form-control" name="keyword" placeholder="Search Keyword" value="">
-                                    <i class="icon-magnifying-glass"></i>
+                                    <select id="select2-search-company" class="form-control"></select>
                                 </div>
                             </div>
                             <div class="col-md-2 col-sm-2 col-xs-12 nopadding">
                                 <div class="form-group form-action">
-                                    <button type="button" class="btn btn-default btn-search-submit">
+                                    <button type="button" id="btnSearch" class="btn btn-default btn-search-submit">
                                         Search <i class="fa fa-angle-right"></i>
                                     </button>
                                 </div>
@@ -54,34 +53,6 @@
     </div>
 </section>
 
-<script>
-    var currentPage = 0;
-
-    $(document).ready(function() {
-        loadPage();
-    });
-
-    function loadPage() {
-        $.ajax({
-            type: 'GET',
-            url: '/ajax/company',
-            data: {page: currentPage},
-            success: function(res) {
-                if (res.content.length > 0) {
-                    $("#companies").append(tmpl('tmpl-companies', res.content));
-                    currentPage++;
-                }
-                if (res.last) {
-                    $("#btnLoadMoreCompany").remove();
-                }
-            },
-            error: function(res) {
-                console.log('ERR:' + res);
-            }
-        });
-    }
-</script>
-
 <script type="text/x-tmpl" id="tmpl-companies">
 {% for (var i = 0; i < o.length; i++) { %}
     <div class="col-md-4 col-sm-6 col-xs-12">
@@ -102,3 +73,5 @@
     </div>
 {% } %}
 </script>
+
+<script src="/js/app/company_list.js"></script>

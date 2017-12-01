@@ -16,13 +16,12 @@
                     <form class="form-inline">
                         <div class="col-md-7 col-sm-7 col-xs-12 nopadding">
                             <div class="form-group">
-                                <input type="text" class="form-control" name="keyword" placeholder="Search Keyword" value="">
-                                <i class="icon-magnifying-glass"></i>
+                                <select id="select2-search-job" class="form-control"></select>
                             </div>
                         </div>
                         <div class="col-md-3 col-sm-3 col-xs-12 nopadding">
                             <div class="form-group">
-                                <select class="select-location form-control">
+                                <select id="select2-location" class="form-control">
                                 <c:forEach var="location" items="${locations}">
                                     <option value="${location.id}">${location.name}</option>
                                 </c:forEach>
@@ -31,7 +30,9 @@
                         </div>
                         <div class="col-md-2 col-sm-2 col-xs-12 nopadding">
                             <div class="form-group form-action">
-                                <button type="button" class="btn btn-default btn-search-submit">Search <i class="fa fa-angle-right"></i></button>
+                                <button type="button" id="btnSearch" class="btn btn-default btn-search-submit">
+                                    Search <i class="fa fa-angle-right"></i>
+                                </button>
                             </div>
                         </div>
                     </form>
@@ -116,3 +117,5 @@
         </div>
     </div>
 </section>
+
+<script src="/js/app/home.js"></script>

@@ -79,8 +79,8 @@
     <!-- BOOTSTRAP CORE JS -->
     <script type="text/javascript" src="/js/bootstrap.min.js"></script>
 
-    <!-- JQUERY SELECT -->
-    <script type="text/javascript" src="/js/select2.min.js"></script>
+    <!-- SELECT2 -->
+    <script type="text/javascript" src="/js/select2.full.min.js"></script>
 
     <!-- MEGA MENU -->
     <script type="text/javascript" src="/js/mega_menu.min.js"></script>

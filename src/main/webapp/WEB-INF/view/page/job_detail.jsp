@@ -34,7 +34,7 @@
                             <div class="job-detail-meta">
                                 <ul>
                                     <li><i class="fa fa-map-marker"></i> ${job.location.name}</li>
-                                    <li><i class="fa fa-dollar"></i> $${job.salary}</li>
+                                    <li><i class="fa fa-money"></i> $${job.salary}</li>
                                     <li><i class="fa fa-clock-o"></i> ${job.jobType.name}</li>
 
                                 </ul>

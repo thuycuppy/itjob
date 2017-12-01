@@ -97,34 +97,7 @@
 </section>
 
 <script>
-    var currentUrl = window.location.href;
-    var companyId = currentUrl.substr(currentUrl.lastIndexOf("/") + 1);
-    var currentPage = 0;
 
-    $(document).ready(function() {
-        loadPage();
-    });
-
-    function loadPage(page) {
-        $.ajax({
-            type: 'GET',
-            url: '/ajax/company/' + companyId + '/job',
-            data: {page: currentPage},
-            success: function(res) {
-                console.log(res);
-                if (res.content.length > 0) {
-                    $("#jobs").append(tmpl('tmpl-jobs', res.content));
-                    currentPage++;
-                }
-                if (res.last) {
-                    $("#btnLoadMoreJob").remove();
-                }
-            },
-            error: function(res) {
-                console.log('ERR:' + res);
-            }
-        });
-    }
 </script>
 
 <script type="text/x-tmpl" id="tmpl-jobs">
@@ -151,3 +124,5 @@
 </div>
 {% } %}
 </script>
+
+<script src="/js/app/company_detail.js"></script>

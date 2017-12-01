@@ -6,7 +6,7 @@ import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotEmpty;
 
-public class RegisterDto {
+public class RegisterReq {
 	@NotEmpty
 	@Length(max = 100)
 	private String name;
@@ -25,11 +25,11 @@ public class RegisterDto {
 	
 	private String role;
 	
-	public RegisterDto() {
+	public RegisterReq() {
 		// TODO Auto-generated constructor stub
 	}
 
-	public RegisterDto(String name, String password, String confirmPassword, String email, String role) {
+	public RegisterReq(String name, String password, String confirmPassword, String email, String role) {
 		super();
 		this.name = name;
 		this.password = password;

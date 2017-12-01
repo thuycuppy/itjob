@@ -2,7 +2,7 @@ package com.ptit.itjob.dto.response;
 
 import java.io.Serializable;
 
-public class CompanyListDto implements Serializable {
+public class CompanyListRes implements Serializable {
     private static final long serialVersionUID = 8445046521195282012L;
     private Integer id;
     private String name;
@@ -10,10 +10,10 @@ public class CompanyListDto implements Serializable {
     private String address;
     private int totalJobs;
 
-    public CompanyListDto() {
+    public CompanyListRes() {
     }
 
-    public CompanyListDto(Integer id, String name, String logo, String address, int totalJobs) {
+    public CompanyListRes(Integer id, String name, String logo, String address, int totalJobs) {
         this.id = id;
         this.name = name;
         this.logo = logo;

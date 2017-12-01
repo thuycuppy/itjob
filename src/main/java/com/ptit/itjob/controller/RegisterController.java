@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.ptit.itjob.dto.request.RegisterDto;
+import com.ptit.itjob.dto.request.RegisterReq;
 import com.ptit.itjob.service.ProfileService;
 import com.ptit.itjob.validator.RegisterValidator;
 
@@ -24,19 +24,19 @@ public class RegisterController {
 	
 	@GetMapping("/register")
 	public String register(Model model) {
-		model.addAttribute("registerDto", new RegisterDto());
+		model.addAttribute("registerDto", new RegisterReq());
 		return "register";
 	}
 	
 	@PostMapping("/register")
-	public String handleRegister(@ModelAttribute("registerDto") @Valid RegisterDto registerDto, 
+	public String handleRegister(@ModelAttribute("registerDto") @Valid RegisterReq req,
 			BindingResult result, RedirectAttributes redirect) {
-		registerValidator.validate(registerDto, result);
+		registerValidator.validate(req, result);
         if (result.hasErrors()) {
             return "register";
         }
 
-        profileService.register(registerDto);
+        profileService.register(req);
         redirect.addFlashAttribute("success", "You registered successfully!");
         return "redirect:/login";
 	}

@@ -5,7 +5,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
 
-import com.ptit.itjob.dto.request.RegisterDto;
+import com.ptit.itjob.dto.request.RegisterReq;
 import com.ptit.itjob.model.Account;
 import com.ptit.itjob.repository.AccountRepository;
 
@@ -17,12 +17,12 @@ public class RegisterValidator implements Validator {
 	@Override
 	public boolean supports(Class<?> cls) {
 		// TODO Auto-generated method stub
-		return RegisterDto.class.isAssignableFrom(cls);
+		return RegisterReq.class.isAssignableFrom(cls);
 	}
 
 	@Override
 	public void validate(Object o, Errors errors) {
-		RegisterDto dto = (RegisterDto) o;
+		RegisterReq dto = (RegisterReq) o;
 
 		// Match password
 		if (!dto.getConfirmPassword().equals(dto.getPassword())) {
