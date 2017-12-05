@@ -22,4 +22,9 @@ public class LocationServiceImpl implements LocationService {
 	public Iterable<Location> findAll() {
 		return locationRepository.findAll();
 	}
+
+	@Override
+	public Location findOne(Integer id) {
+		return locationRepository.findOne(id);
+	}
 }

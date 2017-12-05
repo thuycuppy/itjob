@@ -40,6 +40,9 @@
     <link rel="stylesheet" href="/css/et-line-fonts.css" type="text/css">
     <link rel="stylesheet" href="/css/slideshowstyle.css" type="text/css">
 
+    <!-- Bootstrap Datepicker -->
+    <link rel="stylesheet" href="/css/bootstrap-datepicker3.min.css" type="text/css">
+
     <!-- JavaScripts -->
     <script src="/js/modernizr.js"></script>
 	
@@ -104,8 +107,11 @@
     <script src="/js/revolution/js/jquery.themepunch.tools.min.js"></script>
     <script src="/js/revolution/js/jquery.themepunch.revolution.min.js"></script>
 
+    <!-- Bootstrap Datepicker -->
+    <script src="/js/revolution/js/jquery.themepunch.revolution.min.js"></script>
+
     <!-- JAVASCRIPT TEMPLATE -->
-    <script type="text/javascript" src="/js/tmpl.min.js"></script>
+    <script type="text/javascript" src="/js/bootstrap-datepicker.min.js"></script>
 
     <!-- CORE JS -->
     <script type="text/javascript" src="/js/custom.js"></script>

@@ -6,5 +6,4 @@ import com.ptit.itjob.model.Account;
 
 public interface AccountRepository extends CrudRepository<Account, Integer> {
 	Account findByEmail(String email);
-
 }

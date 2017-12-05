@@ -15,38 +15,37 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.ptit.itjob.dto.request.CandidateRegisterReq;
 import com.ptit.itjob.service.CandidateService;
-import com.ptit.itjob.validator.RegisterValidator;
+import com.ptit.itjob.validator.CandidateRegisterValidator;
 
 @Controller
-public class RegisterController {
-	private RegisterValidator registerValidator;
+public class CandidateController {
+	private CandidateRegisterValidator registerValidator;
 	private CandidateService candidateService;
 
 	@Autowired
-	public RegisterController(RegisterValidator registerValidator, CandidateService candidateService) {
+	public CandidateController(CandidateRegisterValidator registerValidator, CandidateService candidateService) {
 		this.registerValidator = registerValidator;
 		this.candidateService = candidateService;
 	}
 
-	@GetMapping("/register/candidate")
+	@GetMapping("/candidate/register")
 	public String registerCandidate(Model model) {
 		model.addAttribute("registerDto", new CandidateRegisterReq());
-		return "register";
+		return "candidate_register";
 	}
 	
-	@PostMapping("/register/candidate")
+	@PostMapping("/candidate/register")
 	public String handleRegisterCandidate(
 			@ModelAttribute("registerDto") @Valid CandidateRegisterReq req,
 			BindingResult result, RedirectAttributes redirect,
 			@RequestParam(value = "resume", required = false) MultipartFile resume) {
 		registerValidator.validate(req, result);
         if (result.hasErrors()) {
-            return "register";
+            return "candidate_register";
         }
 
-        candidateService.register(req, resume);
+        candidateService.create(req, resume);
         redirect.addFlashAttribute("success", "You registered successfully!");
         return "redirect:/login";
 	}
-
 }

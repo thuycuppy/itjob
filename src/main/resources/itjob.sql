@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 01, 2017 at 10:26 PM
+-- Generation Time: Dec 05, 2017 at 01:23 PM
 -- Server version: 5.7.14
 -- PHP Version: 5.6.25
 
@@ -55,7 +55,8 @@ INSERT INTO `account` (`id`, `name`, `password`, `email`, `role`, `avatar`) VALU
 (14, '456', '$2a$10$uYjrSbW0DZ/lBwRXb4Mp.O/FcOqaj.KFdu3jcqq8ioTeErul.ozXO', '456@gmail.com', 'ROLE_CANDIDATE', '/upload/avatar/default.jpg'),
 (15, '789', '$2a$10$BI.FPPiWxYsPMJ5SzfzkEuL4Xp/GRU1kjzb8vvwc9tsXF5X9VHzN2', '789@gmail.com', 'ROLE_CANDIDATE', '/upload/avatar/default.jpg'),
 (16, '456', '$2a$10$Ax7XeUBNe5g0fwHLOPFDpee2xV1HlR3Q0TU2N3gjE8zwwnm1dKSiK', '123@gmail.com2', 'ROLE_CANDIDATE', '/upload/avatar/default.jpg'),
-(17, 'khihieu', '$2a$10$xkxHHCkt9UK2.JQANrwp4OWuzjLPOajaiDcRQANiUf8LuC65ZZCfW', 'khihieu@gmail.com', 'ROLE_CANDIDATE', '/upload/avatar/default.jpg');
+(17, 'khihieu', '$2a$10$xkxHHCkt9UK2.JQANrwp4OWuzjLPOajaiDcRQANiUf8LuC65ZZCfW', 'khihieu@gmail.com', 'ROLE_CANDIDATE', '/upload/avatar/default.jpg'),
+(18, 'k6', '$2a$10$ltYl5W8S5PZfX90zUDyvQ.uUnlJkhaes96gRAQBhAbPOxWDzd/cG2', 'k6@gmail.com', 'ROLE_COMPANY', '/upload/logo/k6.jpg');
 
 -- --------------------------------------------------------
 
@@ -121,11 +122,11 @@ CREATE TABLE `company` (
   `name` varchar(50) NOT NULL,
   `company_type_id` int(11) UNSIGNED NOT NULL,
   `quantity` varchar(45) NOT NULL,
-  `website` varchar(255) NOT NULL,
+  `website` varchar(255) DEFAULT NULL,
   `location_id` int(11) UNSIGNED NOT NULL,
   `address` varchar(255) NOT NULL,
   `logo` varchar(255) NOT NULL,
-  `description` varchar(255) DEFAULT NULL,
+  `description` varchar(500) DEFAULT NULL,
   `phone` varchar(255) NOT NULL,
   `account_id` int(11) UNSIGNED NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -144,7 +145,8 @@ INSERT INTO `company` (`id`, `name`, `company_type_id`, `quantity`, `website`, `
 (7, 'Episerver', 1, '51-150', 'www.abc.com', 1, 'Đống Đa, Hà Nội', '/upload/logo/2.png', NULL, '0123456789', 1),
 (8, 'Episerver', 1, '51-150', 'www.abc.com', 1, 'Đống Đa, Hà Nội', '/upload/logo/2.png', NULL, '0123456789', 1),
 (9, 'Episerver', 1, '51-150', 'www.abc.com', 1, 'Đống Đa, Hà Nội', '/upload/logo/2.png', NULL, '0123456789', 1),
-(10, 'Episerver', 1, '51-150', 'www.abc.com', 1, 'Đống Đa, Hà Nội', '/upload/logo/2.png', NULL, '0123456789', 1);
+(10, 'Episerver', 1, '51-150', 'www.abc.com', 1, 'Đống Đa, Hà Nội', '/upload/logo/2.png', NULL, '0123456789', 1),
+(11, 'k6', 1, '500', '12', 1, 'hà đông', '/upload/logo/k6.jpg', '', '123', 18);
 
 -- --------------------------------------------------------
 
@@ -444,7 +446,7 @@ ALTER TABLE `skill`
 -- AUTO_INCREMENT for table `account`
 --
 ALTER TABLE `account`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 --
 -- AUTO_INCREMENT for table `candidate`
 --
@@ -454,7 +456,7 @@ ALTER TABLE `candidate`
 -- AUTO_INCREMENT for table `company`
 --
 ALTER TABLE `company`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 --
 -- AUTO_INCREMENT for table `company_type`
 --

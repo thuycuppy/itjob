@@ -6,13 +6,13 @@
     <div class="container">
         <div class="row">
             <div class="col-md-6 col-sm-7 co-xs-12 text-left">
-                <h3>Registration Page</h3>
+                <h3>Candidate Register</h3>
             </div>
             <div class="col-md-6 col-sm-5 co-xs-12 text-right">
                 <div class="bread">
                     <ol class="breadcrumb">
                         <li><a href="/">Home</a> </li>
-                        <li class="active">Registration</li>
+                        <li class="active">Candidate Register</li>
                     </ol>
                 </div>
             </div>
@@ -26,7 +26,7 @@
             <div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="login-container" style="width: 700px">
                     <div class="loginbox">
-                        <div class="loginbox-title">Sign Up using social accounts</div>
+                        <div class="loginbox-title">Sign up using social accounts</div>
                         <ul class="social-network social-circle onwhite">
                             <li><a href="#" class="icoFacebook" title="Facebook"><i class="fa fa-facebook"></i></a></li>
                             <li><a href="#" class="icoTwitter" title="Twitter"><i class="fa fa-twitter"></i></a></li>
@@ -37,8 +37,9 @@
                             <div class="or-line"></div>
                             <div class="or">OR</div>
                         </div>
-                        <c:url value="/register/candidate" var="action" />
+                        <c:url value="/candidate/register" var="action" />
         	 			<form:form action="${action}" method="POST" modelAttribute="registerDto" enctype="multipart/form-data">
+                            <!-- Candidate name -->
                             <div class="col-md-6 form-group">
                                 <label>Your name: <span class="required">*</span></label>
                                 <form:input path="name" cssClass="form-control" />
@@ -50,8 +51,10 @@
                                   </div>
                                 </c:if>
                             </div>
+
+                            <!-- Candidate email -->
                             <div class="col-md-6  form-group">
-                                <label>Email: <span class="required">*</span></label>
+                                <label>Your Email: <span class="required">*</span></label>
                                 <form:input path="email" cssClass="form-control" />
                                 <c:set var="emailErrors"><form:errors path="email"/></c:set>
                                 <c:if test="${not empty emailErrors}">
@@ -61,6 +64,8 @@
                                   </div>
                                 </c:if>
                             </div>
+
+                            <!-- Candidate password -->
                             <div class="col-md-6 form-group">
                                 <label>Password: <span class="required">*</span></label>
                                 <form:password path="password" cssClass="form-control" />
@@ -72,6 +77,8 @@
                                    </div>
                                 </c:if>
                             </div>
+
+                            <!-- Candidate confirm password -->
                             <div class="col-md-6 form-group">
                                 <label>Confirm Password: <span class="required">*</span></label>
                                 <form:password path="confirmPassword" cssClass="form-control" />
@@ -83,13 +90,17 @@
                                   </div>
                                 </c:if>
                             </div>
+
+                            <!-- Candidate resume -->
                             <div class="col-md-12 form-group">
-                                <label>Resume:</label>
+                                <label>Your Resume:</label>
                                 <input type="file" name="resume">
                             </div>
+
+                            <!-- Candidate birthday -->
                             <div class="col-md-6 form-group">
-                                <label>Your birthday: <span class="required">*</span></label>
-                                <form:input path="dob" cssClass="form-control" />
+                                <label>Your Birthday: <span class="required">*</span></label>
+                                <form:input path="dob" cssClass="form-control datepicker" />
                                 <c:set var="dobErrors"><form:errors path="dob"/></c:set>
                                 <c:if test="${not empty dobErrors}">
                                     <div class="field-error">
@@ -98,8 +109,10 @@
                                     </div>
                                 </c:if>
                             </div>
+
+                            <!-- Candidate phone -->
                             <div class="col-md-6 form-group">
-                                <label>Your phone: <span class="required">*</span></label>
+                                <label>Your Phone: <span class="required">*</span></label>
                                 <form:input path="phone" cssClass="form-control" />
                                 <c:set var="phoneErrors"><form:errors path="phone"/></c:set>
                                 <c:if test="${not empty phoneErrors}">
@@ -109,8 +122,10 @@
                                     </div>
                                 </c:if>
                             </div>
+
+                            <!-- Candidate sex -->
                             <div class="col-md-6 form-group">
-                                <label>Your sex:</label><br/>
+                                <label>Your Sex:</label><br/>
                                 <label class="radio-inline">
                                     <form:radiobutton path="sex" value="false" />Female
                                 </label>
@@ -118,8 +133,10 @@
                                     <form:radiobutton path="sex" value="true" />Male
                                 </label>
                             </div>
+
+                            <!-- Candidate address -->
                             <div class="col-md-6 form-group">
-                                <label>Your address: <span class="required">*</span></label>
+                                <label>Your Address: <span class="required">*</span></label>
                                 <form:input path="address" cssClass="form-control" />
                                 <c:set var="addressErrors"><form:errors path="address"/></c:set>
                                 <c:if test="${not empty addressErrors}">
@@ -129,11 +146,11 @@
                                     </div>
                                 </c:if>
                             </div>
-                        <div class="loginbox-submit">
+                        <div class="loginbox-submit" style="padding: 0 15px">
                             <input type="submit" class="btn btn-default btn-block" value="Register">
                         </div>
                         </form:form>
-                        <div class="loginbox-signup"> Already have account? <a href="login">Sign in</a> </div>
+                        <div class="loginbox-signup"> Already have account? <a href="/login">Sign in</a> </div>
                     </div>
                 </div>
             </div>

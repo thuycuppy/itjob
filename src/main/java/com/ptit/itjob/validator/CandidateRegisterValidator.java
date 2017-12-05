@@ -10,9 +10,13 @@ import com.ptit.itjob.model.Account;
 import com.ptit.itjob.repository.AccountRepository;
 
 @Component
-public class RegisterValidator implements Validator {
-	@Autowired
+public class CandidateRegisterValidator implements Validator {
 	private AccountRepository accountRepository;
+
+	@Autowired
+	public CandidateRegisterValidator(AccountRepository accountRepository) {
+		this.accountRepository = accountRepository;
+	}
 
 	@Override
 	public boolean supports(Class<?> cls) {
@@ -24,15 +28,15 @@ public class RegisterValidator implements Validator {
 	public void validate(Object o, Errors errors) {
 		CandidateRegisterReq dto = (CandidateRegisterReq) o;
 
-		// Match password
-		if (!dto.getConfirmPassword().equals(dto.getPassword())) {
-			errors.rejectValue("confirmPassword", "Match.registerDto.confirmPassword");
-		}
-
 		// Unique email
 		Account account = accountRepository.findByEmail(dto.getEmail());
 		if (account != null) {
 			errors.rejectValue("email", "Unique.registerDto.email");
+		}
+
+		// Match password
+		if (!dto.getConfirmPassword().equals(dto.getPassword())) {
+			errors.rejectValue("confirmPassword", "Match.registerDto.confirmPassword");
 		}
 	}
 

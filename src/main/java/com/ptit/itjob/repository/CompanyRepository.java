@@ -18,4 +18,6 @@ public interface CompanyRepository extends PagingAndSortingRepository<Company, I
 
     @Query("select c from Company c left join c.companyType left join c.location where c.id = ?1")
     Company findOneById(Integer id);
+
+    Company findByName(String name);
 }

@@ -4,8 +4,6 @@ import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotEmpty;
 
-import javax.persistence.Transient;
-
 public class RegisterReq {
     @NotEmpty
     @Length(max = 50)
@@ -19,7 +17,6 @@ public class RegisterReq {
     @Length(min = 6)
     protected String password;
 
-    @Transient
     @NotEmpty
     protected String confirmPassword;
 

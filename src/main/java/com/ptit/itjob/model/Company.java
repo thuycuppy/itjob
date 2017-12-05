@@ -122,7 +122,7 @@ public class Company implements java.io.Serializable {
 		this.quantity = quantity;
 	}
 
-	@Column(name = "website", nullable = false)
+	@Column(name = "website")
 	public String getWebsite() {
 		return this.website;
 	}
@@ -149,7 +149,7 @@ public class Company implements java.io.Serializable {
 		this.logo = logo;
 	}
 
-	@Column(name = "description")
+	@Column(name = "description", length = 500)
 	public String getDescription() {
 		return this.description;
 	}
@@ -158,7 +158,7 @@ public class Company implements java.io.Serializable {
 		this.description = description;
 	}
 
-	@Column(name = "phone", nullable = false)
+	@Column(name = "phone", nullable = false, length = 20)
 	public String getPhone() {
 		return this.phone;
 	}

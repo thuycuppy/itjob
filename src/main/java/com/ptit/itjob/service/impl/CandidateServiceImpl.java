@@ -31,7 +31,7 @@ public class CandidateServiceImpl implements CandidateService {
 
 	@Override
 	@Transactional
-	public void register(CandidateRegisterReq registerDto, MultipartFile resume) {
+	public void create(CandidateRegisterReq registerDto, MultipartFile resume) {
 		// Insert into account table
 		Account account = new Account();
 		account.setName(registerDto.getName());
