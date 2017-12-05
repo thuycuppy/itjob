@@ -1,6 +1,7 @@
 package com.ptit.itjob.repository;
 
 import com.ptit.itjob.dto.response.CompanySearchRes;
+import com.ptit.itjob.model.Account;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.Query;
@@ -20,4 +21,6 @@ public interface CompanyRepository extends PagingAndSortingRepository<Company, I
     Company findOneById(Integer id);
 
     Company findByName(String name);
+
+    Company findByAccount(Account account);
 }

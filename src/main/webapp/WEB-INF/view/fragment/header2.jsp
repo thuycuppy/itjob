@@ -26,19 +26,19 @@
                         </a>
                         <ul class="drop-down-multilevel left-side">
                             <sec:authorize access="hasAnyRole('CANDIDATE')">
-                                <li><a href="/candidate"><i class="fa fa-user"></i> Profile</a></li>
+                                <li><a href="/candidate/profile"><i class="fa fa-user"></i> Profile</a></li>
                                 <li><a href="/candidate/edit-profile"><i class="fa fa-pencil"></i> Edit Profile</a></li>
                                 <li><a href="/candidate/applied-jobs"><i class="fa fa-list-alt"></i> Applied Jobs</a></li>
                             </sec:authorize>
 
                             <sec:authorize access="hasAnyRole('COMPANY')">
-                                <li><a href="/company"><i class="fa fa-user"></i> Profile</a></li>
-                                <li><a href="/company/edit-profile">><i class="fa fa-pencil"></i> Edit Profile</a></li>
-                                <li><a href="/company/active-jobs"><i class="fa fa-plus-square-o"></i> Post Job</a></li>
+                                <li><a href="/company/profile"><i class="fa fa-user"></i> Profile</a></li>
+                                <li><a href="/company/edit-profile"><i class="fa fa-pencil"></i> Edit Profile</a></li>
+                                <li><a href="/company/post-job"><i class="fa fa-plus-square-o"></i> Post Job</a></li>
                                 <li><a href="/company/active-jobs"><i class="fa fa-list"></i> Active Jobs</a></li>
                             </sec:authorize>
 
-                            <li><a href="logout"><i class="fa fa-power-off"></i> Logout</a></li>
+                            <li><a href="/logout"><i class="fa fa-power-off"></i> Logout</a></li>
                         </ul>
                     </li>
                 </sec:authorize>

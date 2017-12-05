@@ -6,10 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -26,6 +23,12 @@ public class CandidateController {
 	public CandidateController(CandidateRegisterValidator registerValidator, CandidateService candidateService) {
 		this.registerValidator = registerValidator;
 		this.candidateService = candidateService;
+	}
+
+	@GetMapping("/candidate/profile")
+	public String showCandidate(Model model) {
+		model.addAttribute("candidate", candidateService.findCurrent());
+		return "candidate_profile";
 	}
 
 	@GetMapping("/candidate/register")

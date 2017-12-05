@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 05, 2017 at 01:23 PM
+-- Generation Time: Dec 05, 2017 at 05:44 PM
 -- Server version: 5.7.14
 -- PHP Version: 5.6.25
 
@@ -57,6 +57,19 @@ INSERT INTO `account` (`id`, `name`, `password`, `email`, `role`, `avatar`) VALU
 (16, '456', '$2a$10$Ax7XeUBNe5g0fwHLOPFDpee2xV1HlR3Q0TU2N3gjE8zwwnm1dKSiK', '123@gmail.com2', 'ROLE_CANDIDATE', '/upload/avatar/default.jpg'),
 (17, 'khihieu', '$2a$10$xkxHHCkt9UK2.JQANrwp4OWuzjLPOajaiDcRQANiUf8LuC65ZZCfW', 'khihieu@gmail.com', 'ROLE_CANDIDATE', '/upload/avatar/default.jpg'),
 (18, 'k6', '$2a$10$ltYl5W8S5PZfX90zUDyvQ.uUnlJkhaes96gRAQBhAbPOxWDzd/cG2', 'k6@gmail.com', 'ROLE_COMPANY', '/upload/logo/k6.jpg');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `application`
+--
+
+CREATE TABLE `application` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `candidate_id` int(10) UNSIGNED NOT NULL,
+  `job_id` int(10) UNSIGNED NOT NULL,
+  `created_at` datetime NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -362,6 +375,14 @@ ALTER TABLE `account`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `application`
+--
+ALTER TABLE `application`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `candidate_id` (`candidate_id`),
+  ADD KEY `job_id` (`job_id`);
+
+--
 -- Indexes for table `candidate`
 --
 ALTER TABLE `candidate`
@@ -448,6 +469,11 @@ ALTER TABLE `skill`
 ALTER TABLE `account`
   MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 --
+-- AUTO_INCREMENT for table `application`
+--
+ALTER TABLE `application`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+--
 -- AUTO_INCREMENT for table `candidate`
 --
 ALTER TABLE `candidate`
@@ -490,6 +516,13 @@ ALTER TABLE `skill`
 --
 -- Constraints for dumped tables
 --
+
+--
+-- Constraints for table `application`
+--
+ALTER TABLE `application`
+  ADD CONSTRAINT `application_candidate_pk` FOREIGN KEY (`candidate_id`) REFERENCES `candidate` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `application_job_pk` FOREIGN KEY (`job_id`) REFERENCES `job` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `candidate`

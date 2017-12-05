@@ -4,7 +4,11 @@ import com.ptit.itjob.common.DateUtil;
 import com.ptit.itjob.common.FileUtil;
 import com.ptit.itjob.model.Candidate;
 import com.ptit.itjob.repository.CandidateRepository;
+import com.ptit.itjob.security.CustomUserDetails;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -27,6 +31,18 @@ public class CandidateServiceImpl implements CandidateService {
 		this.accountRepository = accountRepository;
 		this.candidateRepository = candidateRepository;
 		this.passwordEncoder = passwordEncoder;
+	}
+
+	@Override
+	public Candidate findCurrent() {
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		if (authentication != null) {
+			if (authentication.getAuthorities().contains(new SimpleGrantedAuthority(Constant.ROLE_CANDIDATE))) {
+				CustomUserDetails userDetails = (CustomUserDetails) authentication.getPrincipal();
+				return candidateRepository.findByAccount(userDetails.getAccount());
+			}
+		}
+		return null;
 	}
 
 	@Override

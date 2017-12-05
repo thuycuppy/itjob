@@ -94,7 +94,7 @@
                             <!-- Candidate resume -->
                             <div class="col-md-12 form-group">
                                 <label>Your Resume:</label>
-                                <input type="file" name="resume">
+                                <input type="file" name="resume" accept="application/pdf">
                             </div>
 
                             <!-- Candidate birthday -->

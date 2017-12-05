@@ -40,9 +40,15 @@ public class CompanyController {
     }
 
     @GetMapping("/company/{id}")
-    public String showCompany(@PathVariable("id") Integer id, Model model) {
+    public String showCompanyDetail(@PathVariable("id") Integer id, Model model) {
         model.addAttribute("company", companyService.findById(id));
         return "company_detail";
+    }
+
+    @GetMapping("/company/profile")
+    public String showCompanyProfile(Model model) {
+        model.addAttribute("company", companyService.findCurrent());
+        return "company_profile";
     }
 
     @GetMapping("/company/register")

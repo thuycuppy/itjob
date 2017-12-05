@@ -10,11 +10,15 @@ import com.ptit.itjob.dto.response.CompanySearchRes;
 import com.ptit.itjob.model.Account;
 import com.ptit.itjob.model.Company;
 import com.ptit.itjob.repository.AccountRepository;
+import com.ptit.itjob.security.CustomUserDetails;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -60,6 +64,18 @@ public class CompanyServiceImpl implements CompanyService {
 	@Transactional(readOnly = true)
 	public List<CompanySearchRes> findByName(String name) {
 		return companyRepository.findFirst5ByNameContaining(name);
+	}
+
+	@Override
+	public Company findCurrent() {
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		if (authentication != null) {
+			if (authentication.getAuthorities().contains(new SimpleGrantedAuthority(Constant.ROLE_COMPANY))) {
+				CustomUserDetails userDetails = (CustomUserDetails) authentication.getPrincipal();
+				return companyRepository.findByAccount(userDetails.getAccount());
+			}
+		}
+		return null;
 	}
 
 	@Override

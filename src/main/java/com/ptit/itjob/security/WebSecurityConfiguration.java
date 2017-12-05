@@ -1,5 +1,6 @@
 package com.ptit.itjob.security;
 
+import com.ptit.itjob.common.Constant;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -33,6 +34,7 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
             .authorizeRequests()
             	.antMatchers("/").permitAll()
                 .antMatchers("/register").permitAll()
+                .antMatchers("/candidate/profile").hasRole("CANDIDATE")
                 .and()
             .formLogin()
                 .loginPage("/login")

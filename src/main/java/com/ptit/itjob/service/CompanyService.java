@@ -4,6 +4,7 @@ import com.ptit.itjob.dto.request.CompanyRegisterReq;
 import com.ptit.itjob.dto.response.CompanyDetailRes;
 import com.ptit.itjob.dto.response.CompanyListRes;
 import com.ptit.itjob.dto.response.CompanySearchRes;
+import com.ptit.itjob.model.Company;
 import org.springframework.data.domain.Page;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -15,6 +16,8 @@ public interface CompanyService {
 	Page<CompanyListRes> findTop();
 
 	List<CompanySearchRes> findByName(String name);
+
+	Company findCurrent();
 
 	CompanyDetailRes findById(Integer id);
 
