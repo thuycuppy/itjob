@@ -58,7 +58,7 @@
         <div class="col-md-2 col-sm-2 col-xs-12 hidden-sm hidden-xs">
             <div class="comp-logo">
                 <a href="/company/{%=o[i].companyId%}">
-                    <img src="/{%=o[i].companyLogo%}" class="img-responsive" alt="{%=o[i].companyName%}">
+                    <img src="{%=o[i].companyLogo%}" class="img-responsive" alt="{%=o[i].companyName%}">
                 </a>
             </div>
         </div>

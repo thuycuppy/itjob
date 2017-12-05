@@ -26,7 +26,7 @@
                 <div class="single-job-detail-box">
                     <div class="col-md-9 col-sm-12 col-xs-12">
                         <div class="company-img">
-                            <img src="/${company.logo}" alt="${company.name}">
+                            <img src="${company.logo}" alt="${company.name}">
                         </div>
                         <div class="job-detail-2">
                             <h2>${company.name}</h2>

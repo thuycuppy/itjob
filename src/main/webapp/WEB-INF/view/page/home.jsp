@@ -75,7 +75,9 @@
                     </c:forEach>
                     <div class="col-md-12 col-sm-12 col-xs-12">
                         <div class="load-more-btn">
-                            <button class="btn-default">View All <i class="fa fa-angle-right"></i></button>
+                            <button id="btnViewAllJobs" class="btn-default">
+                                View All <i class="fa fa-angle-right"></i>
+                            </button>
                         </div>
                     </div>
                 </div>
@@ -110,7 +112,9 @@
                 </c:forEach>
                 <div class="col-md-12 col-sm-12 col-xs-12">
                     <div class="load-more-btn">
-                        <button class="btn-default">View All <i class="fa fa-angle-right"></i></button>
+                        <button id="btnViewAllCompanies" class="btn-default">
+                            View All <i class="fa fa-angle-right"></i>
+                        </button>
                     </div>
                 </div>
             </div>

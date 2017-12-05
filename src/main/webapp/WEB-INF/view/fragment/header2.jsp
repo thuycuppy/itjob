@@ -14,28 +14,41 @@
                 <li><a href="/">Home</a></li>
                 <li><a href="/job">All Jobs</a></li>
                 <li><a href="/company">All Companies</a></li>
-                <sec:authorize access="isAnonymous()">
-                 <li class="no-bg">
-                 	<a href="login" class="p-job">
-                    	<i class="fa fa-user"></i> Login
-                    </a>
-                 </li>
-                </sec:authorize>
+
                 <sec:authorize access="isAuthenticated()">
-                	<sec:authentication var="principal" property="principal" />
-                	<c:set var="account" value="${principal.getAccount()}" />
-                	<li class="profile-pic">
-	                   <a href="javascript:void(0)"> 
-	                   	<img src="${account.avatar}" alt="user-img" class="img-circle" width="36">
-	                   	<span class="hidden-xs hidden-sm">${account.name} </span>
-	                   	<i class="fa fa-angle-down fa-indicator"></i> 
-	                   </a>
-	                   <ul class="drop-down-multilevel left-side">
-                   	    <li><a href="candidate.html"><i class="fa fa-user"></i> My Profile</a></li>
-             	        <li><a href="candidate-edit-profile"><i class="fa fa-gear"></i> Account Setting</a></li>
-	                    <li><a href="logout"><i class="fa fa-power-off"></i> Logout</a></li>
-	                   </ul>
-              		</li>
+                    <sec:authentication var="principal" property="principal" />
+                    <c:set var="account" value="${principal.getAccount()}" />
+                    <li class="profile-pic">
+                        <a href="javascript:void(0)">
+                            <img src="${account.avatar}" alt="user-img" class="img-circle" width="36">
+                            <span class="hidden-xs hidden-sm">${account.name}</span>
+                            <i class="fa fa-angle-down fa-indicator"></i>
+                        </a>
+                        <ul class="drop-down-multilevel left-side">
+                            <sec:authorize access="hasAnyRole('CANDIDATE')">
+                                <li><a href="/candidate"><i class="fa fa-user"></i> Profile</a></li>
+                                <li><a href="/candidate/edit-profile"><i class="fa fa-pencil"></i> Edit Profile</a></li>
+                                <li><a href="/candidate/applied-jobs"><i class="fa fa-list-alt"></i> Applied Jobs</a></li>
+                            </sec:authorize>
+
+                            <sec:authorize access="hasAnyRole('COMPANY')">
+                                <li><a href="/company"><i class="fa fa-user"></i> Profile</a></li>
+                                <li><a href="/company/edit-profile">><i class="fa fa-pencil"></i> Edit Profile</a></li>
+                                <li><a href="/company/active-jobs"><i class="fa fa-plus-square-o"></i> Post Job</a></li>
+                                <li><a href="/company/active-jobs"><i class="fa fa-list"></i> Active Jobs</a></li>
+                            </sec:authorize>
+
+                            <li><a href="logout"><i class="fa fa-power-off"></i> Logout</a></li>
+                        </ul>
+                    </li>
+                </sec:authorize>
+
+                <sec:authorize access="isAnonymous()">
+                    <li class="no-bg">
+                        <a href="login" class="p-job">
+                            <i class="fa fa-user"></i> Login
+                        </a>
+                    </li>
                 </sec:authorize>
             </ul>
         </section>

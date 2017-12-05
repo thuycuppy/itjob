@@ -108,10 +108,10 @@
     <script src="/js/revolution/js/jquery.themepunch.revolution.min.js"></script>
 
     <!-- Bootstrap Datepicker -->
-    <script src="/js/revolution/js/jquery.themepunch.revolution.min.js"></script>
+    <script type="text/javascript" src="/js/bootstrap-datepicker.min.js"></script>
 
     <!-- JAVASCRIPT TEMPLATE -->
-    <script type="text/javascript" src="/js/bootstrap-datepicker.min.js"></script>
+    <script type="text/javascript" src="/js/tmpl.min.js"></script>
 
     <!-- CORE JS -->
     <script type="text/javascript" src="/js/custom.js"></script>

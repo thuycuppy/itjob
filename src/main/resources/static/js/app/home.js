@@ -35,4 +35,12 @@ $(document).ready(function() {
     $("#btnSearch").click(function () {
        window.location.href = "/job/" + $("#select2-search-job").val();
     });
+
+    $("#btnViewAllJobs").click(function () {
+       window.location.href = "/job";
+    });
+
+    $("#btnViewAllCompanies").click(function () {
+        window.location.href = "/company";
+    });
 });

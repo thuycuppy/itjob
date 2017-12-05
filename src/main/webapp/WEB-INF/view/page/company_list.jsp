@@ -59,7 +59,7 @@
         <a href="/company/{%=o[i].id%}">
             <div class="company-list-box">
                 <span class="company-list-img">
-                    <img src="/{%=o[i].logo%}" class="img-responsive" alt="{%=o[i].name%}">
+                    <img src="{%=o[i].logo%}" class="img-responsive" alt="{%=o[i].name%}">
                 </span>
                 <div class="company-list-box-detail">
                     <h5>{%=o[i].name%}</h5>
