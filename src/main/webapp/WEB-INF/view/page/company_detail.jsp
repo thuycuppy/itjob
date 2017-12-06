@@ -105,7 +105,7 @@
 <div class="job-box job-box-2">
     <div class="col-md-2 col-sm-2 col-xs-12 hidden-sm">
         <div class="comp-logo">
-            <a href="/company/{%=o[i].companyId%}"><img src="/{%=o[i].companyLogo%}" class="img-responsive" alt="{%=o[i].companyName%}"> </a>
+            <a href="/company/{%=o[i].companyId%}"><img src="{%=o[i].companyLogo%}" class="img-responsive" alt="{%=o[i].companyName%}"> </a>
         </div>
     </div>
     <div class="col-md-10 col-sm-10 col-xs-12">

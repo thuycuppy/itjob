@@ -24,6 +24,7 @@ public class LocationServiceImpl implements LocationService {
 	}
 
 	@Override
+	@Transactional(readOnly = true)
 	public Location findOne(Integer id) {
 		return locationRepository.findOne(id);
 	}

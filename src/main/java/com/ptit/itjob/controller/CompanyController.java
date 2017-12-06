@@ -1,13 +1,17 @@
 package com.ptit.itjob.controller;
 
+import com.ptit.itjob.common.PaginationUtil;
 import com.ptit.itjob.dto.request.CompanyRegisterReq;
+import com.ptit.itjob.dto.response.CompanyJobRes;
 import com.ptit.itjob.model.CompanyType;
 import com.ptit.itjob.model.Location;
 import com.ptit.itjob.service.CompanyService;
 import com.ptit.itjob.service.CompanyTypeService;
+import com.ptit.itjob.service.JobService;
 import com.ptit.itjob.service.LocationService;
 import com.ptit.itjob.validator.CompanyRegisterValidator;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -22,13 +26,15 @@ import java.beans.PropertyEditorSupport;
 @Controller
 public class CompanyController {
     private CompanyService companyService;
+    private JobService jobService;
     private CompanyTypeService companyTypeService;
     private LocationService locationService;
     private CompanyRegisterValidator registerValidator;
 
     @Autowired
-    public CompanyController(CompanyService companyService, CompanyTypeService companyTypeService, LocationService locationService, CompanyRegisterValidator registerValidator) {
+    public CompanyController(CompanyService companyService, JobService jobService, CompanyTypeService companyTypeService, LocationService locationService, CompanyRegisterValidator registerValidator) {
         this.companyService = companyService;
+        this.jobService = jobService;
         this.companyTypeService = companyTypeService;
         this.locationService = locationService;
         this.registerValidator = registerValidator;
@@ -49,6 +55,14 @@ public class CompanyController {
     public String showCompanyProfile(Model model) {
         model.addAttribute("company", companyService.findCurrent());
         return "company_profile";
+    }
+
+    @GetMapping("/company/active-jobs")
+    public String listActiveJobs(@RequestParam(value = "page", defaultValue = "1") Integer page, Model model) {
+        Page<CompanyJobRes> jobs = jobService.findByCurrentCompany(page);
+        model.addAttribute("jobs", jobs);
+        model.addAttribute("pagination", PaginationUtil.paging(jobs));
+        return "company_active_jobs";
     }
 
     @GetMapping("/company/register")

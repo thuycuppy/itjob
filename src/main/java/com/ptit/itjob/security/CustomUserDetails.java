@@ -3,6 +3,8 @@ package com.ptit.itjob.security;
 import java.util.HashSet;
 import java.util.Set;
 
+import com.ptit.itjob.model.Candidate;
+import com.ptit.itjob.model.Company;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -11,6 +13,8 @@ import com.ptit.itjob.model.Account;
 public class CustomUserDetails implements UserDetails {
 	private static final long serialVersionUID = 1L;
 	private Account account;
+	private Candidate candidate;
+	private Company company;
 	private Set<GrantedAuthority> authorities = new HashSet<>();
 
 	public Account getAccount() {
@@ -19,6 +23,22 @@ public class CustomUserDetails implements UserDetails {
 
 	public void setAccount(Account account) {
 		this.account = account;
+	}
+
+	public Candidate getCandidate() {
+		return candidate;
+	}
+
+	public void setCandidate(Candidate candidate) {
+		this.candidate = candidate;
+	}
+
+	public Company getCompany() {
+		return company;
+	}
+
+	public void setCompany(Company company) {
+		this.company = company;
 	}
 
 	@Override

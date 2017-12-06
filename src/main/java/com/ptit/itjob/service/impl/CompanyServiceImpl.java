@@ -31,90 +31,88 @@ import java.util.List;
 
 @Service
 public class CompanyServiceImpl implements CompanyService {
-	private CompanyRepository companyRepository;
-	private AccountRepository accountRepository;
-	private ModelMapper modelMapper;
-	private PasswordEncoder passwordEncoder;
+    private CompanyRepository companyRepository;
+    private AccountRepository accountRepository;
+    private ModelMapper modelMapper;
+    private PasswordEncoder passwordEncoder;
 
-	@Autowired
-	public CompanyServiceImpl(CompanyRepository companyRepository, AccountRepository accountRepository, ModelMapper modelMapper, PasswordEncoder passwordEncoder) {
-		this.companyRepository = companyRepository;
-		this.accountRepository = accountRepository;
-		this.modelMapper = modelMapper;
-		this.passwordEncoder = passwordEncoder;
-	}
+    @Autowired
+    public CompanyServiceImpl(CompanyRepository companyRepository, AccountRepository accountRepository, ModelMapper modelMapper, PasswordEncoder passwordEncoder) {
+        this.companyRepository = companyRepository;
+        this.accountRepository = accountRepository;
+        this.modelMapper = modelMapper;
+        this.passwordEncoder = passwordEncoder;
+    }
 
-	@Override
-	@Transactional(readOnly = true)
-	public Page<CompanyListRes> findTop() {
-		PageRequest pageRequest = new PageRequest(0, Constant.COMPANY_HOME, new Sort(Sort.Direction.DESC, "jobs.size"));
-		Page<Company> companies = companyRepository.findAll(pageRequest);
-		return companies.map(this::convertToCompanyListDto);
-	}
+    @Override
+    @Transactional(readOnly = true)
+    public Page<CompanyListRes> findTop() {
+        PageRequest pageRequest = new PageRequest(0, Constant.COMPANY_HOME, new Sort(Sort.Direction.DESC, "jobs.size"));
+        Page<Company> companies = companyRepository.findAll(pageRequest);
+        return companies.map(this::convertToCompanyListDto);
+    }
 
-	@Override
-	@Transactional(readOnly = true)
-	public Page<CompanyListRes> findAll(int page) {
-		PageRequest pageRequest = new PageRequest(page, Constant.COMPANY_PER_PAGE);
-		Page<Company> companies = companyRepository.findAll(pageRequest);
-		return companies.map(this::convertToCompanyListDto);
-	}
+    @Override
+    @Transactional(readOnly = true)
+    public Page<CompanyListRes> findAll(Integer page) {
+        PageRequest pageRequest = new PageRequest(page, Constant.COMPANY_PER_PAGE);
+        Page<Company> companies = companyRepository.findAll(pageRequest);
+        return companies.map(this::convertToCompanyListDto);
+    }
 
-	@Override
-	@Transactional(readOnly = true)
-	public List<CompanySearchRes> findByName(String name) {
-		return companyRepository.findFirst5ByNameContaining(name);
-	}
+    @Override
+    @Transactional(readOnly = true)
+    public List<CompanySearchRes> findByName(String name) {
+        return companyRepository.findFirst5ByNameContaining(name);
+    }
 
-	@Override
-	public Company findCurrent() {
-		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-		if (authentication != null) {
-			if (authentication.getAuthorities().contains(new SimpleGrantedAuthority(Constant.ROLE_COMPANY))) {
-				CustomUserDetails userDetails = (CustomUserDetails) authentication.getPrincipal();
-				return companyRepository.findByAccount(userDetails.getAccount());
-			}
-		}
-		return null;
-	}
+    @Override
+    @Transactional(readOnly = true)
+    public Company findCurrent() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        CustomUserDetails userDetails = (CustomUserDetails) authentication.getPrincipal();
+        return userDetails.getCompany();
+    }
 
-	@Override
-	public CompanyDetailRes findById(Integer id) {
-		return convertToCompanyDetailDto(companyRepository.findOneById(id));
-	}
+    @Override
+    @Transactional(readOnly = true)
+    public CompanyDetailRes findById(Integer id) {
+        return convertToCompanyDetailDto(companyRepository.findOneById(id));
+    }
 
-	@Override
-	public void create(CompanyRegisterReq registerDto, MultipartFile resume) {
-		// Upload logo
-		String fileName = FileUtil.upload(resume, Constant.UPLOAD_COMPANY_LOGO_DIRECTORY);
-		String filePath = Constant.UPLOAD_COMPANY_LOGO_PATH + fileName;
+    @Override
+    @Transactional
+    public void create(CompanyRegisterReq registerDto, MultipartFile resume) {
+        // Upload logo
+        String fileName = FileUtil.upload(resume, Constant.UPLOAD_COMPANY_LOGO_DIRECTORY);
+        String filePath = Constant.UPLOAD_COMPANY_LOGO_PATH + fileName;
 
-		// Insert into account table
-		Account account = new Account();
-		account.setName(registerDto.getName());
-		account.setEmail(registerDto.getEmail());
-		account.setPassword(passwordEncoder.encode(registerDto.getPassword()));
-		account.setAvatar(filePath);
-		account.setRole(Constant.ROLE_COMPANY);
-		accountRepository.save(account);
+        // Insert into account table
+        Account account = new Account();
+        account.setName(registerDto.getName());
+        account.setEmail(registerDto.getEmail());
+        account.setPassword(passwordEncoder.encode(registerDto.getPassword()));
+        account.setAvatar(filePath);
+        account.setRole(Constant.ROLE_COMPANY);
+        accountRepository.save(account);
 
-		// Insert into company table
-		Company company = modelMapper.map(registerDto, Company.class);
-		company.setLogo(filePath);
-		company.setAccount(account);
-		companyRepository.save(company);
-	}
+        // Insert into company table
+        Company company = modelMapper.map(registerDto, Company.class);
+        company.setLogo(filePath);
+        company.setAccount(account);
+        companyRepository.save(company);
+    }
 
-	private CompanyListRes convertToCompanyListDto(Company company) {
-		CompanyListRes dto = modelMapper.map(company, CompanyListRes.class);
-		dto.setTotalJobs(company.getJobs().size());
-		return dto;
-	}
+    private CompanyListRes convertToCompanyListDto(Company company) {
+        CompanyListRes dto = modelMapper.map(company, CompanyListRes.class);
+        dto.setTotalJobs(company.getJobs().size());
+        return dto;
+    }
 
-	private CompanyDetailRes convertToCompanyDetailDto(Company company) {
-		CompanyDetailRes dto = modelMapper.map(company, CompanyDetailRes.class);
-		dto.setCompanyType(company.getCompanyType().getName());
-		dto.setLocation(company.getLocation().getName());
-		return dto;
-	}
+    private CompanyDetailRes convertToCompanyDetailDto(Company company) {
+        CompanyDetailRes dto = modelMapper.map(company, CompanyDetailRes.class);
+        dto.setCompanyType(company.getCompanyType().getName());
+        dto.setLocation(company.getLocation().getName());
+        return dto;
+    }
 }

@@ -1,14 +1,19 @@
 package com.ptit.itjob.service.impl;
 
 import com.ptit.itjob.common.Constant;
+import com.ptit.itjob.dto.response.CompanyJobRes;
 import com.ptit.itjob.dto.response.JobListRes;
 import com.ptit.itjob.dto.response.JobSearchRes;
+import com.ptit.itjob.model.Company;
 import com.ptit.itjob.model.Job;
+import com.ptit.itjob.security.CustomUserDetails;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -33,7 +38,7 @@ public class JobServiceImpl implements JobService {
 	public Page<JobListRes> findAll(int page) {
 		PageRequest pageRequest = new PageRequest(page, Constant.JOB_PER_PAGE, new Sort(Sort.Direction.DESC, "createdAt"));
 		Page<Job> jobs = jobRepository.findAll(pageRequest);
-		return jobs.map(this::convertJobToJobListDto);
+		return jobs.map(this::convertJobToJobListRes);
 	}
 
 	@Override
@@ -41,15 +46,26 @@ public class JobServiceImpl implements JobService {
 	public Page<JobListRes> findLatest() {
 		PageRequest pageRequest = new PageRequest(0, Constant.JOB_HOME, new Sort(Sort.Direction.DESC, "createdAt"));
 		Page<Job> jobs = jobRepository.findAll(pageRequest);
-		return jobs.map(this::convertJobToJobListDto);
+		return jobs.map(this::convertJobToJobListRes);
 	}
 
 	@Override
 	@Transactional(readOnly = true)
-	public Page<JobListRes> findByCompany(Integer companyId, int page) {
+	public Page<JobListRes> findByCompany(Integer companyId, Integer page) {
 		PageRequest pageRequest = new PageRequest(page, Constant.COMPANY_JOB_PER_PAGE, new Sort(Sort.Direction.DESC, "createdAt"));
 		Page<Job> jobs = jobRepository.findByCompanyId(companyId, pageRequest);
-		return jobs.map(this::convertJobToJobListDto);
+		return jobs.map(this::convertJobToJobListRes);
+	}
+
+	@Override
+	@Transactional(readOnly = true)
+	public Page<CompanyJobRes> findByCurrentCompany(Integer page) {
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		CustomUserDetails userDetails = (CustomUserDetails) authentication.getPrincipal();
+		Company currentCompany = userDetails.getCompany();
+		PageRequest pageRequest = new PageRequest(page - 1, Constant.ACTIVE_JOB_PER_PAGE, new Sort(Sort.Direction.DESC, "createdAt"));
+		Page<Job> jobs = jobRepository.findByCompanyId(currentCompany.getId(), pageRequest);
+		return jobs.map(this::convertJobToCompanyJobRes);
 	}
 
 	@Override
@@ -70,12 +86,16 @@ public class JobServiceImpl implements JobService {
 		return jobRepository.findOne(id);
 	}
 
-	private JobListRes convertJobToJobListDto(Job job) {
-		JobListRes dto = modelMapper.map(job, JobListRes.class);
-		dto.setCompanyId(job.getCompany().getId());
-		dto.setCompanyName(job.getCompany().getName());
-		dto.setCompanyLogo(job.getCompany().getLogo());
-		dto.setJobType(job.getJobType().getName());
-		return dto;
+	private JobListRes convertJobToJobListRes(Job job) {
+		JobListRes res = modelMapper.map(job, JobListRes.class);
+		res.setCompanyId(job.getCompany().getId());
+		res.setCompanyName(job.getCompany().getName());
+		res.setCompanyLogo(job.getCompany().getLogo());
+		res.setJobType(job.getJobType().getName());
+		return res;
+	}
+
+	private CompanyJobRes convertJobToCompanyJobRes(Job job) {
+		return modelMapper.map(job, CompanyJobRes.class);
 	}
 }

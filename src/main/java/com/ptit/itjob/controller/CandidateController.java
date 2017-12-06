@@ -2,7 +2,10 @@ package com.ptit.itjob.controller;
 
 import javax.validation.Valid;
 
+import com.ptit.itjob.common.PaginationUtil;
+import com.ptit.itjob.dto.response.ApplicationRes;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -29,6 +32,14 @@ public class CandidateController {
 	public String showCandidate(Model model) {
 		model.addAttribute("candidate", candidateService.findCurrent());
 		return "candidate_profile";
+	}
+
+	@GetMapping("/candidate/applied-jobs")
+	public String listAppliedJobs(@RequestParam(value = "page", defaultValue = "1") Integer page, Model model) {
+		Page<ApplicationRes> applications = candidateService.findApplication(page);
+		model.addAttribute("applications", applications);
+		model.addAttribute("pagination", PaginationUtil.paging(applications));
+		return "candidate_applied_jobs";
 	}
 
 	@GetMapping("/candidate/register")

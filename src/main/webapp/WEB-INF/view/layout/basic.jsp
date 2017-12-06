@@ -29,6 +29,9 @@
     <link rel="stylesheet" href="/css/owl.carousel.css">
     <link rel="stylesheet" href="/css/owl.style.css">
 
+    <!-- TOASTER CSS -->
+    <link rel="stylesheet" href="/css/toastr.min.css">
+
     <!-- TEMPLATE CORE CSS -->
     <link rel="stylesheet" href="/css/style.css">
 
@@ -112,6 +115,9 @@
 
     <!-- JAVASCRIPT TEMPLATE -->
     <script type="text/javascript" src="/js/tmpl.min.js"></script>
+
+    <!-- TOASTER JS -->
+    <script type="text/javascript" src="/js/toastr.min.js"></script>
 
     <!-- CORE JS -->
     <script type="text/javascript" src="/js/custom.js"></script>

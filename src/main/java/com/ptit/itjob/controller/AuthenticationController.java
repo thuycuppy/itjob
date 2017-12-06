@@ -1,6 +1,5 @@
 package com.ptit.itjob.controller;
 
-import com.ptit.itjob.service.SecurityService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -13,13 +12,6 @@ import javax.servlet.http.HttpServletResponse;
 
 @Controller
 public class AuthenticationController {
-	private SecurityService securityService;
-
-	@Autowired
-	public AuthenticationController(SecurityService securityService) {
-		this.securityService = securityService;
-	}
-
 	@GetMapping("/login")
 	public String login() {
 		return "login";
@@ -27,7 +19,10 @@ public class AuthenticationController {
 
 	@GetMapping("/logout")
 	public String logout(HttpServletRequest request, HttpServletResponse response) {
-		securityService.logout(request, response);
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		if (authentication != null) {
+			new SecurityContextLogoutHandler().logout(request, response, authentication);
+		}
 		return "redirect:/login";
 	}
 }

@@ -22,6 +22,8 @@ public class Constant {
 	public static final int COMPANY_PER_PAGE = 9;
 	public static final int COMPANY_JOB_PER_PAGE = 3;
 	public static final int JOB_PER_PAGE = 9;
+	public static final int APPLIED_JOB_PER_PAGE = 10;
+	public static final int ACTIVE_JOB_PER_PAGE = 10;
 
 	// Datetime format
 	public static final String DF_YYYY_MM_DD_DASH = "yyyy-MM-dd";

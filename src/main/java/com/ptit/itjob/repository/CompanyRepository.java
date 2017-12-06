@@ -22,5 +22,6 @@ public interface CompanyRepository extends PagingAndSortingRepository<Company, I
 
     Company findByName(String name);
 
+    @Query("select c from Company c left join fetch c.companyType left join fetch c.location where c.account = ?1")
     Company findByAccount(Account account);
 }

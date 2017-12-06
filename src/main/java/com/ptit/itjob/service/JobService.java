@@ -1,5 +1,6 @@
 package com.ptit.itjob.service;
 
+import com.ptit.itjob.dto.response.CompanyJobRes;
 import com.ptit.itjob.dto.response.JobListRes;
 import com.ptit.itjob.dto.response.JobSearchRes;
 import com.ptit.itjob.model.Job;
@@ -12,7 +13,9 @@ public interface JobService {
 
 	Page<JobListRes> findLatest();
 
-	Page<JobListRes> findByCompany(Integer companyId, int page);
+	Page<JobListRes> findByCompany(Integer companyId, Integer page);
+
+	Page<CompanyJobRes> findByCurrentCompany(Integer page);
 
 	List<JobSearchRes> findByTitle(String title);
 
