@@ -59,6 +59,11 @@
         <put-attribute name="body" value="/WEB-INF/view/page/company_active_jobs.jsp" />
     </definition>
 
+    <definition name="company_job_resume" extends="basic">
+        <put-attribute name="title" value="ITJob | Company Manager" />
+        <put-attribute name="body" value="/WEB-INF/view/page/company_job_resume.jsp" />
+    </definition>
+
     <definition name="company_register" extends="basic">
         <put-attribute name="title" value="ITJob | Register" />
         <put-attribute name="body" value="/WEB-INF/view/page/company_register.jsp" />

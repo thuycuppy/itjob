@@ -5,14 +5,14 @@
     <div class="container">
         <div class="row">
             <div class="col-md-6 col-sm-7 co-xs-12 text-left">
-                <h3>Active Jobs</h3>
+                <h3>Job Resumes</h3>
             </div>
             <div class="col-md-6 col-sm-5 co-xs-12 text-right">
                 <div class="bread">
                     <ol class="breadcrumb">
                         <li><a href="/">Home</a> </li>
                         <li><a href="/company-manager/profile">Company Manager</a></li>
-                        <li class="active">Active Jobs</li>
+                        <li class="active">Job Resumes</li>
                     </ol>
                 </div>
             </div>
@@ -45,25 +45,26 @@
             </div>
             <div class="col-md-8 col-sm-8 col-xs-12">
                 <div class="heading-inner first-heading">
-                    <p class="title">Active Jobs</p>
+                    <p class="title">Job Resume</p>
                 </div>
                 <div class="table-responsive">
                     <table class="table table-striped table-bordered">
                         <thead>
                         <tr>
                             <th class="text-center" width="5%">#</th>
-                            <th width="70%">Job</th>
-                            <th width="25%">Action</th>
+                            <th width="55%">Candidate</th>
+                            <th width="25%">Apply At</th>
+                            <th width="15%">Action</th>
                         </tr>
                         </thead>
                         <tbody>
-                        <c:forEach var="job" items="${jobs.content}" varStatus="loop">
+                        <c:forEach var="application" items="${applications.content}" varStatus="loop">
                             <tr>
                                 <th class="text-center">${loop.index + 1}</th>
-                                <th>${job.title}</th>
+                                <td>${application.candidateName}</td>
+                                <td>${application.createdAt}</td>
                                 <td>
-                                    <a href="/job/${job.id}" class="btn btn-success">Detail</a>
-                                    <a href="/company-manager/job/${job.id}/resume" class="btn btn-danger">Resume</a>
+                                    <a href="${application.candidateResume}" class="btn btn-success">View Resume</a>
                                 </td>
                             </tr>
                         </c:forEach>
@@ -77,25 +78,25 @@
                                 <li class="disabled"><a href="#"><span aria-hidden="true">«</span></a></li>
                             </c:when>
                             <c:otherwise>
-                                <li><a href="/company-manager/active-jobs?page=1"><span aria-hidden="true">«</span></a></li>
+                                <li><a href="/company-manager/job/${jobId}/resume?page=1"><span aria-hidden="true">«</span></a></li>
                             </c:otherwise>
                         </c:choose>
                         <c:forEach var="page" begin="${pagination.beginIndex}" end="${pagination.endIndex}">
                             <c:choose>
                                 <c:when test="${page == pagination.currentIndex}">
-                                    <li class="active"><a href="/company-manager/active-jobs?page=${page}">${page}</a></li>
+                                    <li class="active"><a href="/company-manager/job/${jobId}/resume?page=${page}">${page}</a></li>
                                 </c:when>
                                 <c:otherwise>
-                                    <li><a href="/company-manager/active-jobs?page=${page}">${page}</a></li>
+                                    <li><a href="/company-manager/job/${jobId}/resume?page=${page}">${page}</a></li>
                                 </c:otherwise>
                             </c:choose>
                         </c:forEach>
                         <c:choose>
-                            <c:when test="${pagination.currentIndex == job.totalPages}">
+                            <c:when test="${pagination.currentIndex == applications.totalPages}">
                                 <li class="disabled"><a href="#"><span aria-hidden="true">»</span></a></li>
                             </c:when>
                             <c:otherwise>
-                                <li><a href="/company-manager/active-jobs?page=${jobs.totalPages}"><span aria-hidden="true">»</span></a></li>
+                                <li><a href="/company-manager/job/${jobId}/resume?page=${applications.totalPages}"><span aria-hidden="true">»</span></a></li>
                             </c:otherwise>
                         </c:choose>
                     </ul>

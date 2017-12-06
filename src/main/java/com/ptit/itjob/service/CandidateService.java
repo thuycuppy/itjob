@@ -11,7 +11,5 @@ import java.util.List;
 public interface CandidateService {
 	Candidate findCurrent();
 
-	Page<ApplicationRes> findApplication(Integer page);
-
 	void create(CandidateRegisterReq registerDto, MultipartFile resume);
 }

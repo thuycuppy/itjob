@@ -37,10 +37,10 @@ $(document).ready(function() {
     });
 
     $("#btnViewAllJobs").click(function () {
-       window.location.href = "/job";
+       window.location.href = "/jobs";
     });
 
     $("#btnViewAllCompanies").click(function () {
-        window.location.href = "/company";
+        window.location.href = "/companies";
     });
 });

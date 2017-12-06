@@ -12,8 +12,8 @@
             </ul>
             <ul class="menu-links pull-right">
                 <li><a href="/">Home</a></li>
-                <li><a href="/job">All Jobs</a></li>
-                <li><a href="/company">All Companies</a></li>
+                <li><a href="/jobs">All Jobs</a></li>
+                <li><a href="/companies">All Companies</a></li>
 
                 <sec:authorize access="isAuthenticated()">
                     <sec:authentication var="principal" property="principal" />
@@ -26,16 +26,16 @@
                         </a>
                         <ul class="drop-down-multilevel left-side">
                             <sec:authorize access="hasAnyRole('CANDIDATE')">
-                                <li><a href="/candidate/profile"><i class="fa fa-user"></i> Profile</a></li>
-                                <li><a href="/candidate/edit-profile"><i class="fa fa-pencil"></i> Edit Profile</a></li>
-                                <li><a href="/candidate/applied-jobs"><i class="fa fa-list-alt"></i> Applied Jobs</a></li>
+                                <li><a href="/candidate-manager/profile"><i class="fa fa-user"></i> Profile</a></li>
+                                <li><a href="/candidate-manager/edit-profile"><i class="fa fa-pencil"></i> Edit Profile</a></li>
+                                <li><a href="/candidate-manager/applied-jobs"><i class="fa fa-list-alt"></i> Applied Jobs</a></li>
                             </sec:authorize>
 
                             <sec:authorize access="hasAnyRole('COMPANY')">
-                                <li><a href="/company/profile"><i class="fa fa-user"></i> Profile</a></li>
-                                <li><a href="/company/edit-profile"><i class="fa fa-pencil"></i> Edit Profile</a></li>
-                                <li><a href="/company/post-job"><i class="fa fa-plus-square-o"></i> Post Job</a></li>
-                                <li><a href="/company/active-jobs"><i class="fa fa-list"></i> Active Jobs</a></li>
+                                <li><a href="/company-manager/profile"><i class="fa fa-user"></i> Profile</a></li>
+                                <li><a href="/company-manager/edit-profile"><i class="fa fa-pencil"></i> Edit Profile</a></li>
+                                <li><a href="/company-manager/post-job"><i class="fa fa-plus-square-o"></i> Post Job</a></li>
+                                <li><a href="/company-manager/active-jobs"><i class="fa fa-list"></i> Active Jobs</a></li>
                             </sec:authorize>
 
                             <li><a href="/logout"><i class="fa fa-power-off"></i> Logout</a></li>

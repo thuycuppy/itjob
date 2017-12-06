@@ -33,10 +33,8 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
         http
             .authorizeRequests()
             	.antMatchers("/").permitAll()
-                .antMatchers("/register").permitAll()
-                .antMatchers("/company/profile").hasRole("COMPANY")
-                .antMatchers("/company/active-jobs").hasRole("COMPANY")
-                .antMatchers("/candidate/**").hasRole("CANDIDATE")
+                .antMatchers("/company-manager/**").hasRole("COMPANY")
+                .antMatchers("/candidate-manager/**").hasRole("CANDIDATE")
                 .and()
             .formLogin()
                 .loginPage("/login")
