@@ -11,8 +11,10 @@
         <put-attribute name="body" value="" />
         <put-attribute name="footer" value="/WEB-INF/view/fragment/footer.jsp" />
     </definition>
-    
-    <!-- Pages -->
+
+
+    <!-- Default Pages -->
+
     <definition name="home" extends="basic">
     	<put-attribute name="title" value="ITJob | Home" />
         <put-attribute name="header" value="/WEB-INF/view/fragment/header2.jsp" />
@@ -24,19 +26,14 @@
         <put-attribute name="body" value="/WEB-INF/view/page/login.jsp" />
     </definition>
 
-    <definition name="candidate_profile" extends="basic">
-        <put-attribute name="title" value="ITJob | Candidate Manager" />
-        <put-attribute name="body" value="/WEB-INF/view/page/candidate_profile.jsp" />
-    </definition>
-
-    <definition name="candidate_applied_jobs" extends="basic">
-        <put-attribute name="title" value="ITJob | Candidate Manager" />
-        <put-attribute name="body" value="/WEB-INF/view/page/candidate_applied_jobs.jsp" />
-    </definition>
-
     <definition name="candidate_register" extends="basic">
         <put-attribute name="title" value="ITJob | Register" />
         <put-attribute name="body" value="/WEB-INF/view/page/candidate_register.jsp" />
+    </definition>
+
+    <definition name="company_register" extends="basic">
+        <put-attribute name="title" value="ITJob | Register" />
+        <put-attribute name="body" value="/WEB-INF/view/page/company_register.jsp" />
     </definition>
 
     <definition name="company_list" extends="basic">
@@ -48,6 +45,32 @@
         <put-attribute name="title" value="ITJob | Company Detail" />
         <put-attribute name="body" value="/WEB-INF/view/page/company_detail.jsp" />
     </definition>
+
+    <definition name="job_list" extends="basic">
+        <put-attribute name="title" value="ITJob | All Jobs" />
+        <put-attribute name="body" value="/WEB-INF/view/page/job_list.jsp" />
+    </definition>
+
+    <definition name="job_detail" extends="basic">
+        <put-attribute name="title" value="ITJob | Job Detail" />
+        <put-attribute name="body" value="/WEB-INF/view/page/job_detail.jsp" />
+    </definition>
+
+
+    <!-- Candidate Manager -->
+
+    <definition name="candidate_profile" extends="basic">
+        <put-attribute name="title" value="ITJob | Candidate Manager" />
+        <put-attribute name="body" value="/WEB-INF/view/page/candidate_profile.jsp" />
+    </definition>
+
+    <definition name="candidate_applied_jobs" extends="basic">
+        <put-attribute name="title" value="ITJob | Candidate Manager" />
+        <put-attribute name="body" value="/WEB-INF/view/page/candidate_applied_jobs.jsp" />
+    </definition>
+
+
+    <!-- Company Manager -->
 
     <definition name="company_profile" extends="basic">
         <put-attribute name="title" value="ITJob | Company Manager" />
@@ -64,18 +87,9 @@
         <put-attribute name="body" value="/WEB-INF/view/page/company_job_resume.jsp" />
     </definition>
 
-    <definition name="company_register" extends="basic">
-        <put-attribute name="title" value="ITJob | Register" />
-        <put-attribute name="body" value="/WEB-INF/view/page/company_register.jsp" />
+    <definition name="company_post_job" extends="basic">
+        <put-attribute name="title" value="ITJob | Company Manager" />
+        <put-attribute name="body" value="/WEB-INF/view/page/company_post_job.jsp" />
     </definition>
 
-    <definition name="job_list" extends="basic">
-        <put-attribute name="title" value="ITJob | All Jobs" />
-        <put-attribute name="body" value="/WEB-INF/view/page/job_list.jsp" />
-    </definition>
-
-    <definition name="job_detail" extends="basic">
-        <put-attribute name="title" value="ITJob | Job Detail" />
-        <put-attribute name="body" value="/WEB-INF/view/page/job_detail.jsp" />
-    </definition>
 </tiles-definitions>

@@ -48,4 +48,9 @@ public class CompanyManagerController {
         model.addAttribute("pagination", PaginationUtil.paging(applications));
         return "company_job_resume";
     }
+
+    @GetMapping("/company-manager/job/post")
+    public String postJob(Model model) {
+        return "company_post_job";
+    }
 }
