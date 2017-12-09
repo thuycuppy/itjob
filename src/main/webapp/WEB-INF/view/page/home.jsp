@@ -68,7 +68,7 @@
                                 <a href="/company/${latestJob.companyId}"><span class="comp-name">${latestJob.companyName}</span></a>
                                 <span class="job-type jt-remote-color"><i class="fa fa-clock-o"></i> ${latestJob.jobType}</span>
                             </div>
-                            <p>${latestJob.description}<a href="#">Read More</a> </p>
+                            <p>${latestJob.description}<a href="/job/${latestJob.id}">Read More</a></p>
                         </div>
                         <div class="job-salary"> <i class="fa fa-money"></i> $${latestJob.salary}</div>
                     </div>

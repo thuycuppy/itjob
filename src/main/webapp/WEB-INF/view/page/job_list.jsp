@@ -72,7 +72,7 @@
                     <i class="fa fa-clock-o"></i> {%=o[i].jobType%}
                 </span>
             </div>
-            <p>{%=o[i].description%}<a href="#">Read More</a> </p>
+            <p>{%=o[i].description%}<a href="/job/{%=o[i].id%}">Read More</a> </p>
         </div>
         <div class="job-salary">
             <i class="fa fa-money"></i> {%=o[i].salary%}

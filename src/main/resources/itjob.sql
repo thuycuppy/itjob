@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 06, 2017 at 03:08 PM
+-- Generation Time: Dec 09, 2017 at 05:15 PM
 -- Server version: 5.7.14
 -- PHP Version: 5.6.25
 
@@ -203,10 +203,10 @@ CREATE TABLE `experience` (
 --
 
 INSERT INTO `experience` (`id`, `name`) VALUES
-(1, 'fresher'),
-(2, 'junior'),
-(3, 'senior'),
-(4, 'expert');
+(1, 'Fresher'),
+(2, 'Junior'),
+(3, 'Senior'),
+(4, 'Expert');
 
 -- --------------------------------------------------------
 

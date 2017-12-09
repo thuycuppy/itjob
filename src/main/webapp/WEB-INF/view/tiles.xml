@@ -58,10 +58,14 @@
 
 
     <!-- Candidate Manager -->
-
     <definition name="candidate_profile" extends="basic">
         <put-attribute name="title" value="ITJob | Candidate Manager" />
         <put-attribute name="body" value="/WEB-INF/view/page/candidate_profile.jsp" />
+    </definition>
+
+    <definition name="candidate_edit_profile" extends="basic">
+        <put-attribute name="title" value="ITJob | Candidate Manager" />
+        <put-attribute name="body" value="/WEB-INF/view/page/candidate_edit_profile.jsp" />
     </definition>
 
     <definition name="candidate_applied_jobs" extends="basic">
@@ -71,10 +75,14 @@
 
 
     <!-- Company Manager -->
-
     <definition name="company_profile" extends="basic">
         <put-attribute name="title" value="ITJob | Company Manager" />
         <put-attribute name="body" value="/WEB-INF/view/page/company_profile.jsp" />
+    </definition>
+
+    <definition name="company_edit_profile" extends="basic">
+        <put-attribute name="title" value="ITJob | Company Manager" />
+        <put-attribute name="body" value="/WEB-INF/view/page/company_edit_profile.jsp" />
     </definition>
 
     <definition name="company_active_jobs" extends="basic">
