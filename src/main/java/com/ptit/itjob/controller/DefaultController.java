@@ -75,16 +75,15 @@ public class DefaultController {
 
 
     /*================== CANDIDATE PAGES ================== */
-
     @GetMapping("/candidate/register")
     public String registerCandidate(Model model) {
-        model.addAttribute("registerDto", new CandidateRegisterReq());
+        model.addAttribute("req", new CandidateRegisterReq());
         return "candidate_register";
     }
 
     @PostMapping("/candidate/register")
     public String handleRegisterCandidate(
-            @ModelAttribute("registerDto") @Valid CandidateRegisterReq req,
+            @ModelAttribute("req") @Valid CandidateRegisterReq req,
             BindingResult result, RedirectAttributes redirect,
             @RequestParam(value = "resume", required = false) MultipartFile resume) {
         registerValidator.validate(req, result);
@@ -115,7 +114,7 @@ public class DefaultController {
     public String registerCompany(Model model) {
         model.addAttribute("companyTypes", companyTypeService.findAll());
         model.addAttribute("locations", locationService.findAll());
-        model.addAttribute("registerDto", new CompanyRegisterReq());
+        model.addAttribute("req", new CompanyRegisterReq());
         return "company_register";
     }
 
@@ -140,8 +139,8 @@ public class DefaultController {
 
     @PostMapping("/company/register")
     public String handleRegisterCompany(
-            @ModelAttribute("registerDto") @Valid CompanyRegisterReq req,
-            Model model, BindingResult result, RedirectAttributes redirect,
+            @ModelAttribute("req") @Valid CompanyRegisterReq req,
+            BindingResult result, Model model, RedirectAttributes redirect,
             @RequestParam(value = "logo") MultipartFile logo) {
         registerValidator.validate(req, result);
         if (result.hasErrors()) {

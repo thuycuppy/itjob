@@ -29,7 +29,7 @@
                         <img src="/img/building.jpg" alt="" class="img-responsive">
                     </div>
                     <div class="user-image">
-                        <img src="${candidate.account.avatar}" class="img-responsive img-circle" alt="">
+                        <img src="${candidate.avatar}" class="img-responsive img-circle" alt="">
                     </div>
                     <div class="card-body">
                         <h3>${candidate.name}</h3>

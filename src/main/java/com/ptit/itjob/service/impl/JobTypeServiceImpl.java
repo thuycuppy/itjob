@@ -19,4 +19,9 @@ public class JobTypeServiceImpl implements JobTypeService {
     public Iterable<JobType> findAll() {
         return jobTypeRepository.findAll();
     }
+
+    @Override
+    public JobType findOne(Integer id) {
+        return jobTypeRepository.findOne(id);
+    }
 }

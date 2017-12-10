@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 
 <section class="job-breadcrumb">
     <div class="container">
@@ -59,92 +60,128 @@
             </div>
 
             <div class="col-md-8 col-sm-8 col-xs-12">
+                <c:url value="/candidate-manager/edit-profile" var="action" />
+                <form:form action="${action}" method="POST" modelAttribute="req" enctype="multipart/form-data">
                 <div class="heading-inner first-heading">
                     <p class="title">Edit Profile</p>
                 </div>
                 <div class="col-md-12 col-sm-12 col-xs-12 nopadding">
                     <div class="profile-edit row">
-                    <div class="col-md-6 col-sm-12">
-                        <div class="form-group">
-                            <label>Full Name <span class="required">*</span></label>
-                            <input type="text" placeholder="" class="form-control">
+                        <!-- Candidate name -->
+                        <div class="col-md-6 col-sm-12">
+                            <div class="form-group">
+                                <label>Your Name <span class="required">*</span></label>
+                                <form:input path="name" cssClass="form-control" />
+                                <c:set var="nameErrors"><form:errors path="name"/></c:set>
+                                <c:if test="${not empty nameErrors}">
+                                    <div class="field-error">
+                                        <i class="fa fa-exclamation-circle"></i>
+                                        <form:errors path="name" delimiter="<br><i class='fa fa-exclamation-circle'></i> " />
+                                    </div>
+                                </c:if>
+                            </div>
                         </div>
-                    </div>
 
-                    <div class="col-md-6 col-sm-12">
-                        <div class="form-group">
-                            <label>Date Of Birth<span class="required">*</span></label>
-                            <input type="text" placeholder="" class="form-control datepicker">
+                        <!-- Candidate birthday -->
+                        <div class="col-md-6 col-sm-12">
+                            <div class="form-group">
+                                <label>Date Of Birth<span class="required">*</span></label>
+                                <form:input path="dob" cssClass="form-control datepicker" />
+                                <c:set var="dobErrors"><form:errors path="dob"/></c:set>
+                                <c:if test="${not empty dobErrors}">
+                                    <div class="field-error">
+                                        <i class="fa fa-exclamation-circle"></i>
+                                        <form:errors path="dob" delimiter="<br><i class='fa fa-exclamation-circle'></i> " />
+                                    </div>
+                                </c:if>
+                            </div>
                         </div>
-                    </div>
 
-                    <div class="col-md-6 col-sm-12">
-                        <div class="form-group">
-                            <label>Phone <span class="required">*</span></label>
-                            <input type="text" placeholder="" class="form-control">
+                        <!-- Candidate phone -->
+                        <div class="col-md-6 col-sm-12">
+                            <div class="form-group">
+                                <label>Phone <span class="required">*</span></label>
+                                <form:input path="phone" cssClass="form-control" />
+                                <c:set var="phoneErrors"><form:errors path="phone"/></c:set>
+                                <c:if test="${not empty phoneErrors}">
+                                    <div class="field-error">
+                                        <i class="fa fa-exclamation-circle"></i>
+                                        <form:errors path="phone" delimiter="<br><i class='fa fa-exclamation-circle'></i> " />
+                                    </div>
+                                </c:if>
+                            </div>
                         </div>
-                    </div>
 
-                    <div class="col-md-6 col-sm-12">
-                        <div class="form-group">
-                            <label>Address <span class="required">*</span></label>
-                            <input type="text" placeholder="" class="form-control">
+                        <!-- Candidate address -->
+                        <div class="col-md-6 col-sm-12">
+                            <div class="form-group">
+                                <label>Address <span class="required">*</span></label>
+                                <form:input path="address" cssClass="form-control" />
+                                <c:set var="addressErrors"><form:errors path="address"/></c:set>
+                                <c:if test="${not empty addressErrors}">
+                                    <div class="field-error">
+                                        <i class="fa fa-exclamation-circle"></i>
+                                        <form:errors path="address" delimiter="<br><i class='fa fa-exclamation-circle'></i> " />
+                                    </div>
+                                </c:if>
+                            </div>
                         </div>
-                    </div>
 
-                    <div class="col-md-6 col-sm-12">
-                        <div class="form-group">
-                            <label>Sex:</label>
-                            <label class="radio-inline">
-                                <input type="radio" name="role" value="company" checked>Female
-                            </label>
-                            <label class="radio-inline">
-                                <input type="radio" name="role" value="candidate">Male
-                            </label>
+                        <!-- Candidate sex -->
+                        <div class="col-md-6 col-sm-12">
+                            <div class="form-group">
+                                <label>Sex:</label>
+                                <label class="radio-inline">
+                                    <form:radiobutton path="sex" value="false" />Female
+                                </label>
+                                <label class="radio-inline">
+                                    <form:radiobutton path="sex" value="true" />Male
+                                </label>
+                            </div>
                         </div>
-                    </div>
 
-                    <div class="col-md-12 col-sm-12">
-                        <div class="input-group image-preview form-group">
-                            <label>Avatar:</label>
-                            <input type="text" placeholder="Upload Profile Image" class="form-control image-preview-filename" disabled="disabled">
-                            <span class="input-group-btn">
-                                <button type="button" class="btn btn-default image-preview-clear" style="display:none;">
-                                    <span class="glyphicon glyphicon-remove"></span> Clear
-                                </button>
-                                <div class="btn btn-default image-preview-input">
-                                    <span class="glyphicon glyphicon-folder-open"></span>
-                                    <span class="image-preview-input-title">Browse</span>
-                                    <input type="file" accept="file_extension" name="input-file-preview" />
-                                </div>
-                            </span>
+                        <!-- Candidate avatar -->
+                        <div class="col-md-12 col-sm-12">
+                            <div class="input-group image-preview form-group">
+                                <label>Avatar:</label>
+                                <input type="text" placeholder="Upload Profile Image" class="form-control image-preview-filename" disabled="disabled">
+                                <span class="input-group-btn">
+                                    <button type="button" class="btn btn-default image-preview-clear" style="display:none;">
+                                        <span class="glyphicon glyphicon-remove"></span> Clear
+                                    </button>
+                                    <div class="btn btn-default image-preview-input">
+                                        <span class="glyphicon glyphicon-folder-open"></span>
+                                        <span class="image-preview-input-title">Browse</span>
+                                        <input type="file"  name="avatar" accept="image/jpeg" />
+                                    </div>
+                                </span>
+                            </div>
                         </div>
-                    </div>
 
-                    <div class="col-md-12 col-sm-12">
-                        <div class="input-group image-preview form-group">
-                            <label>Resume:</label>
-                            <input type="text" placeholder="Upload Your Resume" class="form-control image-preview-filename" disabled="disabled">
-                            <span class="input-group-btn">
-                                <button type="button" class="btn btn-default image-preview-clear" style="display:none;">
-                                    <span class="glyphicon glyphicon-remove"></span> Clear
-                                </button>
-                                <div class="btn btn-default image-preview-input">
-                                    <span class="glyphicon glyphicon-folder-open"></span>
-                                    <span class="image-preview-input-title">Browse</span>
-                                    <input type="file" accept="file_extension" name="input-file-preview" />
-                                </div>
-                            </span>
+                        <!-- Resume -->
+                        <div class="col-md-12 col-sm-12">
+                            <div class="input-group image-preview form-group">
+                                <label>Resume:</label>
+                                <input type="text" placeholder="Upload Your Resume" class="form-control image-preview-filename" disabled="disabled">
+                                <span class="input-group-btn">
+                                    <button type="button" class="btn btn-default image-preview-clear" style="display:none;">
+                                        <span class="glyphicon glyphicon-remove"></span> Clear
+                                    </button>
+                                    <div class="btn btn-default image-preview-input">
+                                        <span class="glyphicon glyphicon-folder-open"></span>
+                                        <span class="image-preview-input-title">Browse</span>
+                                        <input type="file" name="resume" accept="application/pdf" />
+                                    </div>
+                                </span>
+                            </div>
                         </div>
-                    </div>
 
-                    <div class="col-md-12 col-sm-12">
-                        <div class="form-group">
-                            <label>About Yourself:</label>
-                            <textarea cols="6" rows="8" placeholder="" id="description" class="form-control"></textarea>
+                        <div class="col-md-12 col-sm-12">
+                            <div class="form-group">
+                                <label>About Yourself:</label>
+                                <textarea cols="6" rows="8" placeholder="" id="description" class="form-control"></textarea>
+                            </div>
                         </div>
-                    </div>
-
                     </div>
                 </div>
 
@@ -155,61 +192,54 @@
                     <div class="profile-edit row">
                         <div class="col-md-6 col-sm-12">
                             <div class="form-group">
-                                <label>Location <span class="required">*</span></label>
-                                <select class="form-control select2">
-                                    <c:forEach var="location" items="${locations}">
-                                        <option value="${location.id}">${location.name}</option>
-                                    </c:forEach>
-                                </select>
+                                <label>Location</label>
+                                <form:select path="location" items="${locations}" itemValue="id" itemLabel="name" cssClass="form-control select2" />
                             </div>
                         </div>
 
                         <div class="col-md-6 col-sm-12">
                             <div class="form-group">
                                 <label>Skills</label>
-                                <select class="form-control select2">
-                                    <c:forEach var="skill" items="${skills}">
-                                        <option value="${skill.id}">${skill.name}</option>
-                                    </c:forEach>
-                                </select>
+                                <form:select multiple="true" path="skills" items="${skills}" itemValue="id" itemLabel="name" cssClass="form-control select2" />
                             </div>
                         </div>
 
                         <div class="col-md-6 col-sm-12">
                             <div class="form-group">
                                 <label>Job Type</label>
-                                <select class="form-control select2">
-                                    <c:forEach var="jobType" items="${jobTypes}">
-                                        <option value="${jobType.id}">${jobType.name}</option>
-                                    </c:forEach>
-                                </select>
+                                <form:select path="jobType" items="${jobTypes}" itemValue="id" itemLabel="name" cssClass="form-control select2" />
                             </div>
                         </div>
 
                         <div class="col-md-6 col-sm-12">
                             <div class="form-group">
                                 <label>Job Experience</label>
-                                <select class="form-control select2">
-                                    <c:forEach var="experience" items="${experiences}">
-                                        <option value="${experience.id}">${experience.name}</option>
-                                    </c:forEach>
-                                </select>
+                                <form:select path="experience" items="${experiences}" itemValue="id" itemLabel="name" cssClass="form-control select2" />
                             </div>
                         </div>
 
                         <div class="col-md-12 col-sm-12">
                             <div class="form-group">
                                 <label>Expected Salary</label>
-                                <input type="text" class="form-control">
+                                <form:input path="expectedSalary" cssClass="form-control" />
+                                <c:set var="expectedSalaryErrors"><form:errors path="expectedSalary"/></c:set>
+                                <c:if test="${not empty expectedSalaryErrors}">
+                                    <div class="field-error">
+                                        <i class="fa fa-exclamation-circle"></i>
+                                        <form:errors path="expectedSalary" delimiter="<br><i class='fa fa-exclamation-circle'></i> " />
+                                    </div>
+                                </c:if>
                             </div>
                         </div>
 
                         <div class="col-md-12 col-sm-12">
-                            <button class="btn btn-default pull-right"> Save Profile <i class="fa fa-angle-right"></i>
+                            <button type="submit" class="btn btn-default pull-right">
+                                Save Profile <i class="fa fa-angle-right"></i>
                             </button>
                         </div>
                     </div>
                 </div>
+                </form:form>
             </div>
         </div>
     </div>

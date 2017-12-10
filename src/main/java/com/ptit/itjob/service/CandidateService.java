@@ -1,5 +1,6 @@
 package com.ptit.itjob.service;
 
+import com.ptit.itjob.dto.request.CandidateEditProfileReq;
 import com.ptit.itjob.dto.request.CandidateRegisterReq;
 import com.ptit.itjob.dto.response.ApplicationRes;
 import com.ptit.itjob.model.Candidate;
@@ -11,5 +12,7 @@ import java.util.List;
 public interface CandidateService {
 	Candidate findCurrent();
 
-	void create(CandidateRegisterReq registerDto, MultipartFile resume);
+	void create(CandidateRegisterReq req, MultipartFile resume);
+
+	void update(CandidateEditProfileReq req, MultipartFile avatar, MultipartFile resume);
 }

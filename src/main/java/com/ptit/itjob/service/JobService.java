@@ -1,5 +1,6 @@
 package com.ptit.itjob.service;
 
+import com.ptit.itjob.dto.request.PostJobReq;
 import com.ptit.itjob.dto.response.CompanyJobRes;
 import com.ptit.itjob.dto.response.JobListRes;
 import com.ptit.itjob.dto.response.JobSearchRes;
@@ -22,4 +23,6 @@ public interface JobService {
 	List<JobSearchRes> findByTitleAndLocation(String title, Integer locationId);
 
 	Job findById(Integer id);
+
+	void create(PostJobReq req);
 }

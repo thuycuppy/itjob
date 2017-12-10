@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 
 <section class="job-breadcrumb">
     <div class="container">
@@ -25,78 +26,123 @@
         <div class="row">
             <div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="box-panel">
+                    <c:if test="${not empty success}">
+                        <div class="alert alert-success">
+                            <p>${success}</p>
+                        </div>
+                    </c:if>
                     <div class="Heading-title black">
-                        <h3>Post A job</h3>
+                        <h3>Post Your Job</h3>
                     </div>
-                    <form class="row">
-                        <div class="col-md-6 col-sm-6 col-xs-12">
-                            <div class="form-group">
-                                <label>Job Title</label>
-                                <input type="text" placeholder="Job Title" class="form-control">
+                    <c:url value="/company-manager/post-job" var="action" />
+                    <div class="row">
+                        <form:form action="${action}" method="POST" modelAttribute="jobDto">
+                            <!-- Job title -->
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <div class="form-group">
+                                    <label>Job Title <span class="required">*</span></label>
+                                    <form:input path="title" cssClass="form-control" />
+                                    <c:set var="titleErrors"><form:errors path="title"/></c:set>
+                                    <c:if test="${not empty titleErrors}">
+                                        <div class="field-error">
+                                            <i class="fa fa-exclamation-circle"></i>
+                                            <form:errors path="title" delimiter="<br><i class='fa fa-exclamation-circle'></i> " />
+                                        </div>
+                                    </c:if>
+                                </div>
                             </div>
-                        </div>
-                        <div class="col-md-6 col-sm-6 col-xs-12">
-                            <div class="form-group">
-                                <label>Expected Salary</label>
-                                <input type="text" class="form-control">
+
+                            <!-- Job salary -->
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <div class="form-group">
+                                    <label>Job Salary ($) <span class="required">*</span></label>
+                                    <form:input path="salary" cssClass="form-control" />
+                                    <c:set var="salaryErrors"><form:errors path="salary"/></c:set>
+                                    <c:if test="${not empty salaryErrors}">
+                                        <div class="field-error">
+                                            <i class="fa fa-exclamation-circle"></i>
+                                            <form:errors path="salary" delimiter="<br><i class='fa fa-exclamation-circle'></i> " />
+                                        </div>
+                                    </c:if>
+                                </div>
                             </div>
-                        </div>
-                        <div class="col-md-6 col-sm-6 col-xs-12">
-                            <div class="form-group">
-                                <label>Location</label>
-                                <select class="form-control select2">
-                                    <c:forEach var="location" items="${locations}">
-                                        <option value="${location.id}">${location.name}</option>
-                                    </c:forEach>
-                                </select>
+
+                            <!-- Location -->
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <div class="form-group">
+                                    <label>Location</label>
+                                    <form:select path="location" items="${locations}" itemValue="id" itemLabel="name" cssClass="form-control select2" />
+                                </div>
                             </div>
-                        </div>
-                        <div class="col-md-6 col-sm-6 col-xs-12">
-                            <div class="form-group">
-                                <label>Skills</label>
-                                <select class="form-control select2">
-                                    <c:forEach var="skill" items="${skills}">
-                                        <option value="${skill.id}">${skill.name}</option>
-                                    </c:forEach>
-                                </select>
+
+                            <!-- Skills -->
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <div class="form-group">
+                                    <label>Skills</label>
+                                    <form:select multiple="true" path="skills" items="${skills}" itemValue="id" itemLabel="name" cssClass="form-control select2" />
+                                    <c:set var="skillsError"><form:errors path="skills"/></c:set>
+                                    <c:if test="${not empty skillsError}">
+                                        <div class="field-error">
+                                            <i class="fa fa-exclamation-circle"></i>
+                                            <form:errors path="skills" delimiter="<br><i class='fa fa-exclamation-circle'></i> " />
+                                        </div>
+                                    </c:if>
+                                </div>
                             </div>
-                        </div>
-                        <div class="col-md-6 col-sm-6 col-xs-12">
-                            <div class="form-group">
-                                <label>Job Type</label>
-                                <select class="form-control select2">
-                                    <c:forEach var="jobType" items="${jobTypes}">
-                                        <option value="${jobType.id}">${jobType.name}</option>
-                                    </c:forEach>
-                                </select>
+
+                            <!-- Job type -->
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <div class="form-group">
+                                    <label>Job Type</label>
+                                    <form:select path="jobType" items="${jobTypes}" itemValue="id" itemLabel="name" cssClass="form-control select2" />
+                                </div>
                             </div>
-                        </div>
-                        <div class="col-md-6 col-sm-6 col-xs-12">
-                            <div class="form-group">
-                                <label>Job Experience</label>
-                                <select class="form-control select2">
-                                    <c:forEach var="experience" items="${experiences}">
-                                        <option value="${experience.id}">${experience.name}</option>
-                                    </c:forEach>
-                                </select>
+
+                            <!-- Experience -->
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <div class="form-group">
+                                    <label>Job Experience</label>
+                                    <form:select path="experience" items="${experiences}" itemValue="id" itemLabel="name" cssClass="form-control select2" />
+                                </div>
                             </div>
-                        </div>
-                        <div class="col-md-12 col-sm-6 col-xs-12">
-                            <div class="form-group">
-                                <label>Description</label>
-                                <textarea id="description" class="form-control"></textarea>
+
+                            <!-- Description -->
+                            <div class="col-md-12 col-sm-6 col-xs-12">
+                                <div class="form-group">
+                                    <label>Description <span class="required">*</span></label>
+                                    <form:textarea path="description" cssClass="form-control" />
+                                    <c:set var="descriptionErrors"><form:errors path="description"/></c:set>
+                                    <c:if test="${not empty descriptionErrors}">
+                                        <div class="field-error">
+                                            <i class="fa fa-exclamation-circle"></i>
+                                            <form:errors path="description" delimiter="<br><i class='fa fa-exclamation-circle'></i> " />
+                                        </div>
+                                    </c:if>
+                                </div>
                             </div>
-                        </div>
-                        <div class="col-md-12 col-sm-6 col-xs-12">
-                            <div class="form-group">
-                                <label>Requirement</label>
-                                <textarea id="requirement" class="form-control"></textarea>
+
+                            <!-- Requirement -->
+                            <div class="col-md-12 col-sm-6 col-xs-12">
+                                <div class="form-group">
+                                    <label>Requirement <span class="required">*</span></label>
+                                    <form:textarea path="requirement" cssClass="form-control" />
+                                    <c:set var="requirementErrors"><form:errors path="requirement"/></c:set>
+                                    <c:if test="${not empty requirementErrors}">
+                                        <div class="field-error">
+                                            <i class="fa fa-exclamation-circle"></i>
+                                            <form:errors path="requirement" delimiter="<br><i class='fa fa-exclamation-circle'></i> " />
+                                        </div>
+                                    </c:if>
+                                </div>
                             </div>
-                        </div>
-                        <div class="col-md-12 col-sm-12 col-xs-12">
-                            <button class="btn btn-default pull-right">Publish Job <i class="fa fa-angle-right"></i></button>
-                        </div>
-                    </form>
+
+                            <div class="col-md-12 col-sm-12 col-xs-12">
+                                <button type="submit" class="btn btn-default pull-right">
+                                    Publish Job <i class="fa fa-angle-right"></i>
+                                </button>
+                            </div>
+                        </form:form>
+                    </div>
                 </div>
             </div>
         </div>

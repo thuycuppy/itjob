@@ -19,4 +19,9 @@ public class ExperienceServiceImpl implements ExperienceService {
     public Iterable<Experience> findAll() {
         return experienceRepository.findAll();
     }
+
+    @Override
+    public Experience findOne(Integer id) {
+        return experienceRepository.findOne(id);
+    }
 }

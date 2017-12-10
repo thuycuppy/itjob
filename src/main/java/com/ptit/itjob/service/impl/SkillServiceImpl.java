@@ -19,4 +19,9 @@ public class SkillServiceImpl implements SkillService {
     public Iterable<Skill> findAll() {
         return skillRepository.findAll();
     }
+
+    @Override
+    public Skill findOne(Integer id) {
+        return skillRepository.findOne(id);
+    }
 }

@@ -1,8 +1,8 @@
 package com.ptit.itjob.service.impl;
 
 import com.ptit.itjob.common.Constant;
-import com.ptit.itjob.common.DateUtil;
 import com.ptit.itjob.common.FileUtil;
+import com.ptit.itjob.common.Session;
 import com.ptit.itjob.dto.request.CompanyRegisterReq;
 import com.ptit.itjob.dto.response.CompanyDetailRes;
 import com.ptit.itjob.dto.response.CompanyListRes;
@@ -10,15 +10,11 @@ import com.ptit.itjob.dto.response.CompanySearchRes;
 import com.ptit.itjob.model.Account;
 import com.ptit.itjob.model.Company;
 import com.ptit.itjob.repository.AccountRepository;
-import com.ptit.itjob.security.CustomUserDetails;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -33,13 +29,15 @@ import java.util.List;
 public class CompanyServiceImpl implements CompanyService {
     private CompanyRepository companyRepository;
     private AccountRepository accountRepository;
+    private Session session;
     private ModelMapper modelMapper;
     private PasswordEncoder passwordEncoder;
 
     @Autowired
-    public CompanyServiceImpl(CompanyRepository companyRepository, AccountRepository accountRepository, ModelMapper modelMapper, PasswordEncoder passwordEncoder) {
+    public CompanyServiceImpl(CompanyRepository companyRepository, AccountRepository accountRepository, Session session, ModelMapper modelMapper, PasswordEncoder passwordEncoder) {
         this.companyRepository = companyRepository;
         this.accountRepository = accountRepository;
+        this.session = session;
         this.modelMapper = modelMapper;
         this.passwordEncoder = passwordEncoder;
     }
@@ -69,9 +67,7 @@ public class CompanyServiceImpl implements CompanyService {
     @Override
     @Transactional(readOnly = true)
     public Company findCurrent() {
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        CustomUserDetails userDetails = (CustomUserDetails) authentication.getPrincipal();
-        return userDetails.getCompany();
+        return session.getCurrentCompany();
     }
 
     @Override
@@ -92,7 +88,7 @@ public class CompanyServiceImpl implements CompanyService {
         account.setName(registerDto.getName());
         account.setEmail(registerDto.getEmail());
         account.setPassword(passwordEncoder.encode(registerDto.getPassword()));
-        account.setAvatar(filePath);
+        account.setImage(filePath);
         account.setRole(Constant.ROLE_COMPANY);
         accountRepository.save(account);
 

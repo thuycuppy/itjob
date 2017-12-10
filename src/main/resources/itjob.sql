@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 09, 2017 at 05:15 PM
+-- Generation Time: Dec 10, 2017 at 07:41 PM
 -- Server version: 5.7.14
 -- PHP Version: 5.6.25
 
@@ -32,14 +32,14 @@ CREATE TABLE `account` (
   `password` varchar(60) NOT NULL,
   `email` varchar(255) NOT NULL,
   `role` varchar(50) NOT NULL,
-  `avatar` varchar(255) DEFAULT 'img/avatar/default.jpg'
+  `image` varchar(255) DEFAULT 'img/avatar/default.jpg'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `account`
 --
 
-INSERT INTO `account` (`id`, `name`, `password`, `email`, `role`, `avatar`) VALUES
+INSERT INTO `account` (`id`, `name`, `password`, `email`, `role`, `image`) VALUES
 (1, 'Lê Thị Thủy', '$2a$10$LOqePml/koRGsk2YAIOFI.1YNKZg7EsQ5BAIuYP1nWOyYRl21dlne', 'thuy@gmail.com', 'ROLE_COMPANY', '/upload/avatar/default.jpg'),
 (2, 'Lê Thị Thủy', '$2y$10$FxstkW3S70UptzjSTZCMfOVBQbmp/z0..Fw0CX0df48nU2.noy4cC', 'anh@gmail.com', 'ROLE_CANDIDATE', '/upload/avatar/default.jpg'),
 (3, 'Lê Thị Thủy', '$2y$10$FxstkW3S70UptzjSTZCMfOVBQbmp/z0..Fw0CX0df48nU2.noy4cC', 'abc@gmail.com', 'ROLE_COMPANY', '/upload/avatar/default.jpg'),
@@ -92,6 +92,7 @@ CREATE TABLE `candidate` (
   `sex` bit(1) NOT NULL,
   `address` varchar(255) NOT NULL,
   `description` varchar(255) DEFAULT NULL,
+  `avatar` varchar(255) NOT NULL,
   `resume` varchar(255) DEFAULT NULL,
   `account_id` int(11) UNSIGNED NOT NULL,
   `expected_location_id` int(11) UNSIGNED DEFAULT NULL,
@@ -104,13 +105,13 @@ CREATE TABLE `candidate` (
 -- Dumping data for table `candidate`
 --
 
-INSERT INTO `candidate` (`id`, `name`, `dob`, `phone`, `sex`, `address`, `description`, `resume`, `account_id`, `expected_location_id`, `expected_job_type_id`, `experience_id`, `expected_salary`) VALUES
-(1, 'Nguyễn Tuấn Anh', '1995-06-21', '0973075726', b'1', 'Hà Đông, Hà Nội', NULL, NULL, 2, 1, 2, 2, 500),
-(2, '123', '2017-02-02', '123', b'0', '123', NULL, NULL, 13, NULL, NULL, NULL, 0),
-(3, '456', '2017-09-08', '123', b'1', '123', NULL, NULL, 14, NULL, NULL, NULL, 0),
-(4, '789', '2017-02-02', '123', b'1', '123', NULL, NULL, 15, NULL, NULL, NULL, 0),
-(5, '456', '2017-02-02', '123', b'0', '123', NULL, NULL, 16, NULL, NULL, NULL, 0),
-(6, 'khihieu', '2017-02-02', '123', b'0', '123', NULL, '/upload/resume/40511_161201410922BuiThiHue.pdf', 17, NULL, NULL, NULL, 0);
+INSERT INTO `candidate` (`id`, `name`, `dob`, `phone`, `sex`, `address`, `description`, `avatar`, `resume`, `account_id`, `expected_location_id`, `expected_job_type_id`, `experience_id`, `expected_salary`) VALUES
+(1, 'Nguyễn Tuấn Anh', '1995-06-21', '0973075726', b'1', 'Hà Đông, Hà Nội', NULL, '/upload/avatar/default.jpg', NULL, 2, 1, 2, 2, 500),
+(2, '123', '2017-02-02', '123', b'0', '123', NULL, '/upload/avatar/default.jpg', NULL, 13, NULL, NULL, NULL, 0),
+(3, '456', '2017-09-08', '123', b'1', '123', NULL, '/upload/avatar/default.jpg', NULL, 14, NULL, NULL, NULL, 0),
+(4, '789', '2017-02-02', '123', b'1', '123', NULL, '/upload/avatar/default.jpg', NULL, 15, NULL, NULL, NULL, 0),
+(5, '456', '2017-02-02', '123', b'0', '123', NULL, '/upload/avatar/default.jpg', NULL, 16, NULL, NULL, NULL, 0),
+(6, 'khihieu', '2017-02-02', '123', b'0', '123', NULL, '/upload/avatar/default.jpg', '/upload/resume/40511_161201410922BuiThiHue.pdf', 17, NULL, NULL, NULL, 0);
 
 -- --------------------------------------------------------
 
@@ -247,7 +248,8 @@ INSERT INTO `job` (`id`, `title`, `salary`, `location_id`, `description`, `requi
 (13, 'Senior Java/J2EE Developer – Up to $1600', 1600, 1, '    Study customer’s requirement and framework, create design documents and coding. \r\n    Can communicate with client to make clear requirement/tasks \r\n    Identify software issues and devise solutions to these problems. \r\n    Report to Project Manager ', '    Bachelor degree in IT.\r\n    Proficient in English communication, can communicate directly with customer via emails, conference calls.\r\n    Have at least 03 years programming in J2EE technologies \r\n    Strong OOAD knowledge, Java core, design pattern. \r\n    Strong experience with Java/J2EE, spring framework, Hibernate, Database (SQL, Oracle). \r\n    Experience with Web Service (SOAP and RESTful). \r\n    Experience with application server Weblogic \r\n    Able to manage team from 5-10 persons. \r\n    Willing to go onsite when requested. ', 1, 3, '2017-11-17 00:00:00', 1),
 (14, 'Senior Java/J2EE Developer – Up to $1600', 1600, 1, '    Study customer’s requirement and framework, create design documents and coding. \r\n    Can communicate with client to make clear requirement/tasks \r\n    Identify software issues and devise solutions to these problems. \r\n    Report to Project Manager ', '    Bachelor degree in IT.\r\n    Proficient in English communication, can communicate directly with customer via emails, conference calls.\r\n    Have at least 03 years programming in J2EE technologies \r\n    Strong OOAD knowledge, Java core, design pattern. \r\n    Strong experience with Java/J2EE, spring framework, Hibernate, Database (SQL, Oracle). \r\n    Experience with Web Service (SOAP and RESTful). \r\n    Experience with application server Weblogic \r\n    Able to manage team from 5-10 persons. \r\n    Willing to go onsite when requested. ', 1, 3, '2017-11-17 00:00:00', 1),
 (15, 'Senior Java/J2EE Developer – Up to $1600', 1600, 1, '    Study customer’s requirement and framework, create design documents and coding. \r\n    Can communicate with client to make clear requirement/tasks \r\n    Identify software issues and devise solutions to these problems. \r\n    Report to Project Manager ', '    Bachelor degree in IT.\r\n    Proficient in English communication, can communicate directly with customer via emails, conference calls.\r\n    Have at least 03 years programming in J2EE technologies \r\n    Strong OOAD knowledge, Java core, design pattern. \r\n    Strong experience with Java/J2EE, spring framework, Hibernate, Database (SQL, Oracle). \r\n    Experience with Web Service (SOAP and RESTful). \r\n    Experience with application server Weblogic \r\n    Able to manage team from 5-10 persons. \r\n    Willing to go onsite when requested. ', 1, 3, '2017-11-17 00:00:00', 1),
-(16, 'Senior Java/J2EE Developer – Up to $1600', 1600, 1, '    Study customer’s requirement and framework, create design documents and coding. \r\n    Can communicate with client to make clear requirement/tasks \r\n    Identify software issues and devise solutions to these problems. \r\n    Report to Project Manager ', '    Bachelor degree in IT.\r\n    Proficient in English communication, can communicate directly with customer via emails, conference calls.\r\n    Have at least 03 years programming in J2EE technologies \r\n    Strong OOAD knowledge, Java core, design pattern. \r\n    Strong experience with Java/J2EE, spring framework, Hibernate, Database (SQL, Oracle). \r\n    Experience with Web Service (SOAP and RESTful). \r\n    Experience with application server Weblogic \r\n    Able to manage team from 5-10 persons. \r\n    Willing to go onsite when requested. ', 1, 3, '2017-11-17 00:00:00', 1);
+(16, 'Senior Java/J2EE Developer – Up to $1600', 1600, 1, '    Study customer’s requirement and framework, create design documents and coding. \r\n    Can communicate with client to make clear requirement/tasks \r\n    Identify software issues and devise solutions to these problems. \r\n    Report to Project Manager ', '    Bachelor degree in IT.\r\n    Proficient in English communication, can communicate directly with customer via emails, conference calls.\r\n    Have at least 03 years programming in J2EE technologies \r\n    Strong OOAD knowledge, Java core, design pattern. \r\n    Strong experience with Java/J2EE, spring framework, Hibernate, Database (SQL, Oracle). \r\n    Experience with Web Service (SOAP and RESTful). \r\n    Experience with application server Weblogic \r\n    Able to manage team from 5-10 persons. \r\n    Willing to go onsite when requested. ', 1, 3, '2017-11-17 00:00:00', 1),
+(17, 'VCL', 1000, 2, '<p>123</p>\r\n', '<p>&lt;h1&gt;aaa&lt;/h1&gt;</p>\r\n', 1, 1, '2017-12-10 13:37:41', 1);
 
 -- --------------------------------------------------------
 
@@ -294,7 +296,9 @@ INSERT INTO `job_skill` (`job_id`, `skill_id`) VALUES
 (15, 1),
 (15, 2),
 (16, 1),
-(16, 2);
+(16, 2),
+(17, 3),
+(17, 4);
 
 -- --------------------------------------------------------
 
@@ -504,7 +508,7 @@ ALTER TABLE `experience`
 -- AUTO_INCREMENT for table `job`
 --
 ALTER TABLE `job`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 --
 -- AUTO_INCREMENT for table `job_type`
 --

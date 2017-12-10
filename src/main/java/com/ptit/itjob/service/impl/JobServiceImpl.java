@@ -1,35 +1,37 @@
 package com.ptit.itjob.service.impl;
 
 import com.ptit.itjob.common.Constant;
+import com.ptit.itjob.common.Session;
+import com.ptit.itjob.dto.request.PostJobReq;
 import com.ptit.itjob.dto.response.CompanyJobRes;
 import com.ptit.itjob.dto.response.JobListRes;
 import com.ptit.itjob.dto.response.JobSearchRes;
 import com.ptit.itjob.model.Company;
 import com.ptit.itjob.model.Job;
-import com.ptit.itjob.security.CustomUserDetails;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.ptit.itjob.repository.JobRepository;
 import com.ptit.itjob.service.JobService;
 
+import java.util.Date;
 import java.util.List;
 
 @Service
 public class JobServiceImpl implements JobService {
 	private JobRepository jobRepository;
+	private Session session;
 	private ModelMapper modelMapper;
 
 	@Autowired
-	public JobServiceImpl(JobRepository jobRepository, ModelMapper modelMapper) {
+	public JobServiceImpl(JobRepository jobRepository, Session session, ModelMapper modelMapper) {
 		this.jobRepository = jobRepository;
+		this.session = session;
 		this.modelMapper = modelMapper;
 	}
 
@@ -60,9 +62,7 @@ public class JobServiceImpl implements JobService {
 	@Override
 	@Transactional(readOnly = true)
 	public Page<CompanyJobRes> findByCurrentCompany(Integer page) {
-		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-		CustomUserDetails userDetails = (CustomUserDetails) authentication.getPrincipal();
-		Company currentCompany = userDetails.getCompany();
+		Company currentCompany = session.getCurrentCompany();
 		PageRequest pageRequest = new PageRequest(page - 1, Constant.ACTIVE_JOB_PER_PAGE, new Sort(Sort.Direction.DESC, "createdAt"));
 		Page<Job> jobs = jobRepository.findByCompanyId(currentCompany.getId(), pageRequest);
 		return jobs.map(this::convertJobToCompanyJobRes);
@@ -84,6 +84,15 @@ public class JobServiceImpl implements JobService {
 	@Transactional(readOnly = true)
 	public Job findById(Integer id) {
 		return jobRepository.findOne(id);
+	}
+
+	@Override
+	@Transactional
+	public void create(PostJobReq req) {
+		Job job = modelMapper.map(req, Job.class);
+		job.setCompany(session.getCurrentCompany());
+		job.setCreatedAt(new Date());
+		jobRepository.save(job);
 	}
 
 	private JobListRes convertJobToJobListRes(Job job) {

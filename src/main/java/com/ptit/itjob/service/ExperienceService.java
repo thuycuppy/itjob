@@ -4,4 +4,6 @@ import com.ptit.itjob.model.Experience;
 
 public interface ExperienceService {
     Iterable<Experience> findAll();
+
+    Experience findOne(Integer id);
 }

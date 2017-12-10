@@ -38,7 +38,7 @@
                             <div class="or">OR</div>
                         </div>
                         <c:url value="/candidate/register" var="action" />
-        	 			<form:form action="${action}" method="POST" modelAttribute="registerDto" enctype="multipart/form-data">
+        	 			<form:form action="${action}" method="POST" modelAttribute="req" enctype="multipart/form-data">
                             <!-- Candidate name -->
                             <div class="col-md-6 form-group">
                                 <label>Your name: <span class="required">*</span></label>
@@ -146,9 +146,10 @@
                                     </div>
                                 </c:if>
                             </div>
-                        <div class="loginbox-submit" style="padding: 0 15px">
-                            <input type="submit" class="btn btn-default btn-block" value="Register">
-                        </div>
+
+                            <div class="loginbox-submit" style="padding: 0 15px">
+                                <input type="submit" class="btn btn-default btn-block" value="Register">
+                            </div>
                         </form:form>
                         <div class="loginbox-signup"> Already have account? <a href="/login">Sign in</a> </div>
                     </div>
