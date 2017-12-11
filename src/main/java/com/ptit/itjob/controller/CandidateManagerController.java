@@ -67,7 +67,7 @@ public class CandidateManagerController {
 			return "candidate_edit_profile";
 		}
 
-		candidateService.create(req, resume);
+		candidateService.update(req, avatar, resume);
 		redirect.addFlashAttribute("success", "You updated profile successfully!");
 		return "redirect:/candidate-manager/edit-profile";
 	}

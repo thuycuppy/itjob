@@ -7,6 +7,7 @@ import com.ptit.itjob.dto.request.CandidateEditProfileReq;
 import com.ptit.itjob.model.Candidate;
 import com.ptit.itjob.repository.CandidateRepository;
 import org.modelmapper.ModelMapper;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -72,18 +73,21 @@ public class CandidateServiceImpl implements CandidateService {
 	@Override
 	@Transactional
 	public void update(CandidateEditProfileReq req, MultipartFile avatar, MultipartFile resume) {
+		Candidate candidate = session.getCurrentCandidate();
+		BeanUtils.copyProperties(req, candidate);
+
 		// Update candidate table
-		Candidate candidate = modelMapper.map(req, Candidate.class);
 		candidate.setDob(DateUtil.convertStringToDate(req.getDob(), Constant.DF_YYYY_MM_DD_DASH));
 
 		// Upload avatar
 		if (avatar != null) {
 			String fileName = FileUtil.upload(avatar, Constant.UPLOAD_CANDIDATE_AVATAR_DIRECTORY);
 			if (fileName != null) {
-				candidate.setAvatar(Constant.UPLOAD_CANDIDATE_RESUME_PATH + fileName);
+				candidate.setAvatar(Constant.UPLOAD_CANDIDATE_AVATAR_PATH + fileName);
 
 				// Update account table
 				Account account = candidate.getAccount();
+				account.setName(candidate.getName());
 				account.setImage(candidate.getAvatar());
 				accountRepository.save(account);
 			}

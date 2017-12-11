@@ -60,6 +60,13 @@
             </div>
 
             <div class="col-md-8 col-sm-8 col-xs-12">
+                <c:if test="${not empty success}">
+                    <div class="alert alert-success alert-dismissible" role="alert">
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                            ${success}
+                    </div>
+                </c:if>
+
                 <c:url value="/candidate-manager/edit-profile" var="action" />
                 <form:form action="${action}" method="POST" modelAttribute="req" enctype="multipart/form-data">
                 <div class="heading-inner first-heading">
@@ -130,7 +137,7 @@
                         <!-- Candidate sex -->
                         <div class="col-md-6 col-sm-12">
                             <div class="form-group">
-                                <label>Sex:</label>
+                                <label>Sex:</label><br>
                                 <label class="radio-inline">
                                     <form:radiobutton path="sex" value="false" />Female
                                 </label>
@@ -140,43 +147,26 @@
                             </div>
                         </div>
 
-                        <!-- Candidate avatar -->
-                        <div class="col-md-12 col-sm-12">
-                            <div class="input-group image-preview form-group">
-                                <label>Avatar:</label>
-                                <input type="text" placeholder="Upload Profile Image" class="form-control image-preview-filename" disabled="disabled">
-                                <span class="input-group-btn">
-                                    <button type="button" class="btn btn-default image-preview-clear" style="display:none;">
-                                        <span class="glyphicon glyphicon-remove"></span> Clear
-                                    </button>
-                                    <div class="btn btn-default image-preview-input">
-                                        <span class="glyphicon glyphicon-folder-open"></span>
-                                        <span class="image-preview-input-title">Browse</span>
-                                        <input type="file"  name="avatar" accept="image/jpeg" />
-                                    </div>
-                                </span>
+                        <div class="col-md-6 col-sm-12">
+                            <div class="form-group">
+                                <label>Your Skills</label>
+                                <form:select multiple="true" path="skills" items="${skills}" itemValue="id" itemLabel="name" cssClass="form-control select2" />
                             </div>
+                        </div>
+
+                        <!-- Candidate avatar -->
+                        <div class="col-md-6 col-sm-12">
+                            <label>Avatar</label>
+                            <input type="file"  name="avatar" accept="image/jpeg" />
                         </div>
 
                         <!-- Resume -->
-                        <div class="col-md-12 col-sm-12">
-                            <div class="input-group image-preview form-group">
-                                <label>Resume:</label>
-                                <input type="text" placeholder="Upload Your Resume" class="form-control image-preview-filename" disabled="disabled">
-                                <span class="input-group-btn">
-                                    <button type="button" class="btn btn-default image-preview-clear" style="display:none;">
-                                        <span class="glyphicon glyphicon-remove"></span> Clear
-                                    </button>
-                                    <div class="btn btn-default image-preview-input">
-                                        <span class="glyphicon glyphicon-folder-open"></span>
-                                        <span class="image-preview-input-title">Browse</span>
-                                        <input type="file" name="resume" accept="application/pdf" />
-                                    </div>
-                                </span>
-                            </div>
+                        <div class="col-md-6 col-sm-12">
+                            <label>Resume</label>
+                            <input type="file" name="resume" accept="application/pdf" />
                         </div>
 
-                        <div class="col-md-12 col-sm-12">
+                        <div class="col-md-12 col-sm-12" style="margin-top: 20px;">
                             <div class="form-group">
                                 <label>About Yourself:</label>
                                 <textarea cols="6" rows="8" placeholder="" id="description" class="form-control"></textarea>
@@ -199,13 +189,6 @@
 
                         <div class="col-md-6 col-sm-12">
                             <div class="form-group">
-                                <label>Skills</label>
-                                <form:select multiple="true" path="skills" items="${skills}" itemValue="id" itemLabel="name" cssClass="form-control select2" />
-                            </div>
-                        </div>
-
-                        <div class="col-md-6 col-sm-12">
-                            <div class="form-group">
                                 <label>Job Type</label>
                                 <form:select path="jobType" items="${jobTypes}" itemValue="id" itemLabel="name" cssClass="form-control select2" />
                             </div>
@@ -218,7 +201,8 @@
                             </div>
                         </div>
 
-                        <div class="col-md-12 col-sm-12">
+
+                        <div class="col-md-6 col-sm-12">
                             <div class="form-group">
                                 <label>Expected Salary</label>
                                 <form:input path="expectedSalary" cssClass="form-control" />

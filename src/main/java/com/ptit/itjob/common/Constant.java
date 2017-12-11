@@ -6,7 +6,7 @@ public class Constant {
 	public static final String ROLE_COMPANY = "ROLE_COMPANY";
 
 	// Upload directories and paths
-	public static final String UPLOAD_BASE_DIRECTORY = "D:/itjob/";
+	public static final String UPLOAD_BASE_DIRECTORY = "E://itjob/";
 	public static final String UPLOAD_CANDIDATE_AVATAR_DIRECTORY = UPLOAD_BASE_DIRECTORY + "avatar/";
 	public static final String UPLOAD_CANDIDATE_RESUME_DIRECTORY = UPLOAD_BASE_DIRECTORY + "resume/";
 	public static final String UPLOAD_COMPANY_LOGO_DIRECTORY = UPLOAD_BASE_DIRECTORY + "logo/";

@@ -4,13 +4,32 @@ import com.ptit.itjob.model.Experience;
 import com.ptit.itjob.model.JobType;
 import com.ptit.itjob.model.Location;
 import com.ptit.itjob.model.Skill;
+import org.hibernate.validator.constraints.Length;
+import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.validation.constraints.Digits;
 import javax.validation.constraints.Min;
 import java.util.Set;
 
-public class CandidateEditProfileReq extends CandidateRegisterReq {
-    private Integer id;
+public class CandidateEditProfileReq {
+    @NotEmpty
+    @Length(max = 50)
+    protected String name;
+
+    @NotEmpty
+    @Length(max = 10)
+    private String dob;
+
+    @NotEmpty
+    @Length(max = 20)
+    private String phone;
+
+    private boolean sex;
+
+    @NotEmpty
+    @Length(max = 255)
+    private String address;
+
     private Location location;
     private Set<Skill> skills;
     private JobType jobType;
@@ -23,9 +42,12 @@ public class CandidateEditProfileReq extends CandidateRegisterReq {
     public CandidateEditProfileReq() {
     }
 
-    public CandidateEditProfileReq(String name, String email, String password, String confirmPassword, String dob, String phone, boolean sex, String address, Integer id, Location location, Set<Skill> skills, JobType jobType, Experience experience, Integer expectedSalary) {
-        super(name, email, password, confirmPassword, dob, phone, sex, address);
-        this.id = id;
+    public CandidateEditProfileReq(String name, String dob, String phone, boolean sex, String address, Location location, Set<Skill> skills, JobType jobType, Experience experience, Integer expectedSalary) {
+        this.name = name;
+        this.dob = dob;
+        this.phone = phone;
+        this.sex = sex;
+        this.address = address;
         this.location = location;
         this.skills = skills;
         this.jobType = jobType;
@@ -33,12 +55,44 @@ public class CandidateEditProfileReq extends CandidateRegisterReq {
         this.expectedSalary = expectedSalary;
     }
 
-    public Integer getId() {
-        return id;
+    public String getName() {
+        return name;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getDob() {
+        return dob;
+    }
+
+    public void setDob(String dob) {
+        this.dob = dob;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    public boolean isSex() {
+        return sex;
+    }
+
+    public void setSex(boolean sex) {
+        this.sex = sex;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
     }
 
     public Location getLocation() {
