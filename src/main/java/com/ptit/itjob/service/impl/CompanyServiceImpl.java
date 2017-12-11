@@ -3,6 +3,7 @@ package com.ptit.itjob.service.impl;
 import com.ptit.itjob.common.Constant;
 import com.ptit.itjob.common.FileUtil;
 import com.ptit.itjob.common.Session;
+import com.ptit.itjob.dto.request.CompanyEditProfileReq;
 import com.ptit.itjob.dto.request.CompanyRegisterReq;
 import com.ptit.itjob.dto.response.CompanyDetailRes;
 import com.ptit.itjob.dto.response.CompanyListRes;
@@ -11,6 +12,7 @@ import com.ptit.itjob.model.Account;
 import com.ptit.itjob.model.Company;
 import com.ptit.itjob.repository.AccountRepository;
 import org.modelmapper.ModelMapper;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -96,6 +98,28 @@ public class CompanyServiceImpl implements CompanyService {
         Company company = modelMapper.map(registerDto, Company.class);
         company.setLogo(filePath);
         company.setAccount(account);
+        companyRepository.save(company);
+    }
+
+    @Override
+    public void update(CompanyEditProfileReq req, MultipartFile logo) {
+        Company company = session.getCurrentCompany();
+        BeanUtils.copyProperties(req, company);
+
+        // Upload logo
+        if (logo != null) {
+            String fileName = FileUtil.upload(logo, Constant.UPLOAD_COMPANY_LOGO_DIRECTORY);
+            if (fileName != null) {
+                company.setLogo(Constant.UPLOAD_COMPANY_LOGO_PATH + fileName);
+
+                // Update account table
+                Account account = company.getAccount();
+                account.setName(company.getName());
+                account.setImage(company.getLogo());
+                accountRepository.save(account);
+            }
+        }
+
         companyRepository.save(company);
     }
 

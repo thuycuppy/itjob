@@ -77,15 +77,14 @@ public class DefaultController {
     /*================== CANDIDATE PAGES ================== */
     @GetMapping("/candidate/register")
     public String registerCandidate(Model model) {
-        model.addAttribute("req", new CandidateRegisterReq());
+        model.addAttribute("registerReq", new CandidateRegisterReq());
         return "candidate_register";
     }
 
     @PostMapping("/candidate/register")
-    public String handleRegisterCandidate(
-            @ModelAttribute("req") @Valid CandidateRegisterReq req,
-            BindingResult result, RedirectAttributes redirect,
-            @RequestParam(value = "resume", required = false) MultipartFile resume) {
+    public String handleRegisterCandidate(@ModelAttribute("registerReq") @Valid CandidateRegisterReq req,
+                                          BindingResult result, RedirectAttributes redirect,
+                                          @RequestParam(value = "resume", required = false) MultipartFile resume) {
         registerValidator.validate(req, result);
         if (result.hasErrors()) {
             return "candidate_register";
@@ -114,7 +113,7 @@ public class DefaultController {
     public String registerCompany(Model model) {
         model.addAttribute("companyTypes", companyTypeService.findAll());
         model.addAttribute("locations", locationService.findAll());
-        model.addAttribute("req", new CompanyRegisterReq());
+        model.addAttribute("registerReq", new CompanyRegisterReq());
         return "company_register";
     }
 
@@ -138,10 +137,9 @@ public class DefaultController {
     }
 
     @PostMapping("/company/register")
-    public String handleRegisterCompany(
-            @ModelAttribute("req") @Valid CompanyRegisterReq req,
-            BindingResult result, Model model, RedirectAttributes redirect,
-            @RequestParam(value = "logo") MultipartFile logo) {
+    public String handleRegisterCompany(@ModelAttribute("registerReq") @Valid CompanyRegisterReq req,
+                                        BindingResult result, Model model, RedirectAttributes redirect,
+                                        @RequestParam(value = "logo") MultipartFile logo) {
         registerValidator.validate(req, result);
         if (result.hasErrors()) {
             model.addAttribute("companyTypes", companyTypeService.findAll());

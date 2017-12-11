@@ -6,9 +6,12 @@ import com.ptit.itjob.model.Location;
 import com.ptit.itjob.model.Skill;
 import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotEmpty;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.validation.constraints.Digits;
 import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
+import java.util.Date;
 import java.util.Set;
 
 public class CandidateEditProfileReq {
@@ -16,9 +19,9 @@ public class CandidateEditProfileReq {
     @Length(max = 50)
     protected String name;
 
-    @NotEmpty
-    @Length(max = 10)
-    private String dob;
+    @NotNull
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private Date dob;
 
     @NotEmpty
     @Length(max = 20)
@@ -42,7 +45,7 @@ public class CandidateEditProfileReq {
     public CandidateEditProfileReq() {
     }
 
-    public CandidateEditProfileReq(String name, String dob, String phone, boolean sex, String address, Location location, Set<Skill> skills, JobType jobType, Experience experience, Integer expectedSalary) {
+    public CandidateEditProfileReq(String name, Date dob, String phone, boolean sex, String address, Location location, Set<Skill> skills, JobType jobType, Experience experience, Integer expectedSalary) {
         this.name = name;
         this.dob = dob;
         this.phone = phone;
@@ -63,11 +66,11 @@ public class CandidateEditProfileReq {
         this.name = name;
     }
 
-    public String getDob() {
+    public Date getDob() {
         return dob;
     }
 
-    public void setDob(String dob) {
+    public void setDob(Date dob) {
         this.dob = dob;
     }
 

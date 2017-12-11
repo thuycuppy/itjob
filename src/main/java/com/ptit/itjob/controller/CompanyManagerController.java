@@ -1,7 +1,8 @@
 package com.ptit.itjob.controller;
 
 import com.ptit.itjob.common.PaginationUtil;
-import com.ptit.itjob.dto.request.CompanyRegisterReq;
+import com.ptit.itjob.common.Session;
+import com.ptit.itjob.dto.request.CompanyEditProfileReq;
 import com.ptit.itjob.dto.request.PostJobReq;
 import com.ptit.itjob.dto.response.ApplicationRes;
 import com.ptit.itjob.dto.response.CompanyJobRes;
@@ -17,6 +18,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
@@ -33,9 +35,10 @@ public class CompanyManagerController {
     private SkillService skillService;
     private JobTypeService jobTypeService;
     private ExperienceService experienceService;
+    private Session session;
 
     @Autowired
-    public CompanyManagerController(CompanyService companyService, JobService jobService, ApplicationService applicationService, CompanyTypeService companyTypeService, LocationService locationService, SkillService skillService, JobTypeService jobTypeService, ExperienceService experienceService) {
+    public CompanyManagerController(CompanyService companyService, JobService jobService, ApplicationService applicationService, CompanyTypeService companyTypeService, LocationService locationService, SkillService skillService, JobTypeService jobTypeService, ExperienceService experienceService, Session session) {
         this.companyService = companyService;
         this.jobService = jobService;
         this.applicationService = applicationService;
@@ -44,49 +47,7 @@ public class CompanyManagerController {
         this.skillService = skillService;
         this.jobTypeService = jobTypeService;
         this.experienceService = experienceService;
-    }
-
-    @GetMapping("/company-manager/profile")
-    public String showCompanyProfile(Model model) {
-        model.addAttribute("company", companyService.findCurrent());
-        return "company_profile";
-    }
-
-    @GetMapping("/company-manager/edit-profile")
-    public String editCompanyProfile(Model model) {
-        model.addAttribute("companyTypes", companyTypeService.findAll());
-        model.addAttribute("locations", locationService.findAll());
-        return "company_edit_profile";
-    }
-
-    @GetMapping("/company-manager/active-jobs")
-    public String listActiveJobs(@RequestParam(value = "page", defaultValue = "1") Integer page, Model model) {
-        Page<CompanyJobRes> jobs = jobService.findByCurrentCompany(page);
-        model.addAttribute("jobs", jobs);
-        model.addAttribute("pagination", PaginationUtil.paging(jobs));
-        return "company_active_jobs";
-    }
-
-    @GetMapping("/company-manager/job/{jobId}/resume")
-    public String listResume(
-            @PathVariable("jobId") Integer jobId,
-            @RequestParam(value = "page", defaultValue = "1") Integer page,
-            Model model) {
-        Page<ApplicationRes> applications = applicationService.findByJob(jobId, page);
-        model.addAttribute("applications", applications);
-        model.addAttribute("jobId", jobId);
-        model.addAttribute("pagination", PaginationUtil.paging(applications));
-        return "company_job_resume";
-    }
-
-    @GetMapping("/company-manager/post-job")
-    public String postJob(Model model) {
-        model.addAttribute("locations", locationService.findAll());
-        model.addAttribute("skills", skillService.findAll());
-        model.addAttribute("jobTypes", jobTypeService.findAll());
-        model.addAttribute("experiences", experienceService.findAll());
-        model.addAttribute("jobDto", new PostJobReq());
-        return "company_post_job";
+        this.session = session;
     }
 
     @InitBinder
@@ -124,8 +85,67 @@ public class CompanyManagerController {
         });
     }
 
+    @GetMapping("/company-manager/profile")
+    public String showCompanyProfile(Model model) {
+        model.addAttribute("company", companyService.findCurrent());
+        return "company_profile";
+    }
+
+    @GetMapping("/company-manager/edit-profile")
+    public String editCompanyProfile(Model model) {
+        model.addAttribute("companyTypes", companyTypeService.findAll());
+        model.addAttribute("locations", locationService.findAll());
+        model.addAttribute("registerReq", session.getCurrentCompanyEditProfileReq());
+        return "company_edit_profile";
+    }
+
+    @PostMapping("/company-manager/edit-profile")
+    public String handleEditCandidateProfile(@ModelAttribute("registerReq") @Valid CompanyEditProfileReq req,
+                                             BindingResult result, Model model, RedirectAttributes redirect,
+                                             @RequestParam(value = "logo", required = false) MultipartFile logo) {
+        if (result.hasErrors()) {
+            model.addAttribute("companyTypes", companyTypeService.findAll());
+            model.addAttribute("locations", locationService.findAll());
+            return "company_edit_profile";
+        }
+
+        companyService.update(req, logo);
+        redirect.addFlashAttribute("success", "You updated profile successfully!");
+        return "redirect:/company-manager/edit-profile";
+    }
+
+    @GetMapping("/company-manager/active-jobs")
+    public String listActiveJobs(@RequestParam(value = "page", defaultValue = "1") Integer page, Model model) {
+        Page<CompanyJobRes> jobs = jobService.findByCurrentCompany(page);
+        model.addAttribute("jobs", jobs);
+        model.addAttribute("pagination", PaginationUtil.paging(jobs));
+        return "company_active_jobs";
+    }
+
+    @GetMapping("/company-manager/job/{jobId}/resume")
+    public String listResume(
+            @PathVariable("jobId") Integer jobId,
+            @RequestParam(value = "page", defaultValue = "1") Integer page,
+            Model model) {
+        Page<ApplicationRes> applications = applicationService.findByJob(jobId, page);
+        model.addAttribute("applications", applications);
+        model.addAttribute("jobId", jobId);
+        model.addAttribute("pagination", PaginationUtil.paging(applications));
+        return "company_job_resume";
+    }
+
+    @GetMapping("/company-manager/post-job")
+    public String postJob(Model model) {
+        model.addAttribute("locations", locationService.findAll());
+        model.addAttribute("skills", skillService.findAll());
+        model.addAttribute("jobTypes", jobTypeService.findAll());
+        model.addAttribute("experiences", experienceService.findAll());
+        model.addAttribute("postJobReq", new PostJobReq());
+        return "company_post_job";
+    }
+
     @PostMapping("/company-manager/post-job")
-    public String handlePostJob(@ModelAttribute("jobDto") @Valid PostJobReq req,
+    public String handlePostJob(@ModelAttribute("postJobReq") @Valid PostJobReq req,
                                 BindingResult result, Model model, RedirectAttributes redirect) {
         if (result.hasErrors()) {
             model.addAttribute("locations", locationService.findAll());

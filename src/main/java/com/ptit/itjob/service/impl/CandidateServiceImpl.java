@@ -76,9 +76,6 @@ public class CandidateServiceImpl implements CandidateService {
 		Candidate candidate = session.getCurrentCandidate();
 		BeanUtils.copyProperties(req, candidate);
 
-		// Update candidate table
-		candidate.setDob(DateUtil.convertStringToDate(req.getDob(), Constant.DF_YYYY_MM_DD_DASH));
-
 		// Upload avatar
 		if (avatar != null) {
 			String fileName = FileUtil.upload(avatar, Constant.UPLOAD_CANDIDATE_AVATAR_DIRECTORY);

@@ -5,17 +5,24 @@ import com.ptit.itjob.common.Session;
 import com.ptit.itjob.dto.request.CandidateEditProfileReq;
 import com.ptit.itjob.dto.response.ApplicationRes;
 import com.ptit.itjob.model.Candidate;
+import com.ptit.itjob.model.Experience;
+import com.ptit.itjob.model.JobType;
+import com.ptit.itjob.model.Location;
 import com.ptit.itjob.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.propertyeditors.CustomCollectionEditor;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
+import java.beans.PropertyEditorSupport;
+import java.util.Set;
 
 @Controller
 public class CandidateManagerController {
@@ -38,6 +45,41 @@ public class CandidateManagerController {
 		this.session = session;
 	}
 
+	@InitBinder
+	public void initBinder(WebDataBinder binder) {
+		binder.registerCustomEditor(Location.class, "location", new PropertyEditorSupport() {
+			@Override
+			public void setAsText(String text) {
+				Location location = locationService.findOne(Integer.parseInt(text));
+				setValue(location);
+			}
+		});
+
+		binder.registerCustomEditor(Set.class, "skills", new CustomCollectionEditor(Set.class) {
+			@Override
+			protected Object convertElement(Object element) {
+				Integer id = Integer.parseInt((String) element);
+				return skillService.findOne(id);
+			}
+		});
+
+		binder.registerCustomEditor(JobType.class, "jobType", new PropertyEditorSupport() {
+			@Override
+			public void setAsText(String text) {
+				JobType jobType = jobTypeService.findOne(Integer.parseInt(text));
+				setValue(jobType);
+			}
+		});
+
+		binder.registerCustomEditor(Experience.class, "experience", new PropertyEditorSupport() {
+			@Override
+			public void setAsText(String text) {
+				Experience experience = experienceService.findOne(Integer.parseInt(text));
+				setValue(experience);
+			}
+		});
+	}
+
 	@GetMapping("/candidate-manager/profile")
 	public String showCandidateProfile(Model model) {
 		model.addAttribute("candidate", candidateService.findCurrent());
@@ -50,12 +92,12 @@ public class CandidateManagerController {
 		model.addAttribute("skills", skillService.findAll());
 		model.addAttribute("jobTypes", jobTypeService.findAll());
 		model.addAttribute("experiences", experienceService.findAll());
-		model.addAttribute("req", session.getCurrentCandidateEditProfileReq());
+		model.addAttribute("registerReq", session.getCurrentCandidateEditProfileReq());
 		return "candidate_edit_profile";
 	}
 
 	@PostMapping("/candidate-manager/edit-profile")
-	public String handleEditCandidateProfile(@ModelAttribute("req") @Valid CandidateEditProfileReq req,
+	public String handleEditCandidateProfile(@ModelAttribute("registerReq") @Valid CandidateEditProfileReq req,
 											 BindingResult result, Model model, RedirectAttributes redirect,
 											 @RequestParam(value = "avatar", required = false) MultipartFile avatar,
 											 @RequestParam(value = "resume", required = false) MultipartFile resume) {

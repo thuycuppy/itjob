@@ -32,7 +32,7 @@
                         <img src="/img/building.jpg" alt="" class="img-responsive">
                     </div>
                     <div class="user-image">
-                        <img src="${account.avatar}" class="img-responsive img-circle" alt="">
+                        <img src="${account.image}" class="img-responsive img-circle" alt="">
                     </div>
                     <div class="card-body">
                         <h3>${account.name}</h3>

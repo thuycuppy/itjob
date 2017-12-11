@@ -125,35 +125,32 @@
                             </li>
                         </ul>
                     </div>
-                    <aside>
-                        <div class="company-detail widget">
-                            <div class="widget-heading"><span class="title">Company Detail</span></div>
-                            <div class="company-contact-detail">
-                                <table>
-                                    <tr>
-                                        <th>Name:</th>
-                                        <td> ${job.company.name}</td>
-                                    </tr>
-                                    <tr>
-                                        <th>Quantity:</th>
-                                        <td> ${job.company.quantity}</td>
-                                    </tr>
-                                    <tr>
-                                        <th>Phone:</th>
-                                        <td> ${job.company.phone}</td>
-                                    </tr>
-                                    <tr>
-                                        <th>Website:</th>
-                                        <td> ${job.company.website}</td>
-                                    </tr>
-                                    <tr>
-                                        <th>Address:</th>
-                                        <td> ${job.company.address}</td>
-                                    </tr>
-                                </table>
-                            </div>
-                        </div>
-                    </aside>
+
+                    <div class="widget">
+                        <div class="widget-heading"><span class="title">Company Information</span></div>
+                        <ul class="short-decs-sidebar">
+                            <li>
+                                <div><h4>Name:</h4></div>
+                                <div>${job.company.name}</div>
+                            </li>
+                            <li>
+                                <div><h4>Quantity:</h4></div>
+                                <div>${job.company.quantity}</div>
+                            </li>
+                            <li>
+                                <div><h4>Phone:</h4></div>
+                                <div>${job.company.phone}</div>
+                            </li>
+                            <li>
+                                <div><h4>Website:</h4></div>
+                                <div>${job.company.website}</div>
+                            </li>
+                            <li>
+                                <div><h4>Address:</h4></div>
+                                <div>${job.company.address}</div>
+                            </li>
+                        </ul>
+                    </div>
                 </div>
             </div>
         </div>

@@ -38,7 +38,7 @@
                             <div class="or">OR</div>
                         </div>
                         <c:url value="/company/register" var="action" />
-                        <form:form action="${action}" method="POST" modelAttribute="req" enctype="multipart/form-data">
+                        <form:form action="${action}" method="POST" modelAttribute="registerReq" enctype="multipart/form-data">
                             <!-- Company name -->
                             <div class="col-md-6 form-group">
                                 <label>Company name: <span class="required">*</span></label>
@@ -100,7 +100,13 @@
                             <!-- Company type -->
                             <div class="col-md-6 form-group">
                                 <label>Company Type:</label>
-                                <form:select path="companyType" items="${companyTypes}" itemValue="id" itemLabel="name" cssClass="form-control" />
+                                <form:select path="companyType" items="${companyTypes}" itemValue="id" itemLabel="name" cssClass="form-control select2" />
+                            </div>
+
+                            <!-- Company location -->
+                            <div class="col-md-6 form-group">
+                                <label>Company Location:</label>
+                                <form:select path="location" items="${locations}" itemValue="id" itemLabel="name" cssClass="form-control select2" />
                             </div>
 
                             <!-- Company quantity -->
@@ -114,12 +120,6 @@
                                         <form:errors path="quantity" delimiter="<br><i class='fa fa-exclamation-circle'></i> " />
                                     </div>
                                 </c:if>
-                            </div>
-
-                            <!-- Company location -->
-                            <div class="col-md-6 form-group">
-                                <label>Company Location:</label>
-                                <form:select path="location" items="${locations}" itemValue="id" itemLabel="name" cssClass="form-control" />
                             </div>
 
                             <!-- Company address -->
@@ -137,15 +137,8 @@
 
                             <!-- Company website -->
                             <div class="col-md-6 form-group">
-                                <label>Company Website</label>
+                                <label>Company Website:</label>
                                 <form:input path="website" cssClass="form-control" />
-                                <c:set var="websiteErrors"><form:errors path="website"/></c:set>
-                                <c:if test="${not empty websiteErrors}">
-                                    <div class="field-error">
-                                        <i class="fa fa-exclamation-circle"></i>
-                                        <form:errors path="website" delimiter="<br><i class='fa fa-exclamation-circle'></i> " />
-                                    </div>
-                                </c:if>
                             </div>
 
                             <!-- Company phone -->
@@ -163,7 +156,7 @@
 
                             <!-- Company description -->
                             <div class="col-md-12 form-group">
-                                <label>Company Description:</label>
+                                <label>About Company:</label>
                                 <form:textarea path="description" cssClass="form-control" cssStyle="height:150px" />
                             </div>
 
@@ -178,3 +171,5 @@
         </div>
     </div>
 </section>
+
+<script src="/js/app/company_register.js"></script>

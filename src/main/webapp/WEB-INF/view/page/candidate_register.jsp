@@ -38,7 +38,7 @@
                             <div class="or">OR</div>
                         </div>
                         <c:url value="/candidate/register" var="action" />
-        	 			<form:form action="${action}" method="POST" modelAttribute="req" enctype="multipart/form-data">
+        	 			<form:form action="${action}" method="POST" modelAttribute="registerReq" enctype="multipart/form-data">
                             <!-- Candidate name -->
                             <div class="col-md-6 form-group">
                                 <label>Your name: <span class="required">*</span></label>

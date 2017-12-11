@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 
 <section class="job-breadcrumb">
     <div class="container">
@@ -49,84 +50,140 @@
                 </div>
 
                 <div class="profile-edit row">
-                    <form>
+                    <c:if test="${not empty success}">
+                        <div class="alert alert-success alert-dismissible" role="alert">
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                ${success}
+                        </div>
+                    </c:if>
+
+                    <c:url value="/company-manager/edit-profile" var="action" />
+                    <form:form action="${action}" method="POST" modelAttribute="registerReq" enctype="multipart/form-data">
+                        <!-- Company name -->
                         <div class="col-md-6 col-sm-12">
                             <div class="form-group">
                                 <label>Name: <span class="required">*</span></label>
-                                <input type="text" placeholder="" class="form-control">
+                                <form:input path="name" cssClass="form-control" />
+                                <c:set var="nameErrors"><form:errors path="name"/></c:set>
+                                <c:if test="${not empty nameErrors}">
+                                    <div class="field-error">
+                                        <i class="fa fa-exclamation-circle"></i>
+                                        <form:errors path="name" delimiter="<br><i class='fa fa-exclamation-circle'></i> " />
+                                    </div>
+                                </c:if>
                             </div>
                         </div>
+
+                        <!-- Company quantity -->
                         <div class="col-md-6 col-sm-12">
                             <div class="form-group">
                                 <label>Quantity: <span class="required">*</span></label>
-                                <input type="text" placeholder="" class="form-control">
+                                <form:input path="quantity" cssClass="form-control" />
+                                <c:set var="quantityErrors"><form:errors path="quantity"/></c:set>
+                                <c:if test="${not empty quantityErrors}">
+                                    <div class="field-error">
+                                        <i class="fa fa-exclamation-circle"></i>
+                                        <form:errors path="quantity" delimiter="<br><i class='fa fa-exclamation-circle'></i> " />
+                                    </div>
+                                </c:if>
                             </div>
                         </div>
+
+                        <!-- Company type -->
                         <div class="col-md-6 col-sm-12">
                             <div class="form-group">
                                 <label>Type of Company:</label>
-                                <select class="form-control select2">
-                                    <c:forEach var="companyType" items="${companyTypes}">
-                                        <option value="${companyType.id}">${companyType.name}</option>
+                                <form:select path="companyType" cssClass="form-control select2">
+                                    <c:forEach items="${companyTypes}" var="companyType">
+                                        <c:choose>
+                                            <c:when test="${companyType.id eq registerReq.companyType.id}">
+                                                <option value="${companyType.id}" selected="true">${companyType.name}</option>
+                                            </c:when>
+                                            <c:otherwise>
+                                                <option value="${companyType.id}">${companyType.name}</option>
+                                            </c:otherwise>
+                                        </c:choose>
                                     </c:forEach>
-                                </select>
+                                </form:select>
                             </div>
                         </div>
+
+                        <!-- Company location -->
                         <div class="col-md-6 col-sm-12">
                             <div class="form-group">
                                 <label>Location:</label>
-                                <select class="form-control select2">
-                                    <c:forEach var="location" items="${locations}">
-                                        <option value="${location.id}">${location.name}</option>
+                                <form:select path="location" cssClass="form-control select2">
+                                    <c:forEach items="${locations}" var="location">
+                                        <c:choose>
+                                            <c:when test="${location.id eq registerReq.location.id}">
+                                                <option value="${location.id}" selected="true">${location.name}</option>
+                                            </c:when>
+                                            <c:otherwise>
+                                                <option value="${location.id}">${location.name}</option>
+                                            </c:otherwise>
+                                        </c:choose>
                                     </c:forEach>
-                                </select>
+                                </form:select>
                             </div>
                         </div>
+
+                        <!-- Company address -->
                         <div class="col-md-6 col-sm-12">
                             <div class="form-group">
                                 <label>Address <span class="required">*</span></label>
-                                <input type="text" placeholder="" class="form-control">
+                                <form:input path="address" cssClass="form-control" />
+                                <c:set var="addressErrors"><form:errors path="address"/></c:set>
+                                <c:if test="${not empty addressErrors}">
+                                    <div class="field-error">
+                                        <i class="fa fa-exclamation-circle"></i>
+                                        <form:errors path="address" delimiter="<br><i class='fa fa-exclamation-circle'></i> " />
+                                    </div>
+                                </c:if>
                             </div>
                         </div>
+
+                        <!-- Company website -->
                         <div class="col-md-6 col-sm-12">
                             <div class="form-group">
-                                <label>Website</label>
-                                <input type="text" placeholder="" class="form-control">
+                                <label>Website:</label>
+                                <form:input path="website" cssClass="form-control" />
                             </div>
                         </div>
+
+                        <!-- Company phone -->
                         <div class="col-md-6 col-sm-12">
                             <div class="form-group">
                                 <label>Phone: <span class="required">*</span></label>
-                                <input type="text" placeholder="" class="form-control">
+                                <form:input path="phone" cssClass="form-control" />
+                                <c:set var="phoneErrors"><form:errors path="phone"/></c:set>
+                                <c:if test="${not empty phoneErrors}">
+                                    <div class="field-error">
+                                        <i class="fa fa-exclamation-circle"></i>
+                                        <form:errors path="phone" delimiter="<br><i class='fa fa-exclamation-circle'></i> " />
+                                    </div>
+                                </c:if>
                             </div>
                         </div>
+
+
                         <div class="col-md-12 col-sm-12">
-                            <div class="input-group image-preview form-group">
-                                <label>Logo: <span class="required">*</span></label>
-                                <input type="text" placeholder="Upload company logo" class="form-control image-preview-filename" disabled="disabled">
-                                <span class="input-group-btn">
-                                    <button type="button" class="btn btn-default image-preview-clear" style="display:none;">
-                                        <span class="glyphicon glyphicon-remove"></span> Clear
-                                    </button>
-                                    <div class="btn btn-default image-preview-input">
-                                        <span class="glyphicon glyphicon-folder-open"></span>
-                                        <span class="image-preview-input-title">Browse</span>
-                                        <input type="file" accept="file_extension" name="input-file-preview" />
-                                    </div>
-                                </span>
+                            <label>Logo:</label>
+                            <input type="file" name="logo" accept="image/jpeg">
+                        </div>
+
+                        <div class="col-md-12 col-sm-12" style="margin-top: 20px;">
+                            <div class="form-group">
+                                <label>About Company:</label>
+                                <form:textarea path="description" cssClass="form-control" />
                             </div>
                         </div>
 
                         <div class="col-md-12 col-sm-12">
-                            <div class="form-group">
-                                <label>About Company</label>
-                                <textarea cols="6" rows="8" id="description" class="form-control"></textarea>
-                            </div>
+                            <button type="btnSumit" class="btn btn-default pull-right">
+                                Save Profile <i class="fa fa-angle-right"></i>
+                            </button>
                         </div>
-                        <div class="col-md-12 col-sm-12">
-                            <button class="btn btn-default pull-right"> Save Profile <i class="fa fa-angle-right"></i></button>
-                        </div>
-                    </form>
+                    </form:form>
                 </div>
             </div>
         </div>

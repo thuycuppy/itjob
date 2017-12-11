@@ -36,7 +36,7 @@
                     </div>
                     <c:url value="/company-manager/post-job" var="action" />
                     <div class="row">
-                        <form:form action="${action}" method="POST" modelAttribute="jobDto">
+                        <form:form action="${action}" method="POST" modelAttribute="postJobReq">
                             <!-- Job title -->
                             <div class="col-md-6 col-sm-6 col-xs-12">
                                 <div class="form-group">

@@ -1,5 +1,6 @@
 package com.ptit.itjob.service;
 
+import com.ptit.itjob.dto.request.CompanyEditProfileReq;
 import com.ptit.itjob.dto.request.CompanyRegisterReq;
 import com.ptit.itjob.dto.response.CompanyDetailRes;
 import com.ptit.itjob.dto.response.CompanyListRes;
@@ -21,5 +22,7 @@ public interface CompanyService {
 
 	CompanyDetailRes findById(Integer id);
 
-	void create(CompanyRegisterReq registerDto, MultipartFile resume);
+	void create(CompanyRegisterReq req, MultipartFile resume);
+
+	void update(CompanyEditProfileReq req, MultipartFile logo);
 }
