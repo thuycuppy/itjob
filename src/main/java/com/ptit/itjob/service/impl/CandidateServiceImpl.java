@@ -60,7 +60,7 @@ public class CandidateServiceImpl implements CandidateService {
 		candidate.setAccount(account);
 
 		// Upload resume
-		if (resume != null) {
+		if (!resume.isEmpty()) {
 			String fileName = FileUtil.upload(resume, Constant.UPLOAD_CANDIDATE_RESUME_DIRECTORY);
 			if (fileName != null) {
 				candidate.setResume(Constant.UPLOAD_CANDIDATE_RESUME_PATH + fileName);
@@ -77,7 +77,7 @@ public class CandidateServiceImpl implements CandidateService {
 		BeanUtils.copyProperties(req, candidate);
 
 		// Upload avatar
-		if (avatar != null) {
+		if (!avatar.isEmpty()) {
 			String fileName = FileUtil.upload(avatar, Constant.UPLOAD_CANDIDATE_AVATAR_DIRECTORY);
 			if (fileName != null) {
 				candidate.setAvatar(Constant.UPLOAD_CANDIDATE_AVATAR_PATH + fileName);
@@ -91,7 +91,7 @@ public class CandidateServiceImpl implements CandidateService {
 		}
 
 		// Upload resume
-		if (resume != null) {
+		if (!resume.isEmpty()) {
 			String fileName = FileUtil.upload(resume, Constant.UPLOAD_CANDIDATE_RESUME_DIRECTORY);
 			if (fileName != null) {
 				candidate.setResume(Constant.UPLOAD_CANDIDATE_RESUME_PATH + fileName);

@@ -107,7 +107,7 @@ public class CompanyServiceImpl implements CompanyService {
         BeanUtils.copyProperties(req, company);
 
         // Upload logo
-        if (logo != null) {
+        if (!logo.isEmpty()) {
             String fileName = FileUtil.upload(logo, Constant.UPLOAD_COMPANY_LOGO_DIRECTORY);
             if (fileName != null) {
                 company.setLogo(Constant.UPLOAD_COMPANY_LOGO_PATH + fileName);
