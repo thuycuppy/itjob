@@ -95,7 +95,7 @@ public class Candidate implements java.io.Serializable {
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "experience_id")
+	@JoinColumn(name = "expected_experience_id")
 	public Experience getExperience() {
 		return this.experience;
 	}

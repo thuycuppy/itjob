@@ -1,6 +1,5 @@
 package com.ptit.itjob.repository;
 
-import com.ptit.itjob.dto.response.CompanyJobRes;
 import com.ptit.itjob.dto.response.JobSearchRes;
 import com.ptit.itjob.model.Job;
 import org.springframework.data.domain.Page;

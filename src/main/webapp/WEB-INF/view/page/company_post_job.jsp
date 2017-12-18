@@ -78,7 +78,7 @@
                             <!-- Skills -->
                             <div class="col-md-6 col-sm-6 col-xs-12">
                                 <div class="form-group">
-                                    <label>Skills</label>
+                                    <label>Skills <span class="required">*</span></label>
                                     <form:select multiple="true" path="skills" items="${skills}" itemValue="id" itemLabel="name" cssClass="form-control select2" />
                                     <c:set var="skillsError"><form:errors path="skills"/></c:set>
                                     <c:if test="${not empty skillsError}">

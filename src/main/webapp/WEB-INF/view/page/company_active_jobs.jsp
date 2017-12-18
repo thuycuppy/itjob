@@ -51,15 +51,13 @@
                     <table class="table table-striped table-bordered">
                         <thead>
                         <tr>
-                            <th class="text-center" width="5%">#</th>
-                            <th width="70%">Job</th>
-                            <th width="25%">Action</th>
+                            <th width="78%">Job</th>
+                            <th class="text-center" width="22%">Action</th>
                         </tr>
                         </thead>
                         <tbody>
                         <c:forEach var="job" items="${jobs.content}" varStatus="loop">
                             <tr>
-                                <th class="text-center">${loop.index + 1}</th>
                                 <th>${job.title}</th>
                                 <td>
                                     <a href="/job/${job.id}" class="btn btn-success">Detail</a>

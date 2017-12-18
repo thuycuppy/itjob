@@ -42,54 +42,48 @@
             </div>
             <div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="col-md-8 col-sm-12 col-xs-12">
-                    <div class="single-job-page-2 job-short-detail">
-                        <div class="heading-inner">
-                            <p class="title">Company Introduction</p>
-                        </div>
-                        <div class="job-desc job-detail-boxes">
-                            <p>${company.description}</p>
-                        </div>
-                        <div class="heading-inner">
-                            <p class="title">Jobs Posted</p>
-                        </div>
-                        <div id="jobs" class="all-jobs-list-box2"></div>
-                        <div class="load-more-btn">
-                            <button id="btnLoadMoreJob" class="btn-default" onclick="loadPage();">
-                                Load More <i class="fa fa-refresh"></i>
-                            </button>
-                        </div>
+                    <div class="heading-inner">
+                        <p class="title">Company Introduction</p>
+                    </div>
+                    <div class="job-desc job-detail-boxes">
+                        <p>${company.description}</p>
+                    </div>
+                    <div class="heading-inner">
+                        <p class="title">Jobs Posted</p>
+                    </div>
+                    <div id="jobs" class="all-jobs-list-box2"></div>
+                    <div class="load-more-btn">
+                        <button id="btnLoadMoreJob" class="btn-default" onclick="loadPage();">
+                            Load More <i class="fa fa-refresh"></i>
+                        </button>
                     </div>
                 </div>
                 <div class="col-md-4 col-sm-12 col-xs-12">
-                    <aside>
-                        <div class="company-detail widget">
-                            <div class="widget-heading"><span class="title">Company Detail</span></div>
-                            <div class="company-contact-detail">
-                                <table>
-                                    <tr>
-                                        <th>Name:</th>
-                                        <td>${company.name}</td>
-                                    </tr>
-                                    <tr>
-                                        <th>Quantity:</th>
-                                        <td>${company.quantity}</td>
-                                    </tr>
-                                    <tr>
-                                        <th>Website:</th>
-                                        <td><a href="${company.website}">${company.website}</a></td>
-                                    </tr>
-                                    <tr>
-                                        <th>Phone:</th>
-                                        <td>${company.phone}</td>
-                                    </tr>
-                                    <tr>
-                                        <th>Address:</th>
-                                        <td>${company.address}</td>
-                                    </tr>
-                                </table>
-                            </div>
-                        </div>
-                    </aside>
+                    <div class="widget">
+                        <div class="widget-heading"><span class="title">Company Information</span></div>
+                        <ul class="short-decs-sidebar">
+                            <li>
+                                <div><h4>Name:</h4></div>
+                                <div>${company.name}</div>
+                            </li>
+                            <li>
+                                <div><h4>Quantity:</h4></div>
+                                <div>${company.quantity}</div>
+                            </li>
+                            <li>
+                                <div><h4>Phone:</h4></div>
+                                <div>${company.phone}</div>
+                            </li>
+                            <li>
+                                <div><h4>Website:</h4></div>
+                                <div>${company.website}</div>
+                            </li>
+                            <li>
+                                <div><h4>Address:</h4></div>
+                                <div>${company.address}</div>
+                            </li>
+                        </ul>
+                    </div>
                 </div>
             </div>
         </div>
@@ -120,7 +114,7 @@
         </div>
         <p>{%=o[i].description%}<a href="/job/{%=o[i].id%}">Read More</a> </p>
     </div>
-    <div class="job-salary"><i class="fa fa-money"></i> {%=o[i].salary%}</div>
+    <div class="job-salary"><i class="fa fa-money"></i> &dollar;{%=o[i].salary%}</div>
 </div>
 {% } %}
 </script>

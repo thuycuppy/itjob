@@ -72,7 +72,7 @@
                         </dl>
                     </div>
                     <div class="heading-inner">
-                        <p class="title">Some Line About Our Company</p>
+                        <p class="title">Some Lines About Your Company</p>
                     </div>
                     <p>${company.description}</p>
                 </div>

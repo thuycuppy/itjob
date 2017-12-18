@@ -68,7 +68,6 @@
                     <table class="table table-striped table-bordered">
                         <thead>
                         <tr>
-                            <th class="text-center">#</th>
                             <th>Company</th>
                             <th>Job</th>
                         </tr>
@@ -76,7 +75,6 @@
                         <tbody>
                         <c:forEach var="application" items="${applications.content}" varStatus="loop">
                         <tr>
-                            <th class="text-center">${loop.index + 1}</th>
                             <td><a href="/company/${application.companyId}">${application.companyName}</a></td>
                             <td><a href="/job/${application.jobId}">${application.jobTitle}</a></td>
                         </tr>
