@@ -14,7 +14,6 @@
 
 
     <!-- Default Pages -->
-
     <definition name="home" extends="basic">
     	<put-attribute name="title" value="ITJob | Home" />
         <put-attribute name="header" value="/WEB-INF/view/fragment/header2.jsp" />
@@ -71,6 +70,11 @@
     <definition name="candidate_applied_jobs" extends="basic">
         <put-attribute name="title" value="ITJob | Candidate Manager" />
         <put-attribute name="body" value="/WEB-INF/view/page/candidate_applied_jobs.jsp" />
+    </definition>
+
+    <definition name="candidate_expected_jobs" extends="basic">
+        <put-attribute name="title" value="ITJob | Candidate Manager" />
+        <put-attribute name="body" value="/WEB-INF/view/page/candidate_expected_jobs.jsp" />
     </definition>
 
 

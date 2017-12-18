@@ -5,6 +5,7 @@ import com.ptit.itjob.common.Session;
 import com.ptit.itjob.dto.request.CandidateEditProfileReq;
 import com.ptit.itjob.dto.request.CandidateRegisterReq;
 import com.ptit.itjob.dto.response.ApplicationRes;
+import com.ptit.itjob.dto.response.ExpectedJobRes;
 import com.ptit.itjob.model.Experience;
 import com.ptit.itjob.model.JobType;
 import com.ptit.itjob.model.Location;
@@ -28,6 +29,7 @@ import java.util.Set;
 @Controller
 public class CandidateManagerController {
 	private CandidateService candidateService;
+	private JobService jobService;
 	private ApplicationService applicationService;
 	private LocationService locationService;
 	private SkillService skillService;
@@ -37,8 +39,9 @@ public class CandidateManagerController {
 	private Session session;
 
 	@Autowired
-	public CandidateManagerController(CandidateService candidateService, ApplicationService applicationService, LocationService locationService, SkillService skillService, JobTypeService jobTypeService, ExperienceService experienceService, CandidateRegisterValidator registerValidator, Session session) {
+	public CandidateManagerController(CandidateService candidateService, JobService jobService, ApplicationService applicationService, LocationService locationService, SkillService skillService, JobTypeService jobTypeService, ExperienceService experienceService, CandidateRegisterValidator registerValidator, Session session) {
 		this.candidateService = candidateService;
+		this.jobService = jobService;
 		this.applicationService = applicationService;
 		this.locationService = locationService;
 		this.skillService = skillService;
@@ -143,5 +146,13 @@ public class CandidateManagerController {
 		model.addAttribute("applications", applications);
 		model.addAttribute("pagination", PaginationUtil.paging(applications));
 		return "candidate_applied_jobs";
+	}
+
+	@GetMapping("/candidate-manager/expected-jobs")
+	public String listExpectedJobs(@RequestParam(value = "page", defaultValue = "1") Integer page, Model model) {
+		Page<ExpectedJobRes> jobs = jobService.findExpected(page);
+		model.addAttribute("jobs", jobs);
+		model.addAttribute("pagination", PaginationUtil.paging(jobs));
+		return "candidate_expected_jobs";
 	}
 }

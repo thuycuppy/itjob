@@ -29,6 +29,7 @@
                                 <li><a href="/candidate-manager/profile"><i class="fa fa-user"></i> Profile</a></li>
                                 <li><a href="/candidate-manager/edit-profile"><i class="fa fa-pencil"></i> Edit Profile</a></li>
                                 <li><a href="/candidate-manager/applied-jobs"><i class="fa fa-list-alt"></i> Applied Jobs</a></li>
+                                <li><a href="/candidate-manager/expected-jobs"><i class="fa fa-star-o"></i> Expected Jobs</a></li>
                             </sec:authorize>
 
                             <sec:authorize access="hasAnyRole('COMPANY')">

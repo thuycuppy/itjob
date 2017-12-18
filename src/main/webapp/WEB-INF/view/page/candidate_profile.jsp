@@ -53,6 +53,9 @@
                             <li>
                                 <a href="/candidate-manager/applied-jobs"> <i class="fa fa-list-alt"></i> Jobs Applied</a>
                             </li>
+                            <li>
+                                <a href="/candidate-manager/expected-jobs"><i class="fa fa-star-o"></i> Expected Jobs</a>
+                            </li>
                         </ul>
                     </div>
                 </div>

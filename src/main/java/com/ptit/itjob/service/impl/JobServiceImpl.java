@@ -4,8 +4,10 @@ import com.ptit.itjob.common.Constant;
 import com.ptit.itjob.common.Session;
 import com.ptit.itjob.dto.request.PostJobReq;
 import com.ptit.itjob.dto.response.CompanyJobRes;
+import com.ptit.itjob.dto.response.ExpectedJobRes;
 import com.ptit.itjob.dto.response.JobListRes;
 import com.ptit.itjob.dto.response.JobSearchRes;
+import com.ptit.itjob.model.Candidate;
 import com.ptit.itjob.model.Company;
 import com.ptit.itjob.model.Job;
 import org.modelmapper.ModelMapper;
@@ -60,6 +62,15 @@ public class JobServiceImpl implements JobService {
 	}
 
 	@Override
+	public Page<ExpectedJobRes> findExpected(Integer page) {
+		Candidate currentCandidate = session.getCurrentCandidate();
+		PageRequest pageRequest = new PageRequest(page - 1, Constant.ACTIVE_JOB_PER_PAGE, new Sort(Sort.Direction.DESC, "createdAt"));
+		Page<Job> jobs = jobRepository.findExpected(currentCandidate.getLocation(), currentCandidate.getJobType(),
+				currentCandidate.getExperience(), currentCandidate.getExpectedSalary(), pageRequest);
+		return jobs.map(this::convertJobToExpectedJobRes);
+	}
+
+	@Override
 	@Transactional(readOnly = true)
 	public Page<CompanyJobRes> findByCurrentCompany(Integer page) {
 		Company currentCompany = session.getCurrentCompany();
@@ -101,6 +112,15 @@ public class JobServiceImpl implements JobService {
 		res.setCompanyName(job.getCompany().getName());
 		res.setCompanyLogo(job.getCompany().getLogo());
 		res.setJobType(job.getJobType().getName());
+		return res;
+	}
+
+	private ExpectedJobRes convertJobToExpectedJobRes(Job job) {
+		ExpectedJobRes res = new ExpectedJobRes();
+		res.setId(job.getId());
+		res.setTitle(job.getTitle());
+		res.setCompanyId(job.getCompany().getId());
+		res.setCompanyName(job.getCompany().getName());
 		return res;
 	}
 
