@@ -1,13 +1,15 @@
 -- phpMyAdmin SQL Dump
--- version 4.6.4
+-- version 4.7.4
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 10, 2017 at 07:41 PM
--- Server version: 5.7.14
--- PHP Version: 5.6.25
+-- Generation Time: Dec 18, 2017 at 08:51 AM
+-- Server version: 10.1.28-MariaDB
+-- PHP Version: 7.1.11
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
+START TRANSACTION;
 SET time_zone = "+00:00";
 
 
@@ -40,7 +42,7 @@ CREATE TABLE `account` (
 --
 
 INSERT INTO `account` (`id`, `name`, `password`, `email`, `role`, `image`) VALUES
-(1, 'Lê Thị Thủy', '$2a$10$LOqePml/koRGsk2YAIOFI.1YNKZg7EsQ5BAIuYP1nWOyYRl21dlne', 'thuy@gmail.com', 'ROLE_COMPANY', '/upload/avatar/default.jpg'),
+(1, 'FPT Software', '$2a$10$LOqePml/koRGsk2YAIOFI.1YNKZg7EsQ5BAIuYP1nWOyYRl21dlne', 'thuy@gmail.com', 'ROLE_COMPANY', '/upload/logo/welcome-wallpaper-HD1.jpg'),
 (2, 'Lê Thị Thủy', '$2y$10$FxstkW3S70UptzjSTZCMfOVBQbmp/z0..Fw0CX0df48nU2.noy4cC', 'anh@gmail.com', 'ROLE_CANDIDATE', '/upload/avatar/default.jpg'),
 (3, 'Lê Thị Thủy', '$2y$10$FxstkW3S70UptzjSTZCMfOVBQbmp/z0..Fw0CX0df48nU2.noy4cC', 'abc@gmail.com', 'ROLE_COMPANY', '/upload/avatar/default.jpg'),
 (4, 'Lê Thị Thủy', '$2y$10$FxstkW3S70UptzjSTZCMfOVBQbmp/z0..Fw0CX0df48nU2.noy4cC', 'tuan@gmail.com', 'ROLE_CANDIDATE', '/upload/avatar/default.jpg'),
@@ -51,7 +53,7 @@ INSERT INTO `account` (`id`, `name`, `password`, `email`, `role`, `image`) VALUE
 (9, 'Lê Thị Thủy', '$2y$10$FxstkW3S70UptzjSTZCMfOVBQbmp/z0..Fw0CX0df48nU2.noy4cC', 'tuananh@gmail.com', 'ROLE_CANDIDATE', '/upload/avatar/default.jpg'),
 (10, 'Lê Thị Thủy', '$2y$10$FxstkW3S70UptzjSTZCMfOVBQbmp/z0..Fw0CX0df48nU2.noy4cC', 'cowell@gmail.com', 'ROLE_COMPANY', '/upload/avatar/default.jpg'),
 (12, 'Lê Thị Thủy', '$2a$10$obGxAbxMMeUTUu51gZ.jlue5bL67j1AapTNBsOlf7FjAX40RF8B7q', 'thuy@gmail.com2', 'ROLE_CANDIDATE', '/upload/avatar/default.jpg'),
-(13, '123', '$2a$10$CihNhkRdAgYVvFiWHeyeBeM0ArrDln6mMlHkZ2P./AEU11vx3JEaG', '123@gmail.com', 'ROLE_CANDIDATE', '/upload/avatar/default.jpg'),
+(13, '123', '$2a$10$LOqePml/koRGsk2YAIOFI.1YNKZg7EsQ5BAIuYP1nWOyYRl21dlne', '123@gmail.com', 'ROLE_CANDIDATE', '/upload/avatar/IMG_3957.JPG'),
 (14, '456', '$2a$10$uYjrSbW0DZ/lBwRXb4Mp.O/FcOqaj.KFdu3jcqq8ioTeErul.ozXO', '456@gmail.com', 'ROLE_CANDIDATE', '/upload/avatar/default.jpg'),
 (15, '789', '$2a$10$BI.FPPiWxYsPMJ5SzfzkEuL4Xp/GRU1kjzb8vvwc9tsXF5X9VHzN2', '789@gmail.com', 'ROLE_CANDIDATE', '/upload/avatar/default.jpg'),
 (16, '456', '$2a$10$Ax7XeUBNe5g0fwHLOPFDpee2xV1HlR3Q0TU2N3gjE8zwwnm1dKSiK', '123@gmail.com2', 'ROLE_CANDIDATE', '/upload/avatar/default.jpg'),
@@ -76,7 +78,8 @@ CREATE TABLE `application` (
 --
 
 INSERT INTO `application` (`id`, `candidate_id`, `job_id`, `created_at`) VALUES
-(1, 2, 1, '2017-12-06 00:00:00');
+(1, 2, 1, '2017-12-06 00:00:00'),
+(2, 2, 3, '2017-12-11 14:23:19');
 
 -- --------------------------------------------------------
 
@@ -91,23 +94,23 @@ CREATE TABLE `candidate` (
   `phone` varchar(20) NOT NULL,
   `sex` bit(1) NOT NULL,
   `address` varchar(255) NOT NULL,
-  `description` varchar(255) DEFAULT NULL,
+  `description` varchar(500) DEFAULT NULL,
   `avatar` varchar(255) NOT NULL,
   `resume` varchar(255) DEFAULT NULL,
   `account_id` int(11) UNSIGNED NOT NULL,
   `expected_location_id` int(11) UNSIGNED DEFAULT NULL,
   `expected_job_type_id` int(11) UNSIGNED DEFAULT NULL,
-  `experience_id` int(11) UNSIGNED DEFAULT NULL,
-  `expected_salary` int(10) UNSIGNED DEFAULT NULL
+  `expected_experience_id` int(11) UNSIGNED DEFAULT NULL,
+  `expected_salary` int(11) UNSIGNED DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `candidate`
 --
 
-INSERT INTO `candidate` (`id`, `name`, `dob`, `phone`, `sex`, `address`, `description`, `avatar`, `resume`, `account_id`, `expected_location_id`, `expected_job_type_id`, `experience_id`, `expected_salary`) VALUES
+INSERT INTO `candidate` (`id`, `name`, `dob`, `phone`, `sex`, `address`, `description`, `avatar`, `resume`, `account_id`, `expected_location_id`, `expected_job_type_id`, `expected_experience_id`, `expected_salary`) VALUES
 (1, 'Nguyễn Tuấn Anh', '1995-06-21', '0973075726', b'1', 'Hà Đông, Hà Nội', NULL, '/upload/avatar/default.jpg', NULL, 2, 1, 2, 2, 500),
-(2, '123', '2017-02-02', '123', b'0', '123', NULL, '/upload/avatar/default.jpg', NULL, 13, NULL, NULL, NULL, 0),
+(2, '123', '2017-12-25', '12345', b'1', '123', NULL, '/upload/avatar/IMG_3957.JPG', '/upload/resume/月別利用明細20171211100448.pdf', 13, 3, 1, 1, 0),
 (3, '456', '2017-09-08', '123', b'1', '123', NULL, '/upload/avatar/default.jpg', NULL, 14, NULL, NULL, NULL, 0),
 (4, '789', '2017-02-02', '123', b'1', '123', NULL, '/upload/avatar/default.jpg', NULL, 15, NULL, NULL, NULL, 0),
 (5, '456', '2017-02-02', '123', b'0', '123', NULL, '/upload/avatar/default.jpg', NULL, 16, NULL, NULL, NULL, 0),
@@ -130,7 +133,9 @@ CREATE TABLE `candidate_skill` (
 
 INSERT INTO `candidate_skill` (`candidate_id`, `skill_id`) VALUES
 (1, 1),
-(1, 2);
+(1, 2),
+(2, 2),
+(2, 3);
 
 -- --------------------------------------------------------
 
@@ -148,7 +153,7 @@ CREATE TABLE `company` (
   `address` varchar(255) NOT NULL,
   `logo` varchar(255) NOT NULL,
   `description` varchar(500) DEFAULT NULL,
-  `phone` varchar(255) NOT NULL,
+  `phone` varchar(20) NOT NULL,
   `account_id` int(11) UNSIGNED NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -157,7 +162,7 @@ CREATE TABLE `company` (
 --
 
 INSERT INTO `company` (`id`, `name`, `company_type_id`, `quantity`, `website`, `location_id`, `address`, `logo`, `description`, `phone`, `account_id`) VALUES
-(1, 'FPT Software', 1, '300+', 'www.fpt.com', 1, 'Cầu Giấy, Hà Nội', '/upload/logo/1.png', NULL, '0123456789', 1),
+(1, 'FPT Software', 1, '1000+', 'www.fpt2.com', 1, 'Cầu Giấy, Hà Nội', '/upload/logo/welcome-wallpaper-HD1.jpg', '', '0123456789', 1),
 (2, 'Episerver', 1, '51-150', 'www.abc.com', 1, 'Đống Đa, Hà Nội', '/upload/logo/2.png', NULL, '0123456789', 2),
 (3, 'Episerver', 1, '51-150', 'www.abc.com', 1, 'Đống Đa, Hà Nội', '/upload/logo/2.png', NULL, '0123456789', 2),
 (4, 'Episerver', 1, '51-150', 'www.abc.com', 1, 'Đống Đa, Hà Nội', '/upload/logo/2.png', NULL, '0123456789', 2),
@@ -402,7 +407,7 @@ ALTER TABLE `candidate`
   ADD KEY `account_id_2` (`account_id`),
   ADD KEY `expected_jobtype_id` (`expected_job_type_id`),
   ADD KEY `expected_location_id` (`expected_location_id`),
-  ADD KEY `experience_id` (`experience_id`);
+  ADD KEY `experience_id` (`expected_experience_id`);
 
 --
 -- Indexes for table `candidate_skill`
@@ -479,51 +484,61 @@ ALTER TABLE `skill`
 --
 ALTER TABLE `account`
   MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+
 --
 -- AUTO_INCREMENT for table `application`
 --
 ALTER TABLE `application`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
 --
 -- AUTO_INCREMENT for table `candidate`
 --
 ALTER TABLE `candidate`
   MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
 --
 -- AUTO_INCREMENT for table `company`
 --
 ALTER TABLE `company`
   MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+
 --
 -- AUTO_INCREMENT for table `company_type`
 --
 ALTER TABLE `company_type`
   MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
 --
 -- AUTO_INCREMENT for table `experience`
 --
 ALTER TABLE `experience`
   MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
 --
 -- AUTO_INCREMENT for table `job`
 --
 ALTER TABLE `job`
   MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+
 --
 -- AUTO_INCREMENT for table `job_type`
 --
 ALTER TABLE `job_type`
   MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
 --
 -- AUTO_INCREMENT for table `location`
 --
 ALTER TABLE `location`
   MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+
 --
 -- AUTO_INCREMENT for table `skill`
 --
 ALTER TABLE `skill`
   MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+
 --
 -- Constraints for dumped tables
 --
@@ -542,7 +557,7 @@ ALTER TABLE `candidate`
   ADD CONSTRAINT `candidate_account_pk` FOREIGN KEY (`account_id`) REFERENCES `account` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `candidate_expected_jobtype_pk` FOREIGN KEY (`expected_job_type_id`) REFERENCES `job_type` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   ADD CONSTRAINT `candidate_expected_location_pk` FOREIGN KEY (`expected_location_id`) REFERENCES `location` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `candidate_experience_pk` FOREIGN KEY (`experience_id`) REFERENCES `experience` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+  ADD CONSTRAINT `candidate_experience_pk` FOREIGN KEY (`expected_experience_id`) REFERENCES `experience` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
 -- Constraints for table `candidate_skill`
@@ -574,6 +589,7 @@ ALTER TABLE `job`
 ALTER TABLE `job_skill`
   ADD CONSTRAINT `jobskill_job_pk` FOREIGN KEY (`job_id`) REFERENCES `job` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `jobskill_skill_pk` FOREIGN KEY (`skill_id`) REFERENCES `skill` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
