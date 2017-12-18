@@ -3,13 +3,16 @@ package com.ptit.itjob.controller;
 import com.ptit.itjob.common.PaginationUtil;
 import com.ptit.itjob.common.Session;
 import com.ptit.itjob.dto.request.CompanyEditProfileReq;
+import com.ptit.itjob.dto.request.CompanyRegisterReq;
 import com.ptit.itjob.dto.request.PostJobReq;
 import com.ptit.itjob.dto.response.ApplicationRes;
 import com.ptit.itjob.dto.response.CompanyJobRes;
+import com.ptit.itjob.model.CompanyType;
 import com.ptit.itjob.model.Experience;
 import com.ptit.itjob.model.JobType;
 import com.ptit.itjob.model.Location;
 import com.ptit.itjob.service.*;
+import com.ptit.itjob.validator.CompanyRegisterValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomCollectionEditor;
 import org.springframework.data.domain.Page;
@@ -35,10 +38,11 @@ public class CompanyManagerController {
     private SkillService skillService;
     private JobTypeService jobTypeService;
     private ExperienceService experienceService;
+    private CompanyRegisterValidator registerValidator;
     private Session session;
 
     @Autowired
-    public CompanyManagerController(CompanyService companyService, JobService jobService, ApplicationService applicationService, CompanyTypeService companyTypeService, LocationService locationService, SkillService skillService, JobTypeService jobTypeService, ExperienceService experienceService, Session session) {
+    public CompanyManagerController(CompanyService companyService, JobService jobService, ApplicationService applicationService, CompanyTypeService companyTypeService, LocationService locationService, SkillService skillService, JobTypeService jobTypeService, ExperienceService experienceService, CompanyRegisterValidator registerValidator, Session session) {
         this.companyService = companyService;
         this.jobService = jobService;
         this.applicationService = applicationService;
@@ -47,11 +51,20 @@ public class CompanyManagerController {
         this.skillService = skillService;
         this.jobTypeService = jobTypeService;
         this.experienceService = experienceService;
+        this.registerValidator = registerValidator;
         this.session = session;
     }
 
     @InitBinder
     public void initBinder(WebDataBinder binder) {
+        binder.registerCustomEditor(CompanyType.class, "companyType", new PropertyEditorSupport() {
+            @Override
+            public void setAsText(String text) {
+                CompanyType type = companyTypeService.findOne(Integer.parseInt(text));
+                setValue(type);
+            }
+        });
+
         binder.registerCustomEditor(Location.class, "location", new PropertyEditorSupport() {
             @Override
             public void setAsText(String text) {
@@ -83,6 +96,30 @@ public class CompanyManagerController {
                 setValue(experience);
             }
         });
+    }
+
+    @GetMapping("/company/register")
+    public String registerCompany(Model model) {
+        model.addAttribute("companyTypes", companyTypeService.findAll());
+        model.addAttribute("locations", locationService.findAll());
+        model.addAttribute("registerReq", new CompanyRegisterReq());
+        return "company_register";
+    }
+
+    @PostMapping("/company/register")
+    public String handleRegisterCompany(@ModelAttribute("registerReq") @Valid CompanyRegisterReq req,
+                                        BindingResult result, Model model, RedirectAttributes redirect,
+                                        @RequestParam(value = "logo") MultipartFile logo) {
+        registerValidator.validate(req, result);
+        if (result.hasErrors()) {
+            model.addAttribute("companyTypes", companyTypeService.findAll());
+            model.addAttribute("locations", locationService.findAll());
+            return "company_register";
+        }
+
+        companyService.create(req, logo);
+        redirect.addFlashAttribute("success", "You registered successfully!");
+        return "redirect:/login";
     }
 
     @GetMapping("/company-manager/profile")

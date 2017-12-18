@@ -3,12 +3,13 @@ package com.ptit.itjob.controller;
 import com.ptit.itjob.common.PaginationUtil;
 import com.ptit.itjob.common.Session;
 import com.ptit.itjob.dto.request.CandidateEditProfileReq;
+import com.ptit.itjob.dto.request.CandidateRegisterReq;
 import com.ptit.itjob.dto.response.ApplicationRes;
-import com.ptit.itjob.model.Candidate;
 import com.ptit.itjob.model.Experience;
 import com.ptit.itjob.model.JobType;
 import com.ptit.itjob.model.Location;
 import com.ptit.itjob.service.*;
+import com.ptit.itjob.validator.CandidateRegisterValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomCollectionEditor;
 import org.springframework.data.domain.Page;
@@ -32,16 +33,18 @@ public class CandidateManagerController {
 	private SkillService skillService;
 	private JobTypeService jobTypeService;
 	private ExperienceService experienceService;
+	private CandidateRegisterValidator registerValidator;
 	private Session session;
 
 	@Autowired
-	public CandidateManagerController(CandidateService candidateService, ApplicationService applicationService, LocationService locationService, SkillService skillService, JobTypeService jobTypeService, ExperienceService experienceService, Session session) {
+	public CandidateManagerController(CandidateService candidateService, ApplicationService applicationService, LocationService locationService, SkillService skillService, JobTypeService jobTypeService, ExperienceService experienceService, CandidateRegisterValidator registerValidator, Session session) {
 		this.candidateService = candidateService;
 		this.applicationService = applicationService;
 		this.locationService = locationService;
 		this.skillService = skillService;
 		this.jobTypeService = jobTypeService;
 		this.experienceService = experienceService;
+		this.registerValidator = registerValidator;
 		this.session = session;
 	}
 
@@ -78,6 +81,26 @@ public class CandidateManagerController {
 				setValue(experience);
 			}
 		});
+	}
+
+	@GetMapping("/candidate-manager/register")
+	public String registerCandidate(Model model) {
+		model.addAttribute("registerReq", new CandidateRegisterReq());
+		return "candidate_register";
+	}
+
+	@PostMapping("/candidate-manager/register")
+	public String handleRegisterCandidate(@ModelAttribute("registerReq") @Valid CandidateRegisterReq req,
+										  BindingResult result, RedirectAttributes redirect,
+										  @RequestParam(value = "resume", required = false) MultipartFile resume) {
+		registerValidator.validate(req, result);
+		if (result.hasErrors()) {
+			return "candidate_register";
+		}
+
+		candidateService.create(req, resume);
+		redirect.addFlashAttribute("success", "You registered successfully!");
+		return "redirect:/login";
 	}
 
 	@GetMapping("/candidate-manager/profile")
